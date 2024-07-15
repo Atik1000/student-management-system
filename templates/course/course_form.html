@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="mt-5">
+  <h1 class="mb-4">{% if form.instance.pk %}Update Course{% else %}Create Course{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        {{ form.semester.label_tag }} {{ form.semester }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 1</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_1.label_tag }} {{ form.course_code_1 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_1.label_tag }} {{ form.course_name_1 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_1.label_tag }} {{ form.credits_1 }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 2</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_2.label_tag }} {{ form.course_code_2 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_2.label_tag }} {{ form.course_name_2 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_2.label_tag }} {{ form.credits_2 }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 3</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_3.label_tag }} {{ form.course_code_3 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_3.label_tag }} {{ form.course_name_3 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_3.label_tag }} {{ form.credits_3 }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 4</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_4.label_tag }} {{ form.course_code_4 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_4.label_tag }} {{ form.course_name_4 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_4.label_tag }} {{ form.credits_4 }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 5</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_5.label_tag }} {{ form.course_code_5 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_5.label_tag }} {{ form.course_name_5 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_5.label_tag }} {{ form.credits_5 }}
+      </div>
+    </div>
+    <h3 class="mb-3">Course 6</h3>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        {{ form.course_code_6.label_tag }} {{ form.course_code_6 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.course_name_6.label_tag }} {{ form.course_name_6 }}
+      </div>
+      <div class="col-md-4 mb-3">
+        {{ form.credits_6.label_tag }} {{ form.credits_6 }}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+{% endblock %}
