@@ -38,10 +38,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>University</th>
+                                    <th>Exam Name</th>
                                     <th>Subject Name</th>
                                     <th>Department name</th>
-                                    <th>Semester name</th>
+                                 
                                     <th>Batch Number</th>
                                     <th class="text-right">Action</th>
                                 </tr>
@@ -50,11 +50,8 @@
                                 {% for exam in exams %}
                                 <tr>
                                     <td>{{ exam.id }}</td>
-                                    <td>{{ exam.university_name }}</td>
-                                    <td>{{ exam.subject_name }}</td>
-                                    <td>{{ exam.department_name }}</td>
-                                    <td>{{ exam.semester_name }}</td>
-                                    <td>{{ exam.batch_number }}</td>
+
+                                    <td>{{ exam.name }}</td>
                                     <td class="text-right">
                                         <div class="actions">
                                             <a href="{% url 'exam-update' exam.id %}" class="btn btn-sm bg-success-light mr-2">

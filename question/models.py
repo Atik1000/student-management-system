@@ -1,17 +1,23 @@
 from django.db import models
 from django.urls import reverse
+from course.models import Department, Semester, Subject
 
 
 class Exam(models.Model):
-    university_name = models.CharField(max_length=100, null=True, blank=True)
-    subject_name = models.CharField(max_length=100, null=True, blank=True)
-    department_name = models.CharField(max_length=100, null=True, blank=True)
-    semester_name = models.CharField(max_length=50, null=True, blank=True)
-    batch_number = models.CharField(max_length=20, null=True, blank=True)
-    course_code = models.CharField(max_length=20, null=True, blank=True)
-    time = models.CharField(max_length=20,null=True, blank=True)
-    marks = models.IntegerField(null=True, blank=True)
+    EXAM_TYPES = [
+        ('Mid', 'Mid Exam'),
+        ('Final', 'Final Exam'),
+    ]
 
+    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')
+    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')
+    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')
+    batch_number = models.CharField(max_length=20, null=True, blank=True)
+    course_code = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='course_code_exams')
+    name = models.CharField(max_length=5, choices=EXAM_TYPES, default='Mid')
+    time = models.CharField(max_length=20, null=True, blank=True)
+    marks = models.IntegerField(null=True, blank=True)
+    
     # Define fields for each question
     q1_number = models.IntegerField(null=True, blank=True)
     q1_description = models.TextField(null=True, blank=True)

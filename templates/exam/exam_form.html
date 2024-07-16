@@ -8,35 +8,37 @@
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.university_name.label_tag }} {{ form.university_name }}
-      </div>
-      <div class="col-md-6 mb-3">
         {{ form.subject_name.label_tag }} {{ form.subject_name }}
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-6 mb-3">
         {{ form.department_name.label_tag }} {{ form.department_name }}
       </div>
+    </div>
+    <div class="row">
       <div class="col-md-6 mb-3">
         {{ form.semester_name.label_tag }} {{ form.semester_name }}
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
         {{ form.batch_number.label_tag }} {{ form.batch_number }}
       </div>
-      <div class="col-md-4 mb-3">
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
         {{ form.course_code.label_tag }} {{ form.course_code }}
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
         {{ form.time.label_tag }} {{ form.time }}
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
         {{ form.marks.label_tag }} {{ form.marks }}
       </div>
+      <div class="col-md-6 mb-3">
+        {{ form.name.label_tag }} {{ form.name }}
+ 
+      </div>
+    </div>
     </div>
     <h2 class="mt-4">Questions</h2>
     <div class="row">

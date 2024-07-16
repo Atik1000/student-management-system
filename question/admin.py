@@ -6,5 +6,4 @@ from .models import Exam
 class ExamAdmin(admin.ModelAdmin):
     list_display=[
         'id',
-        "university_name"
     ]

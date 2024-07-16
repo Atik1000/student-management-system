@@ -1045,6 +1045,30 @@
         "documentation": {}
     },
     {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Subject",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "Semester",
         "importPath": "course.models",
         "description": "course.models",
@@ -2359,7 +2383,7 @@
         "kind": 6,
         "importPath": "question.admin",
         "description": "question.admin",
-        "peekOfCode": "class ExamAdmin(admin.ModelAdmin):\n    list_display=[\n        'id',\n        \"university_name\"\n    ]",
+        "peekOfCode": "class ExamAdmin(admin.ModelAdmin):\n    list_display=[\n        'id',\n    ]",
         "detail": "question.admin",
         "documentation": {}
     },
@@ -2377,7 +2401,7 @@
         "kind": 6,
         "importPath": "question.froms",
         "description": "question.froms",
-        "peekOfCode": "class ExamForm(forms.ModelForm):\n    class Meta:\n        model = Exam\n        fields = [\n            'university_name', 'subject_name', 'department_name', 'semester_name',\n            'batch_number', 'course_code', 'time', 'marks',\n            'q1_number', 'q1_description', 'q1_marks',\n            'q2_number', 'q2_description', 'q2_marks',\n            'q3_number', 'q3_description', 'q3_marks',\n            'q4_number', 'q4_description', 'q4_marks',",
+        "peekOfCode": "class ExamForm(forms.ModelForm):\n    class Meta:\n        model = Exam\n        fields = '__all__'\n        widgets = {\n            'subject_name': forms.Select(attrs={'class': 'form-control'}),\n            'department_name': forms.Select(attrs={'class': 'form-control'}),\n            'semester_name': forms.Select(attrs={'class': 'form-control'}),\n            'batch_number': forms.TextInput(attrs={'class': 'form-control'}),\n            'course_code': forms.Select(attrs={'class': 'form-control'}),",
         "detail": "question.froms",
         "documentation": {}
     },
@@ -2386,7 +2410,7 @@
         "kind": 6,
         "importPath": "question.models",
         "description": "question.models",
-        "peekOfCode": "class Exam(models.Model):\n    university_name = models.CharField(max_length=100, null=True, blank=True)\n    subject_name = models.CharField(max_length=100, null=True, blank=True)\n    department_name = models.CharField(max_length=100, null=True, blank=True)\n    semester_name = models.CharField(max_length=50, null=True, blank=True)\n    batch_number = models.CharField(max_length=20, null=True, blank=True)\n    course_code = models.CharField(max_length=20, null=True, blank=True)\n    time = models.CharField(max_length=20,null=True, blank=True)\n    marks = models.IntegerField(null=True, blank=True)\n    # Define fields for each question",
+        "peekOfCode": "class Exam(models.Model):\n    EXAM_TYPES = [\n        ('Mid', 'Mid Exam'),\n        ('Final', 'Final Exam'),\n    ]\n    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')\n    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')\n    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')\n    batch_number = models.CharField(max_length=20, null=True, blank=True)\n    course_code = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='course_code_exams')",
         "detail": "question.models",
         "documentation": {}
     },
