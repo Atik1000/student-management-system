@@ -1,5 +1,5 @@
 from django import forms
-from .models import Program, Department, Semester, Course
+from .models import Program, Department, Semester, Course,Routine, Subject, Teacher
 
 class ProgramForm(forms.ModelForm):
     class Meta:
@@ -60,3 +60,25 @@ class CourseForm(forms.ModelForm):
             'course_name_6': forms.TextInput(attrs={'class': 'form-control'}),
             'credits_6': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+
+
+class RoutineForm(forms.ModelForm):
+    class Meta:
+        model = Routine
+        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']
+
+    def __init__(self, *args, **kwargs):
+        self.teacher = kwargs.pop('teacher', None)
+        super().__init__(*args, **kwargs)
+
+        if self.teacher:
+            self.fields['semester'].queryset = self.teacher.department.semesters.all()
+            self.fields['subject'].queryset = Subject.objects.all()
+
+    def save(self, commit=True):
+        routine = super().save(commit=False)
+        routine.teacher = self.teacher
+        if commit:
+            routine.save()
+        return routine

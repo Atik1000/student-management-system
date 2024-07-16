@@ -56,6 +56,19 @@
             </li>
 
             <li class="submenu">
+               <a href="#"><i class="fas fa-building"></i> <span> Seat plan </span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'room_create' %}">Add Room </a></li>
+
+                  <li><a href="{% url 'room_list' %}">View Room </a></li>
+
+                  <li><a href="{% url 'course_create' %}">Add Course </a></li>
+                  <li><a href="{% url 'semester_list' %}">View Semester </a></li>
+
+               </ul>
+            </li>
+
+            <li class="submenu">
                <a href="#"><i class="fas fa-book-reader"></i> <span> Exam Question</span> <span class="menu-arrow"></span></a>
                <ul>
                   <li><a href="{% url 'exam-add' %}">Create Question </a></li>

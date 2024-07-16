@@ -1,3 +1,5 @@
+
+
 from django.contrib import admin
 from  .models import *
 from django.contrib.auth.admin import UserAdmin
@@ -7,21 +9,11 @@ from django.contrib.auth.admin import UserAdmin
 class UserModel(UserAdmin):
     list_display = ['username','user_type']
 
-admin.site.register(Program)
+admin.site.register(Room)
 
-admin.site.register(Department)
+admin.site.register(Batch)
 
-admin.site.register(Semester)
-admin.site.register(Course)
-
-admin.site.register(Teacher)
-
-admin.site.register(Subject)
-
-admin.site.register(Routine)
-
-
-
+admin.site.register(SeatPlan)
 
 
 

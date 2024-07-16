@@ -77,6 +77,7 @@ urlpatterns = [
     # course url
 
     path('course/', include('course.urls')),
+    path('seatplan/', include('seatplan.urls')),
 
 
 

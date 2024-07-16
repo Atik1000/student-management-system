@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from course.models import Semester
 
 
 # Create your models here.
@@ -29,6 +30,7 @@ class Session_year(models.Model):
 
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    semester=models.ForeignKey(Semester, on_delete=models.CASCADE)
     address = models.TextField()
     gender = models.CharField(max_length=100)
     session_year_id = models.ForeignKey(Session_year, on_delete=models.DO_NOTHING)

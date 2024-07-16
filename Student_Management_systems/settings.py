@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'active_link',
     'question',
     'course',
+    'seatplan'
 ]
 
 MIDDLEWARE = [

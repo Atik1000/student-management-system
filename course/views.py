@@ -7,7 +7,8 @@ from .models import Program, Department, Semester, Course
 from .forms import ProgramForm, DepartmentForm, SemesterForm, CourseForm
 from django.db import models
 from django.db.models import Sum
-
+from django.db.models import Sum, Case, When, IntegerField, F, Value
+from django.db.models.functions import Coalesce
 
 class ProgramCreateView(CreateView):
     model = Program
@@ -72,22 +73,24 @@ class SemesterDetailView(DetailView):
         course = self.get_object()
 
         # Calculate total credits for the semester
-        total_credits = course.semester.courses.aggregate(total_credits=models.Sum(
-            models.Case(
-                models.When(
+        total_credits = course.semester.courses.aggregate(total_credits=Sum(
+            Case(
+                When(
                     id=course.id,
-                    then=models.F('credits_1') + models.F('credits_2') + models.F('credits_3') +
-                         models.F('credits_4') + models.F('credits_5') + models.F('credits_6')
+                    then=Coalesce(F('credits_1'), Value(0)) +
+                        Coalesce(F('credits_2'), Value(0)) +
+                        Coalesce(F('credits_3'), Value(0)) +
+                        Coalesce(F('credits_4'), Value(0)) +
+                        Coalesce(F('credits_5'), Value(0)) +
+                        Coalesce(F('credits_6'), Value(0))
                 ),
-                default=0,
-                output_field=models.IntegerField()
+                default=Value(0),
+                output_field=IntegerField()
             )
         ))['total_credits'] or 0
 
         context['total_credits'] = total_credits
         return context
-    
-
 # Course Views
 class CourseListView(ListView):
     model = Course
