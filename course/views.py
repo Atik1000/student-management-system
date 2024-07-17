@@ -1,10 +1,9 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Program, Department, Semester, Course
+from .models import Course, Department, Program, Semester, Subject
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from .models import Program, Department, Semester, Course
-from .forms import ProgramForm, DepartmentForm, SemesterForm, CourseForm
+from .forms import ProgramForm, DepartmentForm, SemesterForm, CourseForm,SubjectForm
 from django.db import models
 from django.db.models import Sum
 from django.db.models import Sum, Case, When, IntegerField, F, Value
@@ -111,5 +110,23 @@ class CourseUpdateView(UpdateView):
 
 
 
+
+class SubjectListView(ListView):
+    model = Subject
+    template_name = 'course/subject_list.html'
+    context_object_name = 'subjects'
+
+
+class SubjectCreateView(CreateView):
+    model = Subject
+    form_class = SubjectForm
+    template_name = 'course/subject_form.html'
+    success_url = reverse_lazy('subject_list')
+
+class SubjectUpdateView(UpdateView):
+    model = Subject
+    form_class = SubjectForm
+    template_name = 'course/subject_form.html'
+    success_url = reverse_lazy('subject_list')
 
 

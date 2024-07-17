@@ -1197,38 +1197,6 @@
         "documentation": {}
     },
     {
-        "label": "DeleteView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "ListView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "CreateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "UpdateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
         "label": "DetailView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
@@ -1286,6 +1254,14 @@
     },
     {
         "label": "UpdateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
         "isExtraImport": true,
@@ -2127,11 +2103,20 @@
         "documentation": {}
     },
     {
+        "label": "SubjectAdmin",
+        "kind": 6,
+        "importPath": "course.admin",
+        "description": "course.admin",
+        "peekOfCode": "class SubjectAdmin(admin.ModelAdmin):\n    list_display = ('sub_code', 'sub_name', 'credit')\n    search_fields = ('sub_code', 'sub_name')\nclass UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(Teacher)",
+        "detail": "course.admin",
+        "documentation": {}
+    },
+    {
         "label": "UserModel",
         "kind": 6,
         "importPath": "course.admin",
         "description": "course.admin",
-        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(Teacher)\nadmin.site.register(Subject)\nadmin.site.register(Routine)",
+        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(Teacher)\n# admin.site.register(Subject)\nadmin.site.register(Routine)",
         "detail": "course.admin",
         "documentation": {}
     },
@@ -2186,6 +2171,15 @@
         "importPath": "course.forms",
         "description": "course.forms",
         "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']\n    def __init__(self, *args, **kwargs):\n        self.teacher = kwargs.pop('teacher', None)\n        super().__init__(*args, **kwargs)\n        if self.teacher:\n            self.fields['semester'].queryset = self.teacher.department.semesters.all()\n            self.fields['subject'].queryset = Subject.objects.all()",
+        "detail": "course.forms",
+        "documentation": {}
+    },
+    {
+        "label": "SubjectForm",
+        "kind": 6,
+        "importPath": "course.forms",
+        "description": "course.forms",
+        "peekOfCode": "class SubjectForm(forms.ModelForm):\n    class Meta:\n        model = Subject\n        fields = ['sub_code', 'sub_name', 'credit']\n        widgets = {\n            'sub_code': forms.TextInput(attrs={'class': 'form-control'}),\n            'sub_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'credit': forms.NumberInput(attrs={'class': 'form-control'}),\n        }",
         "detail": "course.forms",
         "documentation": {}
     },
@@ -2365,7 +2359,34 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class CourseUpdateView(UpdateView):\n    model = Course\n    form_class = CourseForm\n    template_name = 'course/course_form.html'\n    success_url = reverse_lazy('course_list')",
+        "peekOfCode": "class CourseUpdateView(UpdateView):\n    model = Course\n    form_class = CourseForm\n    template_name = 'course/course_form.html'\n    success_url = reverse_lazy('course_list')\nclass SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "SubjectListView",
+        "kind": 6,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "class SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\nclass SubjectUpdateView(UpdateView):",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "SubjectCreateView",
+        "kind": 6,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "class SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\nclass SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "SubjectUpdateView",
+        "kind": 6,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "class SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')",
         "detail": "course.views",
         "documentation": {}
     },
@@ -2554,7 +2575,7 @@
         "kind": 5,
         "importPath": "seatplan.urls",
         "description": "seatplan.urls",
-        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    # SeatPlan URLs\n    path('seatplan/', SeatPlanListView.as_view(), name='seatplan_list'),\n    path('seatplan/create/', SeatPlanCreateView.as_view(), name='seatplan_create'),\n]",
+        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),\n    # SeatPlan URLs\n    path('seatplan/', SeatPlanListView.as_view(), name='seatplan_list'),\n    path('seatplan/create/', SeatPlanCreateView.as_view(), name='seatplan_create'),\n]",
         "detail": "seatplan.urls",
         "documentation": {}
     },
@@ -2581,7 +2602,7 @@
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomListView(ListView):\n    model = Room\n    template_name = 'room/room_list.html'\n    context_object_name = 'rooms'\nclass RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomUpdateView(UpdateView):",
+        "peekOfCode": "class RoomListView(ListView):\n    model = Room\n    template_name = 'room/room_list.html'\n    context_object_name = 'rooms'\nclass RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomDetailView(DetailView):",
         "detail": "seatplan.views",
         "documentation": {}
     },
@@ -2590,7 +2611,16 @@
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomUpdateView(UpdateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')",
+        "peekOfCode": "class RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\nclass RoomUpdateView(UpdateView):",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "RoomDetailView",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\nclass RoomUpdateView(UpdateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\ndef generate_seat_plan(request, room_number):",
         "detail": "seatplan.views",
         "documentation": {}
     },

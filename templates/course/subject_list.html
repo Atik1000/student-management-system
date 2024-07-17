@@ -14,15 +14,15 @@
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="page-title">Room</h3>
+                <h3 class="page-title">Subjects</h3>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Room</li>
+                    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Subjects</li>
                 </ul>
             </div>
             <div class="col-auto text-right float-right ml-auto">
                 <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-                <a href="{% url 'room_create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Exam</a>
+                <a href="{% url 'subject_create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Subject</a>
             </div>
         </div>
     </div>
@@ -38,27 +38,23 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Room No</th>
-                                    <th>Number of seat</th>
-                                    <th>Number of column</th>
-                                   
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Credit</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for room in rooms %}
+                                {% for subject in subjects %}
                                 <tr>
-                                    <td>{{ room.id }}</td>
-                                    <td>{{ room.number }}</td>
-                                    <td>{{ room.num_seats }}</td>
-                                    <td>{{ room.num_columns }}</td>
+                                    <td>{{ subject.id }}</td>
+                                    <td>{{ subject.sub_code }}</td>
+                                    <td>{{ subject.sub_name }}</td>
+                                    <td>{{ subject.credit }}</td>
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="{% url 'room_update' room.id %}" class="btn btn-sm bg-success-light mr-2">
+                                            <a href="{% url 'subject_update' subject.id %}" class="btn btn-sm bg-success-light mr-2">
                                                 <i class="fas fa-pen"></i>
-                                            </a>
-                                            <a href="{% url 'room_detail' room.id %}" class="btn btn-sm bg-success-light mr-2">
-                                                <i class="fas fa-eye"></i>
                                             </a>
                                         </div>
                                     </td>

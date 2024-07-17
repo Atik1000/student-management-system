@@ -1,10 +1,8 @@
 from django.urls import path
-from .views import (
-    ProgramListView, ProgramCreateView,
-    DepartmentListView, DepartmentCreateView, DepartmentUpdateView,
-    SemesterListView, SemesterCreateView, SemesterUpdateView, SemesterDetailView,
-    CourseListView, CourseCreateView, CourseUpdateView
-)
+from .views import (CourseCreateView, CourseListView, CourseUpdateView, DepartmentCreateView,
+    DepartmentListView, DepartmentUpdateView, ProgramCreateView, ProgramListView,
+    SemesterCreateView, SemesterDetailView, SemesterListView, SemesterUpdateView,
+    SubjectCreateView, SubjectListView, SubjectUpdateView)
 
 urlpatterns = [
     # Program URLs
@@ -27,4 +25,10 @@ urlpatterns = [
     path('courses/', CourseListView.as_view(), name='course_list'),
     path('courses/create/', CourseCreateView.as_view(), name='course_create'),
     path('courses/<int:pk>/update/', CourseUpdateView.as_view(), name='course_update'),
+
+    # Subject Urls
+    path('subject', SubjectListView.as_view(), name='subject_list'),
+    path('subject/create/', SubjectCreateView.as_view(), name='subject_create'),
+    path('subject/<int:pk>/edit/', SubjectUpdateView.as_view(), name='subject_update'),
+
 ]

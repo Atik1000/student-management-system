@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    RoomListView, RoomCreateView, RoomUpdateView, 
+    RoomListView, RoomCreateView, RoomUpdateView,RoomDetailView,
     SeatPlanListView, SeatPlanCreateView
 )
 
@@ -9,6 +9,8 @@ urlpatterns = [
     path('room/', RoomListView.as_view(), name='room_list'),
     path('room/create/', RoomCreateView.as_view(), name='room_create'),
     path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),
+
+    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),
 
 
     # SeatPlan URLs

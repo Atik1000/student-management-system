@@ -82,3 +82,14 @@ class RoutineForm(forms.ModelForm):
         if commit:
             routine.save()
         return routine
+    
+
+class SubjectForm(forms.ModelForm):
+    class Meta:
+        model = Subject
+        fields = ['sub_code', 'sub_name', 'credit']
+        widgets = {
+            'sub_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'sub_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'credit': forms.NumberInput(attrs={'class': 'form-control'}),
+        }

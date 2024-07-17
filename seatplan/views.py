@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView,DetailView
 from django.urls import reverse_lazy
 from app.models import Student
 from .models import Room, SeatPlan
@@ -28,6 +28,12 @@ class RoomCreateView(CreateView):
     form_class = RoomForm
     template_name = 'room/room_form.html'
     success_url = reverse_lazy('room_list')
+
+
+class RoomDetailView(DetailView):
+    model = Room
+    template_name = 'room/room_detail.html'
+    context_object_name = 'room'
 
 class RoomUpdateView(UpdateView):
     model = Room
