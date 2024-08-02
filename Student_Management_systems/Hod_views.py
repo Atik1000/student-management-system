@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from app.models import Session_year,CustomUser,Student,Staff,Staff_Notification,Staff_leave
 from django.contrib import messages
+from course.models import Semester
 
 
 
@@ -34,9 +35,10 @@ def HOME(request):
 
 
 @login_required(login_url='/')
+
 def ADD_STUDENT(request):
-    course = Course.objects.all()
-    session_year = Session_year.objects.all()
+    session_years = Session_year.objects.all()
+    semesters = Semester.objects.all()
 
     if request.method == "POST":
         profile_pic = request.FILES.get('profile_pic')
@@ -47,49 +49,49 @@ def ADD_STUDENT(request):
         password = request.POST.get('password')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
-        course_id = request.POST.get('course_id')
         session_year_id = request.POST.get('session_year_id')
+        semester_id = request.POST.get('semester_id')
 
         if CustomUser.objects.filter(email=email).exists():
-           messages.warning(request,'Email Is Already Taken')
-           return redirect('add_student')
+            messages.warning(request, 'Email is already taken')
+            return redirect('add_student')
         if CustomUser.objects.filter(username=username).exists():
-           messages.warning(request,'Username Is Already Taken')
-           return redirect('add_student')
+            messages.warning(request, 'Username is already taken')
+            return redirect('add_student')
         else:
             user = CustomUser(
-                first_name = first_name,
-                last_name = last_name,
-                username = username,
-                email = email,
-                profile_pic = profile_pic,
-                user_type = 3
+                first_name=first_name,
+                last_name=last_name,
+                username=username,
+                email=email,
+                profile_pic=profile_pic,
+                user_type=3
             )
             user.set_password(password)
             user.save()
 
-            course = Course.objects.get(id=course_id)
             session_year = Session_year.objects.get(id=session_year_id)
+            semester = Semester.objects.get(id=semester_id)
 
             student = Student(
-                admin = user,
-                address = address,
-                session_year_id = session_year,
-                course_id = course,
-                gender = gender,
+                admin=user,
+                address=address,
+                session_year_id=session_year,
+                semester=semester,
+                gender=gender,
             )
             student.save()
-            messages.success(request, user.first_name + "  " + user.last_name + " Are Successfully Added !")
+            messages.success(request, user.first_name + " " + user.last_name + " has been successfully added!")
             return redirect('add_student')
 
-
-
     context = {
-        'course':course,
-        'session_year':session_year,
+        'session_years': session_years,
+        'semesters': semesters,
     }
 
-    return render(request,'Hod/add_student.html',context)
+    return render(request, 'Hod/add_student.html', context)
+
+
 
 
 
@@ -104,7 +106,7 @@ def VIEW_STUDENT(request):
 @login_required(login_url='/')
 def EDIT_STUDENT(request,id):
     student = Student.objects.filter(id = id)
-    course = Course.objects.all()
+    course = Semester.objects.all()
     session_year = Session_year.objects.all()
 
     context = {
@@ -149,7 +151,7 @@ def UPDATE_STUDENT(request):
         student.address = address
         student.gender = gender
 
-        coures = Course.objects.get(id =course_id)
+        coures = Semester.objects.get(id =course_id)
         student.course_id = coures
 
         session_year = Session_year.objects.get(id = session_year_id)

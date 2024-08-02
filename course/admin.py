@@ -20,13 +20,6 @@ admin.site.register(Department)
 admin.site.register(Semester)
 admin.site.register(Course)
 
-admin.site.register(Teacher)
-
-# admin.site.register(Subject)
-
-admin.site.register(Routine)
-
-
 
 
 

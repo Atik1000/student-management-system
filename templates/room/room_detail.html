@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="exam-container">    
+<div class="exam-container">
+  <h2 class="text-center">Dhaka International University</h2>    
+  <h3 class="text-center"> Dept of CSE</h3>
 
     
     <table class="table table-bordered">
         <thead>
 
-            <p class="text-center"> Room Id :{{ room.id }}</p>
             <p class="text-center">Room number : {{ room.number }}</p>
             <p class="text-center">Number of seat: {{ room.num_seats }}</p>
             <p class="text-center">Number of column: {{ room.num_columns }}</p>

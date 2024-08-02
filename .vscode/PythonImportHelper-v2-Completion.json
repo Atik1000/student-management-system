@@ -304,6 +304,70 @@
         "documentation": {}
     },
     {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Subject",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Subject",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -715,6 +779,54 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -827,7 +939,31 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1034,46 +1170,6 @@
         "description": "django",
         "isExtraImport": true,
         "detail": "django",
-        "documentation": {}
-    },
-    {
-        "label": "Semester",
-        "importPath": "course.models",
-        "description": "course.models",
-        "isExtraImport": true,
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Department",
-        "importPath": "course.models",
-        "description": "course.models",
-        "isExtraImport": true,
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Semester",
-        "importPath": "course.models",
-        "description": "course.models",
-        "isExtraImport": true,
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Subject",
-        "importPath": "course.models",
-        "description": "course.models",
-        "isExtraImport": true,
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Semester",
-        "importPath": "course.models",
-        "description": "course.models",
-        "isExtraImport": true,
-        "detail": "course.models",
         "documentation": {}
     },
     {
@@ -1315,7 +1411,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def ADD_STUDENT(request):\n    course = Course.objects.all()\n    session_year = Session_year.objects.all()\n    if request.method == \"POST\":\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')",
+        "peekOfCode": "def ADD_STUDENT(request):\n    session_years = Session_year.objects.all()\n    semesters = Semester.objects.all()\n    if request.method == \"POST\":\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1324,7 +1420,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def VIEW_STUDENT(request):\n    student = Student.objects.all()\n    context = {\n        'student':student,\n    }\n    return render(request,'Hod/view_student.html',context)\n@login_required(login_url='/')\ndef EDIT_STUDENT(request,id):\n    student = Student.objects.filter(id = id)\n    course = Course.objects.all()",
+        "peekOfCode": "def VIEW_STUDENT(request):\n    student = Student.objects.all()\n    context = {\n        'student':student,\n    }\n    return render(request,'Hod/view_student.html',context)\n@login_required(login_url='/')\ndef EDIT_STUDENT(request,id):\n    student = Student.objects.filter(id = id)\n    course = Semester.objects.all()",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1333,7 +1429,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def EDIT_STUDENT(request,id):\n    student = Student.objects.filter(id = id)\n    course = Course.objects.all()\n    session_year = Session_year.objects.all()\n    context = {\n        'student':student,\n        'course':course,\n        'session_year':session_year,\n    }\n    return render(request,'Hod/edit_student.html',context)",
+        "peekOfCode": "def EDIT_STUDENT(request,id):\n    student = Student.objects.filter(id = id)\n    course = Semester.objects.all()\n    session_year = Session_year.objects.all()\n    context = {\n        'student':student,\n        'course':course,\n        'session_year':session_year,\n    }\n    return render(request,'Hod/edit_student.html',context)",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1905,6 +2001,33 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0014_alter_student_semester_alter_student_session_year_id",
+        "description": "app.migrations.0014_alter_student_semester_alter_student_session_year_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0007_remove_teacher_staff'),\n        ('app', '0013_student_semester'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='student',\n            name='semester',\n            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='course.semester'),",
+        "detail": "app.migrations.0014_alter_student_semester_alter_student_session_year_id",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0015_staff_department_staff_rank",
+        "description": "app.migrations.0015_staff_department_staff_rank",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0007_remove_teacher_staff'),\n        ('app', '0014_alter_student_semester_alter_student_session_year_id'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='staff',\n            name='department',\n            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='teachers_staff', to='course.department'),",
+        "detail": "app.migrations.0015_staff_department_staff_rank",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0016_routine",
+        "description": "app.migrations.0016_routine",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0008_remove_teacher_department_delete_routine_and_more'),\n        ('app', '0015_staff_department_staff_rank'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Routine',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "app.migrations.0016_routine",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -1918,7 +2041,7 @@
         "kind": 6,
         "importPath": "app.admin",
         "description": "app.admin",
-        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(CustomUser,UserModel)\nadmin.site.register(Session_year)\nadmin.site.register(Student)\nadmin.site.register(Staff)\n# admin.site.register(Subject)\nadmin.site.register(Staff_Notification)\nadmin.site.register(Staff_leave)\n# admin.site.register(Program)",
+        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(CustomUser,UserModel)\nadmin.site.register(Session_year)\nadmin.site.register(Student)\nadmin.site.register(Staff)\n# admin.site.register(Subject)\nadmin.site.register(Staff_Notification)\nadmin.site.register(Staff_leave)\nadmin.site.register(Routine)",
         "detail": "app.admin",
         "documentation": {}
     },
@@ -1981,7 +2104,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Session_year(models.Model):\n    session_start = models.CharField(max_length=100)\n    session_end = models.CharField(max_length=100)\n    def __str__(self):\n        return self.session_start + \" To \" + self. session_end\nclass Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.CASCADE)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)",
+        "peekOfCode": "class Session_year(models.Model):\n    session_start = models.CharField(max_length=100)\n    session_end = models.CharField(max_length=100)\n    def __str__(self):\n        return self.session_start + \" To \" + self. session_end\nclass Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)",
         "detail": "app.models",
         "documentation": {}
     },
@@ -1990,7 +2113,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.CASCADE)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)\n    session_year_id = models.ForeignKey(Session_year, on_delete=models.DO_NOTHING)\n    created_at = models.DateTimeField(auto_now_add=True)\n    update_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.admin.first_name + \" \" + self.admin.last_name",
+        "peekOfCode": "class Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)\n    session_year_id = models.ForeignKey(Session_year, on_delete=models.DO_NOTHING,null=True, blank=True)\n    created_at = models.DateTimeField(auto_now_add=True)\n    update_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.admin.first_name + \" \" + self.admin.last_name",
         "detail": "app.models",
         "documentation": {}
     },
@@ -1999,7 +2122,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Staff(models.Model):\n    admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)\n    created_at = models.DateTimeField(auto_now_add=True)\n    update_at = models.DateTimeField(auto_now= True)\n    def __str__(self):\n        return self.admin.username\n# class Subject(models.Model):\n#     name  = models.CharField(max_length=100)",
+        "peekOfCode": "class Staff(models.Model):\n    RANK_CHOICES = [\n        ('CH', 'Chairman'),\n        ('AP', 'Associate Professor'),\n        ('AS', 'Assistant Professor'),\n        ('LE', 'Lecturer'),\n    ]\n    admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2017,7 +2140,16 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)\n    message = models.TextField()\n    status = models.IntegerField(default=0)\n    created_at = models.DateTimeField(auto_now=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.staff_id.admin.first_name + self.staff_id.admin.last_name",
+        "peekOfCode": "class Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)\n    message = models.TextField()\n    status = models.IntegerField(default=0)\n    created_at = models.DateTimeField(auto_now=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.staff_id.admin.first_name + self.staff_id.admin.last_name\nclass Routine(models.Model):",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Routine",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Routine(models.Model):\n    DAY_CHOICES = [\n        ('Sun', 'Sunday'),\n        ('Mon', 'Monday'),\n        ('Tue', 'Tuesday'),\n        ('Wed', 'Wednesday'),\n        ('Thu', 'Thursday'),\n        ('Fri', 'Friday'),\n    ]\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='routines')",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2085,6 +2217,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "course.migrations.0008_remove_teacher_department_delete_routine_and_more",
+        "description": "course.migrations.0008_remove_teacher_department_delete_routine_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0007_remove_teacher_staff'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='teacher',\n            name='department',\n        ),\n        migrations.DeleteModel(",
+        "detail": "course.migrations.0008_remove_teacher_department_delete_routine_and_more",
+        "documentation": {}
+    },
+    {
         "label": "getattr_custom",
         "kind": 2,
         "importPath": "course.templatetags.custom_filters",
@@ -2107,7 +2248,7 @@
         "kind": 6,
         "importPath": "course.admin",
         "description": "course.admin",
-        "peekOfCode": "class SubjectAdmin(admin.ModelAdmin):\n    list_display = ('sub_code', 'sub_name', 'credit')\n    search_fields = ('sub_code', 'sub_name')\nclass UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(Teacher)",
+        "peekOfCode": "class SubjectAdmin(admin.ModelAdmin):\n    list_display = ('sub_code', 'sub_name', 'credit')\n    search_fields = ('sub_code', 'sub_name')\nclass UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)",
         "detail": "course.admin",
         "documentation": {}
     },
@@ -2116,7 +2257,7 @@
         "kind": 6,
         "importPath": "course.admin",
         "description": "course.admin",
-        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(Teacher)\n# admin.site.register(Subject)\nadmin.site.register(Routine)",
+        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)",
         "detail": "course.admin",
         "documentation": {}
     },
@@ -2166,15 +2307,6 @@
         "documentation": {}
     },
     {
-        "label": "RoutineForm",
-        "kind": 6,
-        "importPath": "course.forms",
-        "description": "course.forms",
-        "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']\n    def __init__(self, *args, **kwargs):\n        self.teacher = kwargs.pop('teacher', None)\n        super().__init__(*args, **kwargs)\n        if self.teacher:\n            self.fields['semester'].queryset = self.teacher.department.semesters.all()\n            self.fields['subject'].queryset = Subject.objects.all()",
-        "detail": "course.forms",
-        "documentation": {}
-    },
-    {
         "label": "SubjectForm",
         "kind": 6,
         "importPath": "course.forms",
@@ -2197,7 +2329,7 @@
         "kind": 6,
         "importPath": "course.models",
         "description": "course.models",
-        "peekOfCode": "class Department(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='department')\n    dept_name = models.CharField(max_length=20)\n    def __str__(self):\n        return f\"{self.dept_name}\"\nclass Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\nclass Semester(models.Model):",
+        "peekOfCode": "class Department(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='department')\n    dept_name = models.CharField(max_length=20)\n    def __str__(self):\n        return f\"{self.dept_name}\"\nclass Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\n    def __str__(self):",
         "detail": "course.models",
         "documentation": {}
     },
@@ -2206,7 +2338,7 @@
         "kind": 6,
         "importPath": "course.models",
         "description": "course.models",
-        "peekOfCode": "class Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\nclass Semester(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='semesters')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='semesters')\n    name = models.CharField(max_length=20, unique=True)\n    def __str__(self):\n        return f\"{self.program} - {self.name}\"",
+        "peekOfCode": "class Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\n    def __str__(self):\n        return f\"{self.sub_name}\"\nclass Semester(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='semesters')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='semesters')\n    name = models.CharField(max_length=20, unique=True)",
         "detail": "course.models",
         "documentation": {}
     },
@@ -2225,24 +2357,6 @@
         "importPath": "course.models",
         "description": "course.models",
         "peekOfCode": "class Course(models.Model):\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='courses')\n    course_code_1 = models.CharField(max_length=10, null=True, blank=True)\n    course_name_1 = models.CharField(max_length=100, null=True, blank=True)\n    credits_1 = models.IntegerField(null=True, blank=True)\n    course_code_2 = models.CharField(max_length=10, null=True, blank=True)\n    course_name_2 = models.CharField(max_length=100, null=True, blank=True)\n    credits_2 = models.IntegerField(null=True, blank=True)\n    course_code_3 = models.CharField(max_length=10, null=True, blank=True)\n    course_name_3 = models.CharField(max_length=100, null=True, blank=True)",
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Teacher",
-        "kind": 6,
-        "importPath": "course.models",
-        "description": "course.models",
-        "peekOfCode": "class Teacher(models.Model):\n    RANK_CHOICES = [\n        ('CH', 'Chairman'),\n        ('AP', 'Associate Professor'),\n        ('AS', 'Assistant Professor'),\n        ('LE', 'Lecturer'),\n    ]\n    # staff = models.OneToOneField(Staff, on_delete=models.CASCADE)\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='teachers')\n    rank = models.CharField(max_length=2, choices=RANK_CHOICES)",
-        "detail": "course.models",
-        "documentation": {}
-    },
-    {
-        "label": "Routine",
-        "kind": 6,
-        "importPath": "course.models",
-        "description": "course.models",
-        "peekOfCode": "class Routine(models.Model):\n    DAY_CHOICES = [\n        ('Sun', 'Sunday'),\n        ('Mon', 'Monday'),\n        ('Tue', 'Tuesday'),\n        ('Wed', 'Wednesday'),\n        ('Thu', 'Thursday'),\n        ('Fri', 'Friday'),\n    ]\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='routines')",
         "detail": "course.models",
         "documentation": {}
     },
@@ -2400,6 +2514,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "question.migrations.0002_remove_exam_course_code_remove_exam_university_name_and_more",
+        "description": "question.migrations.0002_remove_exam_course_code_remove_exam_university_name_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0007_remove_teacher_staff'),\n        ('question', '0001_initial'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='exam',\n            name='course_code',\n        ),",
+        "detail": "question.migrations.0002_remove_exam_course_code_remove_exam_university_name_and_more",
+        "documentation": {}
+    },
+    {
         "label": "ExamAdmin",
         "kind": 6,
         "importPath": "question.admin",
@@ -2422,7 +2545,7 @@
         "kind": 6,
         "importPath": "question.froms",
         "description": "question.froms",
-        "peekOfCode": "class ExamForm(forms.ModelForm):\n    class Meta:\n        model = Exam\n        fields = '__all__'\n        widgets = {\n            'subject_name': forms.Select(attrs={'class': 'form-control'}),\n            'department_name': forms.Select(attrs={'class': 'form-control'}),\n            'semester_name': forms.Select(attrs={'class': 'form-control'}),\n            'batch_number': forms.TextInput(attrs={'class': 'form-control'}),\n            'course_code': forms.Select(attrs={'class': 'form-control'}),",
+        "peekOfCode": "class ExamForm(forms.ModelForm):\n    class Meta:\n        model = Exam\n        fields = [\n            'subject_name', 'department_name', 'semester_name', 'batch_number',\n             'name', 'time', 'marks',\n            'q1_number', 'q1_description', 'q1_marks',\n            'q2_number', 'q2_description', 'q2_marks',\n            'q3_number', 'q3_description', 'q3_marks',\n            'q4_number', 'q4_description', 'q4_marks',",
         "detail": "question.froms",
         "documentation": {}
     },
@@ -2431,7 +2554,7 @@
         "kind": 6,
         "importPath": "question.models",
         "description": "question.models",
-        "peekOfCode": "class Exam(models.Model):\n    EXAM_TYPES = [\n        ('Mid', 'Mid Exam'),\n        ('Final', 'Final Exam'),\n    ]\n    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')\n    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')\n    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')\n    batch_number = models.CharField(max_length=20, null=True, blank=True)\n    course_code = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='course_code_exams')",
+        "peekOfCode": "class Exam(models.Model):\n    EXAM_TYPES = [\n        ('Mid', 'Mid Exam'),\n        ('Final', 'Final Exam'),\n    ]\n    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')\n    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')\n    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')\n    batch_number = models.CharField(max_length=20, null=True, blank=True)\n    name = models.CharField(max_length=5, choices=EXAM_TYPES, default='Mid')",
         "detail": "question.models",
         "documentation": {}
     },
