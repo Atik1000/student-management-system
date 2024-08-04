@@ -144,6 +144,22 @@
         "documentation": {}
     },
     {
+        "label": "CustomUser",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Routine",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "Session_year",
         "importPath": "app.models",
         "description": "app.models",
@@ -152,7 +168,23 @@
         "documentation": {}
     },
     {
-        "label": "CustomUser",
+        "label": "Staff",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff_leave",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff_Notification",
         "importPath": "app.models",
         "description": "app.models",
         "isExtraImport": true,
@@ -192,30 +224,6 @@
         "documentation": {}
     },
     {
-        "label": "Staff",
-        "importPath": "app.models",
-        "description": "app.models",
-        "isExtraImport": true,
-        "detail": "app.models",
-        "documentation": {}
-    },
-    {
-        "label": "Staff_Notification",
-        "importPath": "app.models",
-        "description": "app.models",
-        "isExtraImport": true,
-        "detail": "app.models",
-        "documentation": {}
-    },
-    {
-        "label": "Staff_leave",
-        "importPath": "app.models",
-        "description": "app.models",
-        "isExtraImport": true,
-        "detail": "app.models",
-        "documentation": {}
-    },
-    {
         "label": "CustomUser",
         "importPath": "app.models",
         "description": "app.models",
@@ -301,6 +309,14 @@
         "description": "django.contrib",
         "isExtraImport": true,
         "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
         "documentation": {}
     },
     {
@@ -368,28 +384,27 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
+        "label": "RoutineForm",
+        "importPath": "app.forms",
+        "description": "app.forms",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "detail": "app.forms",
         "documentation": {}
     },
     {
-        "label": "get_asgi_application",
-        "importPath": "django.core.asgi",
-        "description": "django.core.asgi",
+        "label": "StaffForm",
+        "importPath": "app.forms",
+        "description": "app.forms",
         "isExtraImport": true,
-        "detail": "django.core.asgi",
+        "detail": "app.forms",
         "documentation": {}
     },
     {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
+        "label": "reverse_lazy",
+        "importPath": "django.urls",
+        "description": "django.urls",
         "isExtraImport": true,
-        "detail": "pathlib",
+        "detail": "django.urls",
         "documentation": {}
     },
     {
@@ -402,6 +417,14 @@
     },
     {
         "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
         "importPath": "django.urls",
         "description": "django.urls",
         "isExtraImport": true,
@@ -473,6 +496,151 @@
         "documentation": {}
     },
     {
+        "label": "CreateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "ListView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "ListView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "CreateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "ListView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "ListView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "CreateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "settings",
         "importPath": "django.conf",
         "description": "django.conf",
@@ -502,6 +670,22 @@
         "description": "django.conf.urls.static",
         "isExtraImport": true,
         "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineCreateView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineUpdateView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
     {
@@ -756,6 +940,22 @@
     },
     {
         "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1173,6 +1373,14 @@
         "documentation": {}
     },
     {
+        "label": "time",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "TestCase",
         "importPath": "django.test",
         "description": "django.test",
@@ -1269,102 +1477,6 @@
         "documentation": {}
     },
     {
-        "label": "ListView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "CreateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "UpdateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "DetailView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "UpdateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "DetailView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "View",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "ListView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "ListView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "CreateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "UpdateView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
-        "label": "DetailView",
-        "importPath": "django.views.generic",
-        "description": "django.views.generic",
-        "isExtraImport": true,
-        "detail": "django.views.generic",
-        "documentation": {}
-    },
-    {
         "label": "Coalesce",
         "importPath": "django.db.models.functions",
         "description": "django.db.models.functions",
@@ -1395,6 +1507,24 @@
         "importPath": "sys",
         "description": "sys",
         "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineCreateView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "class RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'create_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass RoutineUpdateView(UpdateView):\n    model = Routine",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineUpdateView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "class RoutineUpdateView(UpdateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'update_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)",
+        "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
     {
@@ -1447,7 +1577,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def DELETE_STUDENT(request,admin):\n    student = CustomUser.objects.get(id = admin)\n    student.delete()\n    messages.success(request,'Record Are Succesfully Deleted')\n    return redirect('view_student')\n# @login_required(login_url='/')\n# def Add_COURSE(request):\n#     if request.method == 'POST':\n#         course_name = request.POST.get('course_name')\n#         course = Course(",
+        "peekOfCode": "def DELETE_STUDENT(request,admin):\n    student = CustomUser.objects.get(id = admin)\n    student.delete()\n    messages.success(request,'Record Are Succesfully Deleted')\n    return redirect('view_student')\n@login_required(login_url='/')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1456,7 +1586,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def ADD_STAFF(request):\n    if request .method == 'POST':\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')\n        address = request.POST.get('address')\n        gender = request.POST.get('gender')",
+        "peekOfCode": "def ADD_STAFF(request):\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES)\n        if form.is_valid():\n            form.save()\n            return redirect('staff_list')  # Redirect to a list view or another success page\n    else:\n        form = StaffForm()\n    departments = Department.objects.all()  # Fetch all departments\n    rank_choices = Staff.RANK_CHOICES",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1582,7 +1712,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')",
+        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')\nclass RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'create_routine.html'\n    success_url = reverse_lazy('view_routines')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2028,6 +2158,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0017_remove_staff_update_at_staff_email_staff_first_name_and_more",
+        "description": "app.migrations.0017_remove_staff_update_at_staff_email_staff_first_name_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0008_remove_teacher_department_delete_routine_and_more'),\n        ('app', '0016_routine'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='staff',\n            name='update_at',\n        ),",
+        "detail": "app.migrations.0017_remove_staff_update_at_staff_email_staff_first_name_and_more",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2055,39 +2194,21 @@
         "documentation": {}
     },
     {
-        "label": "ProgramForm",
+        "label": "StaffForm",
         "kind": 6,
-        "importPath": "app.froms",
-        "description": "app.froms",
-        "peekOfCode": "class ProgramForm(forms.ModelForm):\n    class Meta:\n        model = Program\n        fields = ['name']\nclass DepartmentForm(forms.ModelForm):\n    class Meta:\n        model = Department\n        fields = ['program', 'dept_name']\nclass SemesterForm(forms.ModelForm):\n    class Meta:",
-        "detail": "app.froms",
+        "importPath": "app.forms",
+        "description": "app.forms",
+        "peekOfCode": "class StaffForm(forms.ModelForm):\n    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))\n    class Meta:\n        model = Staff\n        fields = '__all__'  # Use all fields from the Staff model\n        widgets = {\n            'first_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'last_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'email': forms.EmailInput(attrs={'class': 'form-control'}),\n            'username': forms.TextInput(attrs={'class': 'form-control'}),",
+        "detail": "app.forms",
         "documentation": {}
     },
     {
-        "label": "DepartmentForm",
+        "label": "RoutineForm",
         "kind": 6,
-        "importPath": "app.froms",
-        "description": "app.froms",
-        "peekOfCode": "class DepartmentForm(forms.ModelForm):\n    class Meta:\n        model = Department\n        fields = ['program', 'dept_name']\nclass SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name']\nclass CourseForm(forms.ModelForm):\n    class Meta:",
-        "detail": "app.froms",
-        "documentation": {}
-    },
-    {
-        "label": "SemesterForm",
-        "kind": 6,
-        "importPath": "app.froms",
-        "description": "app.froms",
-        "peekOfCode": "class SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name']\nclass CourseForm(forms.ModelForm):\n    class Meta:\n        model = Course\n        fields = ['semester', 'course_code', 'course_name', 'credits']",
-        "detail": "app.froms",
-        "documentation": {}
-    },
-    {
-        "label": "CourseForm",
-        "kind": 6,
-        "importPath": "app.froms",
-        "description": "app.froms",
-        "peekOfCode": "class CourseForm(forms.ModelForm):\n    class Meta:\n        model = Course\n        fields = ['semester', 'course_code', 'course_name', 'credits']",
-        "detail": "app.froms",
+        "importPath": "app.forms",
+        "description": "app.forms",
+        "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'teacher', 'day', 'start_time', 'end_time']\n        widgets = {\n            'semester': forms.Select(attrs={'class': 'form-control'}),\n            'subject': forms.Select(attrs={'class': 'form-control'}),\n            'teacher': forms.Select(attrs={'class': 'form-control'}),\n            'day': forms.Select(attrs={'class': 'form-control'}),\n            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),",
+        "detail": "app.forms",
         "documentation": {}
     },
     {
@@ -2122,7 +2243,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Staff(models.Model):\n    RANK_CHOICES = [\n        ('CH', 'Chairman'),\n        ('AP', 'Associate Professor'),\n        ('AS', 'Assistant Professor'),\n        ('LE', 'Lecturer'),\n    ]\n    admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)",
+        "peekOfCode": "class Staff(models.Model):\n    RANK_CHOICES = [\n        ('CH', 'Chairman'),\n        ('AP', 'Associate Professor'),\n        ('AS', 'Assistant Professor'),\n        ('LE', 'Lecturer'),\n    ]\n    admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)\n    profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)\n    first_name = models.CharField(max_length=100 ,null=True, blank=True)",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2151,6 +2272,15 @@
         "description": "app.models",
         "peekOfCode": "class Routine(models.Model):\n    DAY_CHOICES = [\n        ('Sun', 'Sunday'),\n        ('Mon', 'Monday'),\n        ('Tue', 'Tuesday'),\n        ('Wed', 'Wednesday'),\n        ('Thu', 'Thursday'),\n        ('Fri', 'Friday'),\n    ]\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='routines')",
         "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "app.urls",
+        "description": "app.urls",
+        "peekOfCode": "urlpatterns = [\n    path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),\n    path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),\n]",
+        "detail": "app.urls",
         "documentation": {}
     },
     {

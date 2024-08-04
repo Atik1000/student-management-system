@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from Student_Management_systems.Hod_views import RoutineCreateView, RoutineUpdateView
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -32,18 +33,6 @@ urlpatterns = [
     path('Hod/Staff/Update', Hod_views.UPDATE_STAFF,name='uptadte_staff'),
     path('Hod/Staff/Delete/<str:admin>', Hod_views.DELETE_STAFF,name='delete_staff'),
 
-    # path('Hod/Course/Add',Hod_views.Add_COURSE,name = 'add_coures'),
-    # path('Hod/Course/View', Hod_views.VIEW_COURSE, name='view_course'),
-    # path('Hod/Course/Edit/<str:id>', Hod_views.EDIT_COURSE, name='eidt_course'),
-    # path('Hod/Course/update', Hod_views.UPDATE_COURSE, name='update_course'),
-    # path('Hod/Course/Delete/<str:id>', Hod_views.DELETE_COURSE, name='delete_course'),
-
-    # path('Hod/Subject/Add', Hod_views.ADD_SUBJECT, name='add_subject'),
-    # path('Hod/Subject/view',Hod_views.VIEW_SUBJECT,name = 'view_subject'),
-    # path('Hod/Subject/edit/<str:id>',Hod_views.EDIT_SUBJECT,name= 'edit_subject'),
-    # path('Hod/Subject/Update',Hod_views.UPDATE_SUBJECT, name = 'update_subject'),
-    # path('Hod/Subject/Delete/<str:id>',Hod_views.DELETE_SUBJECT, name = 'delete_subject'),
-
     path('Hod/Session/Add',Hod_views.ADD_SESSION,name= 'add_session'),
     path('Hod/Session/View,',Hod_views.VIEW_SESSION,name = 'view_session'),
     path('Hod/Session/Edit/<str:id>',Hod_views.EDIT_SESSION, name = 'edit_session'),
@@ -68,6 +57,11 @@ urlpatterns = [
     path('Staff/Apply_leave',Staff_Views.STAFF_APPLY_LEAVE,name= 'staff_apply_leave'),
     path('Staff/Apply_leave_save',Staff_Views.STAFF_APPLY_LEAVE_SAVE,name = 'staff_apply_leave_save'),
 
+#  routine urls
+    path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
+  
+    path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),
+  
 
 
     # question url
@@ -78,6 +72,8 @@ urlpatterns = [
 
     path('course/', include('course.urls')),
     path('seatplan/', include('seatplan.urls')),
+
+    # path('routine/', include('app.urls')),
 
 
 

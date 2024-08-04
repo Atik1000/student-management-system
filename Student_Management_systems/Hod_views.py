@@ -1,8 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from app.models import Session_year,CustomUser,Student,Staff,Staff_Notification,Staff_leave
+from app.models import (CustomUser, Routine, Session_year, Staff, Staff_leave, Staff_Notification,
+    Student)
 from django.contrib import messages
-from course.models import Semester
+from course.models import Department, Semester
+from app.forms import RoutineForm, StaffForm
+
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, ListView
 
 
 
@@ -175,69 +180,6 @@ def DELETE_STUDENT(request,admin):
 
 
 
-# @login_required(login_url='/')
-# def Add_COURSE(request):
-#     if request.method == 'POST':
-#         course_name = request.POST.get('course_name')
-
-#         course = Course(
-#             name = course_name,
-#         )
-#         course.save()
-#         messages.success(request,'course Are successfully Created')
-#         return redirect('add_coures')
-
-#     return render(request,'Hod/add_course.html')
-
-# @login_required(login_url='/')
-# def VIEW_COURSE(request):
-#     course = Course.objects.all()
-#     context = {
-#         'course':course,
-#     }
-#     return render(request,'Hod/view_course.html',context)
-
-# @login_required(login_url='/')
-# def EDIT_COURSE(request,id):
-#     course = Course.objects.get(id= id)
-#     context = {
-#         'course': course,
-#     }
-#     return render(request,'Hod/edit_course.html',context)
-
-# @login_required(login_url='/')
-# def UPDATE_COURSE(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         course_id = request.POST.get('course_id')
-
-#         course = Course.objects.get(id = course_id)
-#         course.name = name
-#         course.save()
-#         messages.success(request,'course Are successfully updated')
-#         return redirect('view_course')
-#     return render(request, 'Hod/edit_course.html')
-
-# @login_required(login_url='/')
-# def DELETE_COURSE(request,id):
-#     course = Course.objects.get(id = id)
-#     course.delete()
-#     messages.success(request,'course are successfully deleted')
-
-#     return redirect('view_course')
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -247,39 +189,25 @@ def DELETE_STUDENT(request,admin):
 
 
 @login_required(login_url='/')
+
+
 def ADD_STAFF(request):
-    if request .method == 'POST':
-        profile_pic = request.FILES.get('profile_pic')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        address = request.POST.get('address')
-        gender = request.POST.get('gender')
-
-        if CustomUser.objects.filter(email=email).exists():
-            messages.warning(request,'Email Is Already Taken')
-            return redirect('add_staff')
-        if CustomUser.objects.filter(username=username).exists():
-            messages.warning(request,'Username Is Already Taken')
-            return redirect('add_staff')
-
-        else:
-            user = CustomUser(first_name= first_name,last_name=last_name,email=email,username=username,profile_pic=profile_pic,user_type= 2)
-            user.set_password(password)
-            user.save()
-            staff = Staff(
-                admin = user,
-                address = address,
-                gender = gender
-
-            )
-            staff.save()
-            messages.success(request,'Staff Are Successfuly Add')
-            return redirect('add_staff')
-
-    return render(request,'Hod/add_staff.html')
+    if request.method == 'POST':
+        form = StaffForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('staff_list')  # Redirect to a list view or another success page
+    else:
+        form = StaffForm()
+    
+    departments = Department.objects.all()  # Fetch all departments
+    rank_choices = Staff.RANK_CHOICES
+    
+    return render(request, 'Hod/add_staff.html', {
+        'form': form,
+        'departments': departments,
+        'rank_choices': rank_choices,
+    })
 
 
 @login_required(login_url='/')
@@ -450,3 +378,29 @@ def STAFF_DISAPPROVE_LEAVE(request,id):
     leave.status =2
     leave.save()
     return redirect('staff_leave_view')
+
+
+
+
+
+
+
+class RoutineCreateView(CreateView):
+    model = Routine
+    form_class = RoutineForm
+    template_name = 'create_routine.html'
+    success_url = reverse_lazy('view_routines')
+
+    def form_valid(self, form):
+        # Custom form validation can be added here
+        return super().form_valid(form)
+
+class RoutineUpdateView(UpdateView):
+    model = Routine
+    form_class = RoutineForm
+    template_name = 'update_routine.html'
+    success_url = reverse_lazy('view_routines')
+
+    def form_valid(self, form):
+        # Custom form validation can be added here
+        return super().form_valid(form)
