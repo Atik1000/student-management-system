@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from Student_Management_systems.Hod_views import RoutineCreateView, RoutineUpdateView
+from Student_Management_systems.Hod_views import (DayWiseDetailsView, RoutineCreateView,
+    RoutineUpdateView, WeeklyDetailsView)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -27,11 +28,13 @@ urlpatterns = [
     path('Hod/Student/Edit/<str:id>',Hod_views.EDIT_STUDENT,name='edit_student'),
     path('Hod/Student/update',Hod_views.UPDATE_STUDENT,name = 'update_student'),
     path('Hod/Student/Delete/<str:admin>', Hod_views.DELETE_STUDENT,name='delete_student'),
-    path('Hod/Staff/Add', Hod_views.ADD_STAFF,name='add_staff'),
-    path('Hod/Staff/view', Hod_views.VIEW_STAFF,name='view_staff'),
-    path('Hod/Staff/Edit/<str:id>', Hod_views.EDIT_STAFF,name='edit_staff'),
-    path('Hod/Staff/Update', Hod_views.UPDATE_STAFF,name='uptadte_staff'),
-    path('Hod/Staff/Delete/<str:admin>', Hod_views.DELETE_STAFF,name='delete_staff'),
+    
+    # Staff
+
+    path('staff/add/', Hod_views.ADD_STAFF, name='add_staff'),
+    path('staff/<int:id>/edit/', Hod_views.EDIT_STAFF, name='edit_staff'),
+    path('staff/<int:id>/delete/', Hod_views.DELETE_STAFF, name='delete_staff'),
+    path('staff/', Hod_views.VIEW_STAFF, name='view_staff'),
 
     path('Hod/Session/Add',Hod_views.ADD_SESSION,name= 'add_session'),
     path('Hod/Session/View,',Hod_views.VIEW_SESSION,name = 'view_session'),
@@ -61,7 +64,12 @@ urlpatterns = [
     path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
   
     path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),
-  
+    path('check_subject_availability/', Hod_views.check_subject_availability, name='check_subject_availability'),
+
+    path('day_wise_details/', DayWiseDetailsView.as_view(), name='day_wise_details'),
+    path('weekly_details/<int:pk>/', WeeklyDetailsView.as_view(), name='weekly_details'),
+
+
 
 
     # question url

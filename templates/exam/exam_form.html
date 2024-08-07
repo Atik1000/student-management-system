@@ -3,109 +3,55 @@
 
 {% block content %}
 <div class="mt-5">
-  <h1 class="mb-4">{% if form.instance.pk %}Update Exam{% else %}Create Exam{% endif %}</h1>
-  <form method="post">
+  <h1 class="mb-4">{% if form.instance.pk %}Update Staff{% else %}Add Staff{% endif %}</h1>
+  <form method="post" action="{% url 'add_staff' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.subject_name.label_tag }} {{ form.subject_name }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.department_name.label_tag }} {{ form.department_name }}
+        {{ form.profile_pic.label_tag }} {{ form.profile_pic }}
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.semester_name.label_tag }} {{ form.semester_name }}
+        {{ form.first_name.label_tag }} {{ form.first_name }}
       </div>
       <div class="col-md-6 mb-3">
-        {{ form.batch_number.label_tag }} {{ form.batch_number }}
-      </div>
-    </div>
-    <div class="row">
-   
-      <div class="col-md-6 mb-3">
-        {{ form.time.label_tag }} {{ form.time }}
+        {{ form.last_name.label_tag }} {{ form.last_name }}
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.marks.label_tag }} {{ form.marks }}
+        {{ form.email.label_tag }} {{ form.email }}
       </div>
       <div class="col-md-6 mb-3">
-        {{ form.name.label_tag }} {{ form.name }}
- 
-      </div>
-    </div>
-    </div>
-    <h2 class="mt-4">Questions</h2>
-    <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q1_number.label_tag }} {{ form.q1_number }}
-      </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q1_description.label_tag }} {{ form.q1_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q1_marks.label_tag }} {{ form.q1_marks }}
+        {{ form.username.label_tag }} {{ form.username }}
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q2_number.label_tag }} {{ form.q2_number }}
-      </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q2_description.label_tag }} {{ form.q2_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q2_marks.label_tag }} {{ form.q2_marks }}
+      <div class="col-md-6 mb-3">
+        {{ form.password.label_tag }} {{ form.password }}
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q3_number.label_tag }} {{ form.q3_number }}
-      </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q3_description.label_tag }} {{ form.q3_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q3_marks.label_tag }} {{ form.q3_marks }}
+      <div class="col-md-12 mb-3">
+        {{ form.address.label_tag }} {{ form.address }}
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q4_number.label_tag }} {{ form.q4_number }}
+      <div class="col-md-6 mb-3">
+        {{ form.department.label_tag }} {{ form.department }}
       </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q4_description.label_tag }} {{ form.q4_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q4_marks.label_tag }} {{ form.q4_marks }}
+      <div class="col-md-6 mb-3">
+        {{ form.rank.label_tag }} {{ form.rank }}
       </div>
     </div>
     <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q5_number.label_tag }} {{ form.q5_number }}
-      </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q5_description.label_tag }} {{ form.q5_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q5_marks.label_tag }} {{ form.q5_marks }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 mb-3">
-        {{ form.q6_number.label_tag }} {{ form.q6_number }}
-      </div>
-      <div class="col-md-8 mb-3">
-        {{ form.q6_description.label_tag }} {{ form.q6_description }}
-      </div>
-      <div class="col-md-2 mb-3">
-        {{ form.q6_marks.label_tag }} {{ form.q6_marks }}
+      <div class="col-md-6 mb-3">
+        {{ form.gender.label_tag }} {{ form.gender }}
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
 {% endblock %}
+  

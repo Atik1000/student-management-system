@@ -35,7 +35,6 @@ class Student(models.Model):
     semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)
     address = models.TextField()
     gender = models.CharField(max_length=100)
-    session_year_id = models.ForeignKey(Session_year, on_delete=models.DO_NOTHING,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -56,6 +55,8 @@ class Staff(models.Model):
     first_name = models.CharField(max_length=100 ,null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=True, blank=True)  # Assuming email is unique
+    password = models.CharField(max_length=128)  # Password field
+
     username = models.CharField(max_length=150, unique=True, null=True, blank=True)
     address = models.TextField( null=True, blank=True)
     gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], null=True, blank=True)  # Updated for gender options

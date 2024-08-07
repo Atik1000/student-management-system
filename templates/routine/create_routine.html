@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+        <h2>Create Routine</h2>
+        <form method="post" id="routineForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+ 
+
+    {% endblock %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById('routineForm');
+            form.addEventListener('submit', function(event) {
+                // Fetch form values
+                const startTime = form.querySelector('input[name="start_time"]').value;
+                const endTime = form.querySelector('input[name="end_time"]').value;
+                const subject = form.querySelector('select[name="subject"]').value;
+                const teacher = form.querySelector('select[name="teacher"]').value;
+                
+                // Convert times to Date objects
+                const start = new Date('1970-01-01T' + startTime + 'Z');
+                const end = new Date('1970-01-01T' + endTime + 'Z');
+                const diffMs = end - start;
+                const diffHrs = diffMs / (1000 * 60 * 60);
+                
+                // Check if the duration is between 1 and 3 hours
+                if (diffHrs < 1 || diffHrs > 3) {
+                    alert("Class duration must be between 1 to 3 hours.");
+                    event.preventDefault();
+                    return;
+                }
+            });
+        });
+    </script>

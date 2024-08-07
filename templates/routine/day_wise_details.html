@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h2>Day-wise Routine</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    {% for day in days %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                    <tr>
+                        <td>{{ teacher.username }}</td>
+                        {% for day in days %}
+                            <td>
+                                {% for routine in routines %}
+                                    {% if routine.teacher == teacher and routine.day == day %}
+                                        {{ routine.subject.name }}<br>
+                                        {{ routine.start_time }} - {{ routine.end_time }}<br>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

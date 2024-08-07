@@ -78,6 +78,17 @@
                </ul>
             </li>
 
+            <li class="submenu">
+               <a href="#"><i class="fas fa-building"></i> <span> Routine </span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'day_wise_details' %}">day_wise_details </a></li>
+
+                  <li><a href="{% url 'room_list' %}">View Room </a></li>
+
+
+               </ul>
+            </li>
+
             <li class="submenu {% active_link 'add_session' 'active' %} {% active_link 'view_session' 'active' %}">
                <a href="#"><i class="fas fa-comment-dollar"></i> <span> Session</span> <span class="menu-arrow"></span></a>
                <ul>

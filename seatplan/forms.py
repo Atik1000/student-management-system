@@ -1,5 +1,40 @@
 from django import forms
+from course.models import Department, Program
 from .models import SeatPlan, Batch, Room
+
+from django import forms
+from .models import Room, Semester, SeatPlan
+
+class SeatPlanGenerateForm(forms.Form):
+    room = forms.ModelChoiceField(queryset=Room.objects.all(), widget=forms.HiddenInput())
+    program = forms.ModelChoiceField(queryset=Program.objects.all(), empty_label='Select Program', required=False)
+    department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label='Select Department', required=False)
+    semester = forms.ModelChoiceField(queryset=Semester.objects.all(), empty_label='Select Semester', required=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['department'].queryset = Department.objects.none()
+        self.fields['semester'].queryset = Semester.objects.none()
+
+        if 'program' in self.data:
+            try:
+                program_id = int(self.data.get('program'))
+                self.fields['department'].queryset = Department.objects.filter(program_id=program_id).order_by('dept_name')
+            except (ValueError, TypeError):
+                pass  # Invalid input from the client; ignore and fallback to empty queryset
+
+        if 'department' in self.data:
+            try:
+                department_id = int(self.data.get('department'))
+                self.fields['semester'].queryset = Semester.objects.filter(department_id=department_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # Invalid input from the client; ignore and fallback to empty queryset
+        elif 'program' in self.data:
+            try:
+                program_id = int(self.data.get('program'))
+                self.fields['semester'].queryset = Semester.objects.filter(department__program_id=program_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # Invalid input from the client; ignore and fallback to empty queryset
 
 class SeatPlanForm(forms.ModelForm):
     class Meta:

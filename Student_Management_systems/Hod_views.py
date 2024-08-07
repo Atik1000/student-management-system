@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+import django.shortcuts
 from django.contrib.auth.decorators import login_required
 from app.models import (CustomUser, Routine, Session_year, Staff, Staff_leave, Staff_Notification,
     Student)
@@ -7,7 +7,11 @@ from course.models import Department, Semester
 from app.forms import RoutineForm, StaffForm
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect, get_object_or_404
+
+
 
 
 
@@ -42,7 +46,6 @@ def HOME(request):
 @login_required(login_url='/')
 
 def ADD_STUDENT(request):
-    session_years = Session_year.objects.all()
     semesters = Semester.objects.all()
 
     if request.method == "POST":
@@ -54,7 +57,6 @@ def ADD_STUDENT(request):
         password = request.POST.get('password')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
-        session_year_id = request.POST.get('session_year_id')
         semester_id = request.POST.get('semester_id')
 
         if CustomUser.objects.filter(email=email).exists():
@@ -75,22 +77,19 @@ def ADD_STUDENT(request):
             user.set_password(password)
             user.save()
 
-            session_year = Session_year.objects.get(id=session_year_id)
             semester = Semester.objects.get(id=semester_id)
 
             student = Student(
                 admin=user,
                 address=address,
-                session_year_id=session_year,
                 semester=semester,
                 gender=gender,
             )
             student.save()
             messages.success(request, user.first_name + " " + user.last_name + " has been successfully added!")
-            return redirect('add_student')
+            return redirect('view_student')
 
     context = {
-        'session_years': session_years,
         'semesters': semesters,
     }
 
@@ -191,12 +190,14 @@ def DELETE_STUDENT(request,admin):
 @login_required(login_url='/')
 
 
+@login_required(login_url='/')
 def ADD_STAFF(request):
     if request.method == 'POST':
         form = StaffForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('staff_list')  # Redirect to a list view or another success page
+            messages.success(request, 'Staff has been added successfully.')
+            return redirect('staff_list')  # Redirect to the list view after successful addition
     else:
         form = StaffForm()
     
@@ -209,67 +210,43 @@ def ADD_STAFF(request):
         'rank_choices': rank_choices,
     })
 
-
 @login_required(login_url='/')
 def VIEW_STAFF(request):
     staff = Staff.objects.all()
-    context ={
-        'staff':staff,
-    }
-    return render(request,'Hod/view_staff.html',context)
-
-@login_required(login_url='/')
-def EDIT_STAFF(request,id):
-
-    staff = Staff.objects.get(id= id)
     context = {
-        'staff':staff,
+        'staff': staff,
     }
-    return render(request,'Hod/edit_staff.html',context)
+    return render(request, 'Hod/view_staff.html', context)
 
 
 @login_required(login_url='/')
-def UPDATE_STAFF (request):
+def EDIT_STAFF(request, id):
+    staff = get_object_or_404(Staff, id=id)
     if request.method == 'POST':
-        staff_id = request.POST.get('staff_id')
-        profile_pic = request.FILES.get('profile_pic')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        address = request.POST.get('address')
-        gender = request.POST.get('gender')
-
-        user = CustomUser.objects.get(id = staff_id)
-        user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email =  email
-        if password != None and password != "":
-            user.set_password(password)
-        if profile_pic != None and profile_pic != "":
-            user.profile_pic = profile_pic
-
-
-        user.save()
-        staff = Staff.objects.get(admin = staff_id)
-        staff.gender = gender
-        staff.address = address
-
-        staff.save()
-        messages.success(request,'Staff Is Successfuly updated')
-        return redirect('view_staff')
-
-
-    return render(request,'Hod/edit_staff.html')
+        form = StaffForm(request.POST, request.FILES, instance=staff)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Staff has been updated successfully.')
+            return redirect('staff_list')  # Redirect to the list view after successful update
+    else:
+        form = StaffForm(instance=staff)
+    
+    return render(request, 'Hod/edit_staff.html', {
+        'form': form,
+        'staff': staff,
+    })
 
 @login_required(login_url='/')
-def DELETE_STAFF (request ,admin):
-    staff = CustomUser.objects.get(id = admin)
+def DELETE_STAFF(request, id):
+    staff = get_object_or_404(CustomUser, id=id)
     staff.delete()
-    messages.success(request,'Recoder Are Successfuly Deleted')
-    return redirect('view_staff')
+    messages.success(request, 'Record has been deleted successfully.')
+    return redirect('staff_list')  # Redirect to the list view after successful deletion
+
+
+
+
+
 
 @login_required(login_url='/')
 def ADD_SESSION(request):
@@ -383,17 +360,19 @@ def STAFF_DISAPPROVE_LEAVE(request,id):
 
 
 
-
+# Routine all function 
 
 class RoutineCreateView(CreateView):
     model = Routine
     form_class = RoutineForm
-    template_name = 'create_routine.html'
+    template_name = 'routine/create_routine.html'
     success_url = reverse_lazy('view_routines')
 
     def form_valid(self, form):
         # Custom form validation can be added here
         return super().form_valid(form)
+    
+
 
 class RoutineUpdateView(UpdateView):
     model = Routine
@@ -404,3 +383,51 @@ class RoutineUpdateView(UpdateView):
     def form_valid(self, form):
         # Custom form validation can be added here
         return super().form_valid(form)
+    
+
+
+class DayWiseDetailsView(TemplateView):
+    template_name = 'routine/day_wise_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        teachers = Staff.objects.all()
+        routines = Routine.objects.all().order_by('day', 'start_time')
+        
+        context['days'] = days
+        context['teachers'] = teachers
+        context['routines'] = routines
+        return context
+
+
+
+class WeeklyDetailsView(DetailView):
+    model = Staff
+    template_name = 'routine/weekly_details.html'
+    context_object_name = 'teacher'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        routines = Routine.objects.filter(teacher=self.object).order_by('day', 'start_time')
+        
+        context['days'] = days
+        context['routines'] = routines
+        return context
+
+
+
+@csrf_exempt
+def check_subject_availability(request):
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        teacher = request.POST.get('teacher')
+        
+        # Check if the subject is already taken
+        subject_taken = Routine.objects.filter(subject=subject).exists()
+        
+        if subject_taken:
+            return JsonResponse({'available': False})
+        else:
+            return JsonResponse({'available': True})

@@ -1,5 +1,14 @@
 [
     {
+        "label": "django.shortcuts",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -9,6 +18,14 @@
     },
     {
         "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "get_object_or_404",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
         "isExtraImport": true,
@@ -113,6 +130,22 @@
     },
     {
         "label": "get_object_or_404",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
         "isExtraImport": true,
@@ -328,6 +361,38 @@
         "documentation": {}
     },
     {
+        "label": "Subject",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Subject",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "Department",
         "importPath": "course.models",
         "description": "course.models",
@@ -360,6 +425,14 @@
         "documentation": {}
     },
     {
+        "label": "Program",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "Semester",
         "importPath": "course.models",
         "description": "course.models",
@@ -368,7 +441,15 @@
         "documentation": {}
     },
     {
-        "label": "Subject",
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Program",
         "importPath": "course.models",
         "description": "course.models",
         "isExtraImport": true,
@@ -496,6 +577,14 @@
         "documentation": {}
     },
     {
+        "label": "reverse_lazy",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
         "label": "CreateView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
@@ -513,6 +602,22 @@
     },
     {
         "label": "ListView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "TemplateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
         "isExtraImport": true,
@@ -616,6 +721,38 @@
         "documentation": {}
     },
     {
+        "label": "CreateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "DetailView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -673,6 +810,14 @@
         "documentation": {}
     },
     {
+        "label": "DayWiseDetailsView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
         "label": "RoutineCreateView",
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
@@ -682,6 +827,14 @@
     },
     {
         "label": "RoutineUpdateView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "WeeklyDetailsView",
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
         "isExtraImport": true,
@@ -1020,6 +1173,30 @@
     },
     {
         "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1373,6 +1550,14 @@
         "documentation": {}
     },
     {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
         "label": "time",
         "importPath": "datetime",
         "description": "datetime",
@@ -1514,7 +1699,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'create_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass RoutineUpdateView(UpdateView):\n    model = Routine",
+        "peekOfCode": "class RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/create_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass RoutineUpdateView(UpdateView):\n    model = Routine",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1523,7 +1708,25 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class RoutineUpdateView(UpdateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'update_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)",
+        "peekOfCode": "class RoutineUpdateView(UpdateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'update_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass DayWiseDetailsView(TemplateView):\n    template_name = 'routine/day_wise_details.html'",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "DayWiseDetailsView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "class DayWiseDetailsView(TemplateView):\n    template_name = 'routine/day_wise_details.html'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']\n        teachers = Staff.objects.all()\n        routines = Routine.objects.all().order_by('day', 'start_time')\n        context['days'] = days\n        context['teachers'] = teachers\n        context['routines'] = routines",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "WeeklyDetailsView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "class WeeklyDetailsView(DetailView):\n    model = Staff\n    template_name = 'routine/weekly_details.html'\n    context_object_name = 'teacher'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']\n        routines = Routine.objects.filter(teacher=self.object).order_by('day', 'start_time')\n        context['days'] = days\n        context['routines'] = routines",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1541,7 +1744,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def ADD_STUDENT(request):\n    session_years = Session_year.objects.all()\n    semesters = Semester.objects.all()\n    if request.method == \"POST\":\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')",
+        "peekOfCode": "def ADD_STUDENT(request):\n    semesters = Semester.objects.all()\n    if request.method == \"POST\":\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')\n        address = request.POST.get('address')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1586,7 +1789,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def ADD_STAFF(request):\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES)\n        if form.is_valid():\n            form.save()\n            return redirect('staff_list')  # Redirect to a list view or another success page\n    else:\n        form = StaffForm()\n    departments = Department.objects.all()  # Fetch all departments\n    rank_choices = Staff.RANK_CHOICES",
+        "peekOfCode": "def ADD_STAFF(request):\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES)\n        if form.is_valid():\n            form.save()\n            messages.success(request, 'Staff has been added successfully.')\n            return redirect('staff_list')  # Redirect to the list view after successful addition\n    else:\n        form = StaffForm()\n    departments = Department.objects.all()  # Fetch all departments",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1595,7 +1798,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def VIEW_STAFF(request):\n    staff = Staff.objects.all()\n    context ={\n        'staff':staff,\n    }\n    return render(request,'Hod/view_staff.html',context)\n@login_required(login_url='/')\ndef EDIT_STAFF(request,id):\n    staff = Staff.objects.get(id= id)\n    context = {",
+        "peekOfCode": "def VIEW_STAFF(request):\n    staff = Staff.objects.all()\n    context = {\n        'staff': staff,\n    }\n    return render(request, 'Hod/view_staff.html', context)\n@login_required(login_url='/')\ndef EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    if request.method == 'POST':",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1604,25 +1807,16 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def EDIT_STAFF(request,id):\n    staff = Staff.objects.get(id= id)\n    context = {\n        'staff':staff,\n    }\n    return render(request,'Hod/edit_staff.html',context)\n@login_required(login_url='/')\ndef UPDATE_STAFF (request):\n    if request.method == 'POST':\n        staff_id = request.POST.get('staff_id')",
+        "peekOfCode": "def EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES, instance=staff)\n        if form.is_valid():\n            form.save()\n            messages.success(request, 'Staff has been updated successfully.')\n            return redirect('staff_list')  # Redirect to the list view after successful update\n    else:\n        form = StaffForm(instance=staff)",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
     {
-        "label": "UPDATE_STAF",
+        "label": "DELETE_STAFF",
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def UPDATE_STAFF (request):\n    if request.method == 'POST':\n        staff_id = request.POST.get('staff_id')\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')\n        address = request.POST.get('address')",
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
-        "label": "DELETE_STAF",
-        "kind": 2,
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def DELETE_STAFF (request ,admin):\n    staff = CustomUser.objects.get(id = admin)\n    staff.delete()\n    messages.success(request,'Recoder Are Successfuly Deleted')\n    return redirect('view_staff')\n@login_required(login_url='/')\ndef ADD_SESSION(request):\n    if request.method == 'POST':\n        session_year_start = request.POST.get('session_year_start')\n        session_year_end = request.POST.get('session_year_start')",
+        "peekOfCode": "def DELETE_STAFF(request, id):\n    staff = get_object_or_404(CustomUser, id=id)\n    staff.delete()\n    messages.success(request, 'Record has been deleted successfully.')\n    return redirect('staff_list')  # Redirect to the list view after successful deletion\n@login_required(login_url='/')\ndef ADD_SESSION(request):\n    if request.method == 'POST':\n        session_year_start = request.POST.get('session_year_start')\n        session_year_end = request.POST.get('session_year_start')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1712,7 +1906,16 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')\nclass RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'create_routine.html'\n    success_url = reverse_lazy('view_routines')",
+        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')\n# Routine all function \nclass RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/create_routine.html'",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "check_subject_availability",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "def check_subject_availability(request):\n    if request.method == 'POST':\n        subject = request.POST.get('subject')\n        teacher = request.POST.get('teacher')\n        # Check if the subject is already taken\n        subject_taken = Routine.objects.filter(subject=subject).exists()\n        if subject_taken:\n            return JsonResponse({'available': False})\n        else:\n            return JsonResponse({'available': True})",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2167,6 +2370,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0018_staff_password",
+        "description": "app.migrations.0018_staff_password",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0017_remove_staff_update_at_staff_email_staff_first_name_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='staff',\n            name='password',\n            field=models.CharField(default=1, max_length=128),\n            preserve_default=False,",
+        "detail": "app.migrations.0018_staff_password",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0019_remove_student_session_year_id",
+        "description": "app.migrations.0019_remove_student_session_year_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0018_staff_password'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='student',\n            name='session_year_id',\n        ),\n    ]",
+        "detail": "app.migrations.0019_remove_student_session_year_id",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2198,7 +2419,7 @@
         "kind": 6,
         "importPath": "app.forms",
         "description": "app.forms",
-        "peekOfCode": "class StaffForm(forms.ModelForm):\n    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))\n    class Meta:\n        model = Staff\n        fields = '__all__'  # Use all fields from the Staff model\n        widgets = {\n            'first_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'last_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'email': forms.EmailInput(attrs={'class': 'form-control'}),\n            'username': forms.TextInput(attrs={'class': 'form-control'}),",
+        "peekOfCode": "class StaffForm(forms.ModelForm):\n    class Meta:\n        model = Staff\n        fields = ['profile_pic', 'first_name', 'last_name', 'email', 'username', 'password', 'address', 'department', 'rank', 'gender']\n        widgets = {\n            'profile_pic': forms.FileInput(attrs={'class': 'form-control'}),\n            'first_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'last_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'email': forms.EmailInput(attrs={'class': 'form-control'}),\n            'username': forms.TextInput(attrs={'class': 'form-control'}),",
         "detail": "app.forms",
         "documentation": {}
     },
@@ -2234,7 +2455,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)\n    session_year_id = models.ForeignKey(Session_year, on_delete=models.DO_NOTHING,null=True, blank=True)\n    created_at = models.DateTimeField(auto_now_add=True)\n    update_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.admin.first_name + \" \" + self.admin.last_name",
+        "peekOfCode": "class Student(models.Model):\n    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)\n    semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)\n    address = models.TextField()\n    gender = models.CharField(max_length=100)\n    created_at = models.DateTimeField(auto_now_add=True)\n    update_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.admin.first_name + \" \" + self.admin.last_name\nclass Staff(models.Model):",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2770,6 +2991,15 @@
         "documentation": {}
     },
     {
+        "label": "SeatPlanGenerateForm",
+        "kind": 6,
+        "importPath": "seatplan.forms",
+        "description": "seatplan.forms",
+        "peekOfCode": "class SeatPlanGenerateForm(forms.Form):\n    room = forms.ModelChoiceField(queryset=Room.objects.all(), widget=forms.HiddenInput())\n    program = forms.ModelChoiceField(queryset=Program.objects.all(), empty_label='Select Program', required=False)\n    department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label='Select Department', required=False)\n    semester = forms.ModelChoiceField(queryset=Semester.objects.all(), empty_label='Select Semester', required=True)\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.fields['department'].queryset = Department.objects.none()\n        self.fields['semester'].queryset = Semester.objects.none()\n        if 'program' in self.data:",
+        "detail": "seatplan.forms",
+        "documentation": {}
+    },
+    {
         "label": "SeatPlanForm",
         "kind": 6,
         "importPath": "seatplan.forms",
@@ -2828,8 +3058,26 @@
         "kind": 5,
         "importPath": "seatplan.urls",
         "description": "seatplan.urls",
-        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),\n    # SeatPlan URLs\n    path('seatplan/', SeatPlanListView.as_view(), name='seatplan_list'),\n    path('seatplan/create/', SeatPlanCreateView.as_view(), name='seatplan_create'),\n]",
+        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),\n    # SeatPlan URLs\n    path('seatplan/', SeatPlanListView.as_view(), name='seatplan_list'),\n    path('seatplan/create/', SeatPlanCreateView.as_view(), name='seatplan_create'),\n    path('room/<int:pk>/generate-seatplan/', GenerateSeatPlan.as_view(), name='generate_seat_plan'),",
         "detail": "seatplan.urls",
+        "documentation": {}
+    },
+    {
+        "label": "RoomDetailView",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        context['programs'] = Program.objects.all()\n        context['departments'] = Department.objects.all()\n        context['semesters'] = Semester.objects.all()\n        context['seat_plan_form'] = SeatPlanGenerateForm()",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "GenerateSeatPlan",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class GenerateSeatPlan(View):\n    def post(self, request, *args, **kwargs):\n        form = SeatPlanGenerateForm(request.POST)\n        if form.is_valid():\n            room_id = form.cleaned_data['room']\n            semester_id = form.cleaned_data['semester']\n            room = Room.objects.get(id=room_id)\n            semester = Semester.objects.get(id=semester_id)\n            # Generate seat plan logic - for example, create SeatPlan objects\n            # You can adjust this according to your specific logic and requirements",
+        "detail": "seatplan.views",
         "documentation": {}
     },
     {
@@ -2864,7 +3112,7 @@
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\nclass RoomUpdateView(UpdateView):",
+        "peekOfCode": "class RoomCreateView(CreateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):",
         "detail": "seatplan.views",
         "documentation": {}
     },
@@ -2873,7 +3121,7 @@
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\nclass RoomUpdateView(UpdateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\ndef generate_seat_plan(request, room_number):",
+        "peekOfCode": "class RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        room = self.get_object()\n        seats_per_column = room.num_seats // room.num_columns\n        seat_layout = [\n            [f'{column + 1}-{row + 1}' for column in range(room.num_columns)]",
         "detail": "seatplan.views",
         "documentation": {}
     },
