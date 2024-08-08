@@ -4,7 +4,7 @@ from django.db import models
 # models.py
 from django.db import models
 from app.models import Student
-from course.models import Semester
+from course.models import Department, Program, Semester
 
 class Room(models.Model):
     number = models.IntegerField(unique=True)
@@ -12,6 +12,7 @@ class Room(models.Model):
     num_columns = models.IntegerField(default=4)
     
     def __str__(self):
+        
         return f'Room {self.number}'
 
 class Batch(models.Model):
@@ -19,6 +20,20 @@ class Batch(models.Model):
     sem_name =models.ForeignKey(Semester, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+
+class SeatPlanRoom(models.Model):
+    name = models.CharField(max_length=100)
+    batch = models.ForeignKey(Batch, on_delete=models.CASCADE)
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.name
+    
 
 class SeatPlan(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -30,3 +45,6 @@ class SeatPlan(models.Model):
         
     def __str__(self):
         return f'{self.student} in Room {self.room.number}  Seat {self.seat_number}'
+    
+
+

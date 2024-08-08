@@ -32,7 +32,6 @@
                      <thead>
                         <tr>
                            <th>ID</th>
-                           <th>Name</th>
                            <th>Email</th>
                            <th>Gender</th>
                            <th>Address</th>
@@ -45,8 +44,6 @@
                         {% for staff_member in staff %}
                         <tr>
                            <td>{{ staff_member.id }}</td>
-                           <td>
-                           </td>
                            <td>{{ staff_member.admin.email }}</td>
                            <td>{{ staff_member.get_gender_display }}</td>
                            <td>{{ staff_member.address }}</td>
@@ -59,6 +56,9 @@
                                  </a>
                                  <a href="{% url 'delete_staff' staff_member.admin.id %}" class="btn btn-sm bg-danger-light">
                                     <i class="fas fa-trash"></i> Delete
+                                 </a>
+                                 <a href="{% url 'teacher_routines' staff_member.pk %}" class="btn btn-sm bg-info-light">
+                                    <i class="fas fa-eye"></i> View routine
                                  </a>
                               </div>
                            </td>

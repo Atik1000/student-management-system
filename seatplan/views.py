@@ -3,125 +3,55 @@ from django.views.generic import ListView, CreateView, UpdateView,DetailView
 from django.urls import reverse_lazy
 from app.models import Student
 from course.models import Department, Program, Semester
-from .models import Room, SeatPlan
-from .forms import SeatPlanForm,RoomForm
+from .models import Batch, Room, SeatPlan, SeatPlanRoom
+from .forms import BatchForm, RoomForm, SeatPlanForm
 from django.views.generic import CreateView, DetailView, View
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import SeatPlanGenerateForm
+# views.py
+from django.http import JsonResponse
+from .forms import SeatPlanRoomForm
 
-# class RoomDetailView(DetailView):
-#     model = Room
-#     template_name = 'room/room_detail.html'
-#     context_object_name = 'room'
+class SeatPlanRoomCreateView(CreateView):
+    model = SeatPlanRoom
+    form_class = SeatPlanRoomForm
+    template_name = 'room/seatplanroom_form.html'
+    success_url = reverse_lazy('room_list')
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
+    def form_valid(self, form):
+        room_pk = self.kwargs['pk']
+        room = get_object_or_404(Room, pk=room_pk)
+        form.instance.room = room
+        return super().form_valid(form)
 
-#         # Add programs for selection
-#         programs = Program.objects.all()
-#         context['programs'] = programs
-
-#         # If program is selected, filter departments
-#         program_id = self.request.GET.get('program')
-#         if program_id:
-#             departments = Department.objects.filter(program_id=program_id)
-#             context['departments'] = departments
-
-#         # If department is selected, filter semesters
-#         department_id = self.request.GET.get('department')
-#         if department_id:
-#             semesters = Semester.objects.filter(department_id=department_id)
-#             context['semesters'] = semesters
-
-#         # Add form for generating seat plan
-#         context['form'] = SeatPlanGenerateForm()
-
-#         return context
-
-class RoomDetailView(DetailView):
+class SeatPlanRoomDetailView(DetailView):
     model = Room
-    template_name = 'room/room_detail.html'
+    template_name = 'room/seatplanroom_detail.html'
     context_object_name = 'room'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['programs'] = Program.objects.all()
-        context['departments'] = Department.objects.all()
-        context['semesters'] = Semester.objects.all()
-        context['seat_plan_form'] = SeatPlanGenerateForm()
-        context['seat_layout'] = self.get_seat_layout()
+        room = self.get_object()
+        context['seatplanrooms'] = SeatPlanRoom.objects.filter(room=room)
         return context
     
-    def get_seat_layout(self):
-        room = self.get_object()
-        seat_plans = SeatPlan.objects.filter(room=room)
-        layout = [['' for _ in range(room.num_columns)] for _ in range((room.num_seats // room.num_columns))]
-        
-        for seat_plan in seat_plans:
-            row = (seat_plan.seat_number - 1) // room.num_columns
-            col = (seat_plan.seat_number - 1) % room.num_columns
-            layout[row][col] = seat_plan.student.admin.get_full_name()
-        
-        return layout
-
-
-class GenerateSeatPlan(View):
-    def post(self, request, *args, **kwargs):
-        form = SeatPlanGenerateForm(request.POST)
-
-        if form.is_valid():
-            room_id = form.cleaned_data['room']
-            semester_id = form.cleaned_data['semester']
-
-            room = Room.objects.get(id=room_id)
-            semester = Semester.objects.get(id=semester_id)
-
-            # Generate seat plan logic - for example, create SeatPlan objects
-            # You can adjust this according to your specific logic and requirements
-
-            # Dummy logic to create seat plan
-            students = Student.objects.filter(semester=semester)
-
-            num_columns = room.num_columns
-            seats_per_column = room.num_seats // num_columns
-
-            seat_number = 1
-            for student in students:
-                for column in range(num_columns):
-                    SeatPlan.objects.create(
-                        room=room,
-                        student=student,
-                        seat_number=seat_number
-                    )
-                    seat_number += 1
-                    if seat_number > room.num_seats:
-                        break
-
-            # Redirect to room detail view after generating seat plan
-            return redirect('room_detail', pk=room_id)
-
-        # If form is not valid, render room detail view with errors
-        room_id = request.POST.get('room')
-        return redirect('room_detail', pk=room_id)
 
 
 
+
+def load_departments(request):
+    program_id = request.GET.get('program')
+    departments = Department.objects.filter(program_id=program_id).order_by('name')
+    return JsonResponse(list(departments.values('id', 'name')), safe=False)
+
+def load_semesters(request):
+    department_id = request.GET.get('department')
+    semesters = Semester.objects.filter(department_id=department_id).order_by('name')
+    return JsonResponse(list(semesters.values('id', 'name')), safe=False)
 
 
     
-class SeatPlanListView(ListView):
-    model = SeatPlan
-    template_name = 'room/seatplan_list.html'
-    context_object_name = 'seatplans'
-
-class SeatPlanCreateView(CreateView):
-    model = SeatPlan
-    form_class = SeatPlanForm
-    template_name = 'room/seatplan_form.html'
-    success_url = reverse_lazy('seatplan_list')
-
-
 class RoomListView(ListView):
     model = Room
     template_name = 'room/room_list.html'
@@ -145,6 +75,7 @@ class RoomDetailView(DetailView):
             [f'{column + 1}-{row + 1}' for column in range(room.num_columns)]
             for row in range(seats_per_column)
         ]
+        print(Department.objects.all())  
         context['seat_layout'] = seat_layout
         return context
 
@@ -154,18 +85,83 @@ class RoomUpdateView(UpdateView):
     template_name = 'room/room_form.html'
     success_url = reverse_lazy('room_list')
 
-def generate_seat_plan(request, room_number):
-    room = get_object_or_404(Room, number=room_number)
-    students = Student.objects.all()
-    for student in students:
-        try: 
-            SeatPlan.objects.get(student=student)
-        except SeatPlan.DoesNotExist:
-            total_seat = SeatPlan.objects.filter(room=room).count()
-            if room.num_seats < total_seat + 1:
-                SeatPlan.objects.create(room=room, student=student, seat_number=total_seat + 1)
+class GenerateSeatPlan(View):
+    template_name = 'room/seatplan.html'
 
-    context = {
-        'room': room,
-    }
-    return render(request, 'seat_plan.html', context)
+    def get(self, request):
+        form = SeatPlanGenerateForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = SeatPlanGenerateForm(request.POST)
+
+        if form.is_valid():
+            room_id = form.cleaned_data['room'].id
+            semester_id = form.cleaned_data['semester'].id
+
+            room = Room.objects.get(id=room_id)
+            semester = Semester.objects.get(id=semester_id)
+
+            # Generate seat plan logic
+            students = Student.objects.filter(semester=semester)
+
+            num_columns = room.num_columns
+            seats_per_column = room.num_seats // num_columns
+
+            SeatPlan.objects.filter(room=room).delete()  # Clear existing seat plans for the room
+
+            seat_number = 1
+            for student in students:
+                for column in range(num_columns):
+                    if seat_number <= room.num_seats:
+                        SeatPlan.objects.create(
+                            room=room,
+                            student=student,
+                            seat_number=seat_number
+                        )
+                        seat_number += 1
+
+            return redirect('room_detail', pk=room_id)
+
+        return render(request, self.template_name, {'form': form})
+
+
+
+
+class BatchCreateView(CreateView):
+    model = Batch
+    form_class = BatchForm
+    template_name = 'batch/batch_form.html'
+    success_url = reverse_lazy('batch_list')  # Redirect to batch list view upon successful form submission
+
+class BatchListView(ListView):
+    model = Batch
+    template_name = 'batch/batch_list.html'
+    context_object_name = 'batches'  # Name of the context variable for batches list
+
+
+# combination view 
+
+class RoomSeatPlanDetailView(DetailView):
+    model = Room
+    template_name = 'room/room_seatplan_detail.html'
+    context_object_name = 'room'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        room = self.get_object()
+
+        # Seat layout logic
+        seats_per_column = room.num_seats // room.num_columns
+        seat_layout = [
+            [f'{column + 1}-{row + 1}' for column in range(room.num_columns)]
+            for row in range(seats_per_column)
+        ]
+
+        # Seat plan rooms
+        seatplanrooms = SeatPlanRoom.objects.filter(room=room)
+
+        # Add to context
+        context['seat_layout'] = seat_layout
+        context['seatplanrooms'] = seatplanrooms
+        return context

@@ -42,8 +42,8 @@
                                       <option value="Female">Female</option>
                                   </select>
                               </div>
-                              <label for="semester_id">Semester</label>
                               <div class="form-group">
+                                  <label for="semester_id">Semester</label>
                                   <select class="form-control" id="semester_id" name="semester_id" required>
                                       {% for semester in semesters %}
                                           <option value="{{ semester.id }}">{{ semester.name }}</option>

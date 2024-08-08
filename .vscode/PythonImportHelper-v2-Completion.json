@@ -433,6 +433,22 @@
         "documentation": {}
     },
     {
+        "label": "Department",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Program",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "Semester",
         "importPath": "course.models",
         "description": "course.models",
@@ -473,11 +489,19 @@
         "documentation": {}
     },
     {
-        "label": "StaffForm",
-        "importPath": "app.forms",
-        "description": "app.forms",
+        "label": "LoginRequiredMixin",
+        "importPath": "django.contrib.auth.mixins",
+        "description": "django.contrib.auth.mixins",
         "isExtraImport": true,
-        "detail": "app.forms",
+        "detail": "django.contrib.auth.mixins",
+        "documentation": {}
+    },
+    {
+        "label": "LoginRequiredMixin",
+        "importPath": "django.contrib.auth.mixins",
+        "description": "django.contrib.auth.mixins",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.mixins",
         "documentation": {}
     },
     {
@@ -753,6 +777,78 @@
         "documentation": {}
     },
     {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Case",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "When",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "IntegerField",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "F",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Value",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -810,14 +906,6 @@
         "documentation": {}
     },
     {
-        "label": "DayWiseDetailsView",
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
         "label": "RoutineCreateView",
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
@@ -834,7 +922,7 @@
         "documentation": {}
     },
     {
-        "label": "WeeklyDetailsView",
+        "label": "teacher_weekly_routine_view",
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
         "isExtraImport": true,
@@ -1204,14 +1292,6 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
         "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
@@ -1316,6 +1396,22 @@
         "documentation": {}
     },
     {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
@@ -1365,6 +1461,22 @@
     },
     {
         "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1518,6 +1630,14 @@
         "documentation": {}
     },
     {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
         "label": "template",
         "importPath": "django",
         "description": "django",
@@ -1555,6 +1675,22 @@
         "description": "django",
         "isExtraImport": true,
         "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "django.forms",
+        "description": "django.forms",
+        "isExtraImport": true,
+        "detail": "django.forms",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "django.core.exceptions",
+        "description": "django.core.exceptions",
+        "isExtraImport": true,
+        "detail": "django.core.exceptions",
         "documentation": {}
     },
     {
@@ -1598,70 +1734,6 @@
         "documentation": {}
     },
     {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Case",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "When",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "IntegerField",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "F",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Value",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
         "label": "Coalesce",
         "importPath": "django.db.models.functions",
         "description": "django.db.models.functions",
@@ -1671,6 +1743,14 @@
     },
     {
         "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
         "importPath": "django.http",
         "description": "django.http",
         "isExtraImport": true,
@@ -1699,7 +1779,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/create_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass RoutineUpdateView(UpdateView):\n    model = Routine",
+        "peekOfCode": "class RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/create_routine.html'\n    success_url = reverse_lazy('view_staff')\n    def form_valid(self, form):\n        # Here you can add any additional custom validation before saving the form\n        return super().form_valid(form)\nclass RoutineUpdateView(UpdateView):\n    model = Routine",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1708,25 +1788,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class RoutineUpdateView(UpdateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'update_routine.html'\n    success_url = reverse_lazy('view_routines')\n    def form_valid(self, form):\n        # Custom form validation can be added here\n        return super().form_valid(form)\nclass DayWiseDetailsView(TemplateView):\n    template_name = 'routine/day_wise_details.html'",
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
-        "label": "DayWiseDetailsView",
-        "kind": 6,
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class DayWiseDetailsView(TemplateView):\n    template_name = 'routine/day_wise_details.html'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']\n        teachers = Staff.objects.all()\n        routines = Routine.objects.all().order_by('day', 'start_time')\n        context['days'] = days\n        context['teachers'] = teachers\n        context['routines'] = routines",
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
-        "label": "WeeklyDetailsView",
-        "kind": 6,
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "class WeeklyDetailsView(DetailView):\n    model = Staff\n    template_name = 'routine/weekly_details.html'\n    context_object_name = 'teacher'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']\n        routines = Routine.objects.filter(teacher=self.object).order_by('day', 'start_time')\n        context['days'] = days\n        context['routines'] = routines",
+        "peekOfCode": "class RoutineUpdateView(UpdateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/update_routine.html'\n    success_url = reverse_lazy('view_staff')\n    def form_valid(self, form):\n        # Here you can add any additional custom validation before saving the form\n        return super().form_valid(form)\nfrom django.db.models import Q\ndef teacher_weekly_routine_view(request, teacher_id):",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1789,7 +1851,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def ADD_STAFF(request):\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES)\n        if form.is_valid():\n            form.save()\n            messages.success(request, 'Staff has been added successfully.')\n            return redirect('staff_list')  # Redirect to the list view after successful addition\n    else:\n        form = StaffForm()\n    departments = Department.objects.all()  # Fetch all departments",
+        "peekOfCode": "def ADD_STAFF(request):\n    departments = Department.objects.all()  # Fetch all departments\n    rank_choices = Staff.RANK_CHOICES\n    if request.method == \"POST\":\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')\n        password = request.POST.get('password')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1798,7 +1860,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def VIEW_STAFF(request):\n    staff = Staff.objects.all()\n    context = {\n        'staff': staff,\n    }\n    return render(request, 'Hod/view_staff.html', context)\n@login_required(login_url='/')\ndef EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    if request.method == 'POST':",
+        "peekOfCode": "def VIEW_STAFF(request):\n    staff = Staff.objects.all()\n    context = {\n        'staff': staff,\n    }\n    return render(request, 'Hod/view_staff.html', context)\n@login_required(login_url='/')\ndef EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    departments = Department.objects.all()  # Fetch all departments",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1807,7 +1869,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    if request.method == 'POST':\n        form = StaffForm(request.POST, request.FILES, instance=staff)\n        if form.is_valid():\n            form.save()\n            messages.success(request, 'Staff has been updated successfully.')\n            return redirect('staff_list')  # Redirect to the list view after successful update\n    else:\n        form = StaffForm(instance=staff)",
+        "peekOfCode": "def EDIT_STAFF(request, id):\n    staff = get_object_or_404(Staff, id=id)\n    departments = Department.objects.all()  # Fetch all departments\n    rank_choices = Staff.RANK_CHOICES\n    if request.method == 'POST':\n        profile_pic = request.FILES.get('profile_pic')\n        first_name = request.POST.get('first_name')\n        last_name = request.POST.get('last_name')\n        email = request.POST.get('email')\n        username = request.POST.get('username')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -1911,11 +1973,11 @@
         "documentation": {}
     },
     {
-        "label": "check_subject_availability",
+        "label": "teacher_weekly_routine_view",
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def check_subject_availability(request):\n    if request.method == 'POST':\n        subject = request.POST.get('subject')\n        teacher = request.POST.get('teacher')\n        # Check if the subject is already taken\n        subject_taken = Routine.objects.filter(subject=subject).exists()\n        if subject_taken:\n            return JsonResponse({'available': False})\n        else:\n            return JsonResponse({'available': True})",
+        "peekOfCode": "def teacher_weekly_routine_view(request, teacher_id):\n    # Get the teacher object or return a 404 if not found\n    teacher = get_object_or_404(Staff, id=teacher_id)\n    # Initialize a dictionary to store routines by day\n    weekly_routines = {day: [] for day, _ in Routine.DAY_CHOICES}\n    # Get all routines for this teacher\n    routines = Routine.objects.filter(teacher=teacher)\n    for routine in routines:\n        # Check for overlap\n        overlap_by = Routine.objects.filter(",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2388,6 +2450,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0020_remove_staff_password_remove_staff_username",
+        "description": "app.migrations.0020_remove_staff_password_remove_staff_username",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0019_remove_student_session_year_id'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='staff',\n            name='password',\n        ),\n        migrations.RemoveField(",
+        "detail": "app.migrations.0020_remove_staff_password_remove_staff_username",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2412,15 +2483,6 @@
         "description": "app.apps",
         "peekOfCode": "class AppConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'app'",
         "detail": "app.apps",
-        "documentation": {}
-    },
-    {
-        "label": "StaffForm",
-        "kind": 6,
-        "importPath": "app.forms",
-        "description": "app.forms",
-        "peekOfCode": "class StaffForm(forms.ModelForm):\n    class Meta:\n        model = Staff\n        fields = ['profile_pic', 'first_name', 'last_name', 'email', 'username', 'password', 'address', 'department', 'rank', 'gender']\n        widgets = {\n            'profile_pic': forms.FileInput(attrs={'class': 'form-control'}),\n            'first_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'last_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'email': forms.EmailInput(attrs={'class': 'form-control'}),\n            'username': forms.TextInput(attrs={'class': 'form-control'}),",
-        "detail": "app.forms",
         "documentation": {}
     },
     {
@@ -2973,11 +3035,20 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "seatplan.migrations.0003_seatplanroom",
+        "description": "seatplan.migrations.0003_seatplanroom",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0008_remove_teacher_department_delete_routine_and_more'),\n        ('seatplan', '0002_batch_sem_name_alter_seatplan_student'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='SeatPlanRoom',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "seatplan.migrations.0003_seatplanroom",
+        "documentation": {}
+    },
+    {
         "label": "UserModel",
         "kind": 6,
         "importPath": "seatplan.admin",
         "description": "seatplan.admin",
-        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Room)\nadmin.site.register(Batch)\nadmin.site.register(SeatPlan)",
+        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Room)\nadmin.site.register(Batch)\nadmin.site.register(SeatPlan)\nadmin.site.register(SeatPlanRoom)",
         "detail": "seatplan.admin",
         "documentation": {}
     },
@@ -2991,11 +3062,20 @@
         "documentation": {}
     },
     {
+        "label": "SeatPlanRoomForm",
+        "kind": 6,
+        "importPath": "seatplan.forms",
+        "description": "seatplan.forms",
+        "peekOfCode": "class SeatPlanRoomForm(forms.ModelForm):\n    class Meta:\n        model = SeatPlanRoom\n        fields = ['name', 'batch', 'semester', 'department', 'program']\n        widgets = {\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n            'batch': forms.Select(attrs={'class': 'form-control'}),\n            'semester': forms.Select(attrs={'class': 'form-control'}),\n            'department': forms.Select(attrs={'class': 'form-control'}),\n            'program': forms.Select(attrs={'class': 'form-control'}),",
+        "detail": "seatplan.forms",
+        "documentation": {}
+    },
+    {
         "label": "SeatPlanGenerateForm",
         "kind": 6,
         "importPath": "seatplan.forms",
         "description": "seatplan.forms",
-        "peekOfCode": "class SeatPlanGenerateForm(forms.Form):\n    room = forms.ModelChoiceField(queryset=Room.objects.all(), widget=forms.HiddenInput())\n    program = forms.ModelChoiceField(queryset=Program.objects.all(), empty_label='Select Program', required=False)\n    department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label='Select Department', required=False)\n    semester = forms.ModelChoiceField(queryset=Semester.objects.all(), empty_label='Select Semester', required=True)\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.fields['department'].queryset = Department.objects.none()\n        self.fields['semester'].queryset = Semester.objects.none()\n        if 'program' in self.data:",
+        "peekOfCode": "class SeatPlanGenerateForm(forms.Form):\n    room = forms.ModelChoiceField(queryset=Room.objects.all(), widget=forms.HiddenInput())\n    program = forms.ModelChoiceField(queryset=Program.objects.all(), empty_label='Select Program', required=False)\n    department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label='Select Department', required=False)\n    semester = forms.ModelChoiceField(queryset=Semester.objects.all(), empty_label='Select Semester', required=True)\n    widgets = {\n            'room': forms.Select(attrs={'class': 'form-control'}),\n            'program': forms.Select(attrs={'class': 'form-control'}),\n            'department': forms.Select(attrs={'class': 'form-control'}),\n            'semester': forms.Select(attrs={'class': 'form-control'}),",
         "detail": "seatplan.forms",
         "documentation": {}
     },
@@ -3013,7 +3093,7 @@
         "kind": 6,
         "importPath": "seatplan.forms",
         "description": "seatplan.forms",
-        "peekOfCode": "class BatchForm(forms.ModelForm):\n    class Meta:\n        model = Batch\n        fields = ['name','sem_name']\n        widgets = {\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n            'sem_name': forms.TextInput(attrs={'class': 'form-control'}),\n        }\nclass RoomForm(forms.ModelForm):\n    class Meta:",
+        "peekOfCode": "class BatchForm(forms.ModelForm):\n    class Meta:\n        model = Batch\n        fields = ['name', 'sem_name']\n        widgets = {\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n            'sem_name': forms.Select(attrs={'class': 'form-control'}),\n        }\nclass RoomForm(forms.ModelForm):\n    class Meta:",
         "detail": "seatplan.forms",
         "documentation": {}
     },
@@ -3040,7 +3120,16 @@
         "kind": 6,
         "importPath": "seatplan.models",
         "description": "seatplan.models",
-        "peekOfCode": "class Batch(models.Model):\n    name = models.CharField(max_length=100)\n    sem_name =models.ForeignKey(Semester, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.name\nclass SeatPlan(models.Model):\n    room = models.ForeignKey(Room, on_delete=models.CASCADE)\n    student = models.OneToOneField(Student, on_delete=models.DO_NOTHING)\n    seat_number = models.IntegerField()\n    class Meta:",
+        "peekOfCode": "class Batch(models.Model):\n    name = models.CharField(max_length=100)\n    sem_name =models.ForeignKey(Semester, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.name\nclass SeatPlanRoom(models.Model):\n    name = models.CharField(max_length=100)\n    batch = models.ForeignKey(Batch, on_delete=models.CASCADE)\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)\n    department = models.ForeignKey(Department, on_delete=models.CASCADE)",
+        "detail": "seatplan.models",
+        "documentation": {}
+    },
+    {
+        "label": "SeatPlanRoom",
+        "kind": 6,
+        "importPath": "seatplan.models",
+        "description": "seatplan.models",
+        "peekOfCode": "class SeatPlanRoom(models.Model):\n    name = models.CharField(max_length=100)\n    batch = models.ForeignKey(Batch, on_delete=models.CASCADE)\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE)\n    department = models.ForeignKey(Department, on_delete=models.CASCADE)\n    program = models.ForeignKey(Program, on_delete=models.CASCADE)\n    room = models.ForeignKey(Room, on_delete=models.CASCADE)\n    def __str__(self):\n        return self.name\nclass SeatPlan(models.Model):",
         "detail": "seatplan.models",
         "documentation": {}
     },
@@ -3058,43 +3147,25 @@
         "kind": 5,
         "importPath": "seatplan.urls",
         "description": "seatplan.urls",
-        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),\n    # SeatPlan URLs\n    path('seatplan/', SeatPlanListView.as_view(), name='seatplan_list'),\n    path('seatplan/create/', SeatPlanCreateView.as_view(), name='seatplan_create'),\n    path('room/<int:pk>/generate-seatplan/', GenerateSeatPlan.as_view(), name='generate_seat_plan'),",
+        "peekOfCode": "urlpatterns = [\n    # Room URLs\n    path('room/', RoomListView.as_view(), name='room_list'),\n    path('room/create/', RoomCreateView.as_view(), name='room_create'),\n    path('room/<int:pk>/update/', RoomUpdateView.as_view(), name='room_update'),\n    path('room/<int:pk>/detail/', RoomDetailView.as_view(), name='room_detail'),\n    path('room/generate-seatplan/', GenerateSeatPlan.as_view(), name='generate_seat_plan'),\n    path('batch/create/', BatchCreateView.as_view(), name='create_batch'),\n    path('batch/list/', BatchListView.as_view(), name='batch_list'),\n    path('ajax/load-departments/', load_departments, name='load_departments'),",
         "detail": "seatplan.urls",
         "documentation": {}
     },
     {
-        "label": "RoomDetailView",
+        "label": "SeatPlanRoomCreateView",
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        context['programs'] = Program.objects.all()\n        context['departments'] = Department.objects.all()\n        context['semesters'] = Semester.objects.all()\n        context['seat_plan_form'] = SeatPlanGenerateForm()",
+        "peekOfCode": "class SeatPlanRoomCreateView(CreateView):\n    model = SeatPlanRoom\n    form_class = SeatPlanRoomForm\n    template_name = 'room/seatplanroom_form.html'\n    success_url = reverse_lazy('room_list')\n    def form_valid(self, form):\n        room_pk = self.kwargs['pk']\n        room = get_object_or_404(Room, pk=room_pk)\n        form.instance.room = room\n        return super().form_valid(form)",
         "detail": "seatplan.views",
         "documentation": {}
     },
     {
-        "label": "GenerateSeatPlan",
+        "label": "SeatPlanRoomDetailView",
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class GenerateSeatPlan(View):\n    def post(self, request, *args, **kwargs):\n        form = SeatPlanGenerateForm(request.POST)\n        if form.is_valid():\n            room_id = form.cleaned_data['room']\n            semester_id = form.cleaned_data['semester']\n            room = Room.objects.get(id=room_id)\n            semester = Semester.objects.get(id=semester_id)\n            # Generate seat plan logic - for example, create SeatPlan objects\n            # You can adjust this according to your specific logic and requirements",
-        "detail": "seatplan.views",
-        "documentation": {}
-    },
-    {
-        "label": "SeatPlanListView",
-        "kind": 6,
-        "importPath": "seatplan.views",
-        "description": "seatplan.views",
-        "peekOfCode": "class SeatPlanListView(ListView):\n    model = SeatPlan\n    template_name = 'room/seatplan_list.html'\n    context_object_name = 'seatplans'\nclass SeatPlanCreateView(CreateView):\n    model = SeatPlan\n    form_class = SeatPlanForm\n    template_name = 'room/seatplan_form.html'\n    success_url = reverse_lazy('seatplan_list')\nclass RoomListView(ListView):",
-        "detail": "seatplan.views",
-        "documentation": {}
-    },
-    {
-        "label": "SeatPlanCreateView",
-        "kind": 6,
-        "importPath": "seatplan.views",
-        "description": "seatplan.views",
-        "peekOfCode": "class SeatPlanCreateView(CreateView):\n    model = SeatPlan\n    form_class = SeatPlanForm\n    template_name = 'room/seatplan_form.html'\n    success_url = reverse_lazy('seatplan_list')\nclass RoomListView(ListView):\n    model = Room\n    template_name = 'room/room_list.html'\n    context_object_name = 'rooms'\nclass RoomCreateView(CreateView):",
+        "peekOfCode": "class SeatPlanRoomDetailView(DetailView):\n    model = Room\n    template_name = 'room/seatplanroom_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        room = self.get_object()\n        context['seatplanrooms'] = SeatPlanRoom.objects.filter(room=room)\n        return context\ndef load_departments(request):",
         "detail": "seatplan.views",
         "documentation": {}
     },
@@ -3130,16 +3201,61 @@
         "kind": 6,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "class RoomUpdateView(UpdateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\ndef generate_seat_plan(request, room_number):\n    room = get_object_or_404(Room, number=room_number)\n    students = Student.objects.all()\n    for student in students:\n        try: ",
+        "peekOfCode": "class RoomUpdateView(UpdateView):\n    model = Room\n    form_class = RoomForm\n    template_name = 'room/room_form.html'\n    success_url = reverse_lazy('room_list')\nclass GenerateSeatPlan(View):\n    template_name = 'room/seatplan.html'\n    def get(self, request):\n        form = SeatPlanGenerateForm()\n        return render(request, self.template_name, {'form': form})",
         "detail": "seatplan.views",
         "documentation": {}
     },
     {
-        "label": "generate_seat_plan",
+        "label": "GenerateSeatPlan",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class GenerateSeatPlan(View):\n    template_name = 'room/seatplan.html'\n    def get(self, request):\n        form = SeatPlanGenerateForm()\n        return render(request, self.template_name, {'form': form})\n    def post(self, request, *args, **kwargs):\n        form = SeatPlanGenerateForm(request.POST)\n        if form.is_valid():\n            room_id = form.cleaned_data['room'].id\n            semester_id = form.cleaned_data['semester'].id",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "BatchCreateView",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class BatchCreateView(CreateView):\n    model = Batch\n    form_class = BatchForm\n    template_name = 'batch/batch_form.html'\n    success_url = reverse_lazy('batch_list')  # Redirect to batch list view upon successful form submission\nclass BatchListView(ListView):\n    model = Batch\n    template_name = 'batch/batch_list.html'\n    context_object_name = 'batches'  # Name of the context variable for batches list\n# combination view ",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "BatchListView",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class BatchListView(ListView):\n    model = Batch\n    template_name = 'batch/batch_list.html'\n    context_object_name = 'batches'  # Name of the context variable for batches list\n# combination view \nclass RoomSeatPlanDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_seatplan_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "RoomSeatPlanDetailView",
+        "kind": 6,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "class RoomSeatPlanDetailView(DetailView):\n    model = Room\n    template_name = 'room/room_seatplan_detail.html'\n    context_object_name = 'room'\n    def get_context_data(self, **kwargs):\n        context = super().get_context_data(**kwargs)\n        room = self.get_object()\n        # Seat layout logic\n        seats_per_column = room.num_seats // room.num_columns\n        seat_layout = [",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "load_departments",
         "kind": 2,
         "importPath": "seatplan.views",
         "description": "seatplan.views",
-        "peekOfCode": "def generate_seat_plan(request, room_number):\n    room = get_object_or_404(Room, number=room_number)\n    students = Student.objects.all()\n    for student in students:\n        try: \n            SeatPlan.objects.get(student=student)\n        except SeatPlan.DoesNotExist:\n            total_seat = SeatPlan.objects.filter(room=room).count()\n            if room.num_seats < total_seat + 1:\n                SeatPlan.objects.create(room=room, student=student, seat_number=total_seat + 1)",
+        "peekOfCode": "def load_departments(request):\n    program_id = request.GET.get('program')\n    departments = Department.objects.filter(program_id=program_id).order_by('name')\n    return JsonResponse(list(departments.values('id', 'name')), safe=False)\ndef load_semesters(request):\n    department_id = request.GET.get('department')\n    semesters = Semester.objects.filter(department_id=department_id).order_by('name')\n    return JsonResponse(list(semesters.values('id', 'name')), safe=False)\nclass RoomListView(ListView):\n    model = Room",
+        "detail": "seatplan.views",
+        "documentation": {}
+    },
+    {
+        "label": "load_semesters",
+        "kind": 2,
+        "importPath": "seatplan.views",
+        "description": "seatplan.views",
+        "peekOfCode": "def load_semesters(request):\n    department_id = request.GET.get('department')\n    semesters = Semester.objects.filter(department_id=department_id).order_by('name')\n    return JsonResponse(list(semesters.values('id', 'name')), safe=False)\nclass RoomListView(ListView):\n    model = Room\n    template_name = 'room/room_list.html'\n    context_object_name = 'rooms'\nclass RoomCreateView(CreateView):\n    model = Room",
         "detail": "seatplan.views",
         "documentation": {}
     },

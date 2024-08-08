@@ -14,6 +14,7 @@ admin.site.register(Room)
 admin.site.register(Batch)
 
 admin.site.register(SeatPlan)
+admin.site.register(SeatPlanRoom)
 
 
 

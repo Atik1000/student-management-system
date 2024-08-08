@@ -9,38 +9,7 @@
     <p class="text-center">Number of seats: {{ room.num_seats }}</p>
     <p class="text-center">Number of columns: {{ room.num_columns }}</p>
 
-    <form method="post" action="{% url 'generate_seat_plan' room.id %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="id_program">Select Program:</label>
-            <select id="id_program" name="program" class="form-control">
-                <option value="">Select Program</option>
-                {% for program in programs %}
-                    <option value="{{ program.id }}" {% if program.id == selected_program_id %} selected {% endif %}>{{ program }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="id_department">Select Department:</label>
-            <select id="id_department" name="department" class="form-control">
-                <option value="">Select Department</option>
-                {% for department in departments %}
-                    <option value="{{ department.id }}" {% if department.id == selected_department_id %} selected {% endif %}>{{ department }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="id_semester">Select Semester:</label>
-            <select id="id_semester" name="semester" class="form-control">
-                <option value="">Select Semester</option>
-                {% for semester in semesters %}
-                    <option value="{{ semester.id }}" {% if semester.id == selected_semester_id %} selected {% endif %}>{{ semester }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <button type="submit" class="btn btn-success">Generate Seat Plan</button>
-    </form>
-
+    <a href="{% url 'generate_seat_plan' %}" class=" btn-success">Generate seat plan</a>
 
 <table class="table table-bordered table-striped">
   <thead>

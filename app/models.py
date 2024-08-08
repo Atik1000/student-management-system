@@ -55,11 +55,11 @@ class Staff(models.Model):
     first_name = models.CharField(max_length=100 ,null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(max_length=255, unique=True, null=True, blank=True)  # Assuming email is unique
-    password = models.CharField(max_length=128)  # Password field
+    # password = models.CharField(max_length=128)  # Password field
 
-    username = models.CharField(max_length=150, unique=True, null=True, blank=True)
+    # username = models.CharField(max_length=150, unique=True, null=True, blank=True)
     address = models.TextField( null=True, blank=True)
-    gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], null=True, blank=True)  # Updated for gender options
+    gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], null=True, blank=True)  
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name='staff_department')
@@ -179,11 +179,19 @@ class Routine(models.Model):
         if not (1 <= duration <= 3):
             raise ValidationError('Class duration must be between 1 and 3 hours.')
 
-        # Ensure each day has only one class per teacher
-        if Routine.objects.filter(teacher=self.teacher, day=self.day).exclude(pk=self.pk).exists():
-            raise ValidationError('Teacher already has a class scheduled for this day.')
-
         # Validate credit hours
         total_credits = Routine.objects.filter(teacher=self.teacher, day=self.day).count()
         if total_credits >= 20:
             raise ValidationError('Teacher cannot schedule more than 20 credits per day.')
+
+# Check for overlapping subjects based on rank
+        conflicting_routines = Routine.objects.filter(
+            subject=self.subject,
+            day=self.day,
+            start_time__lt=self.end_time,
+            end_time__gt=self.start_time,
+        ).exclude(teacher=self.teacher)
+
+        for routine in conflicting_routines:
+            if routine.teacher.rank and Staff.RANK_CHOICES.index((routine.teacher.rank,)) < Staff.RANK_CHOICES.index((self.teacher.rank,)):
+                raise ValidationError(f"Overlapped by {routine.teacher.get_rank_display()} {routine.teacher.get_full_name()}.")

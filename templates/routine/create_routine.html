@@ -7,6 +7,7 @@
         <form method="post" id="routineForm">
             {% csrf_token %}
             {{ form.as_p }}
+            {{request.user.user_type}}
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
  

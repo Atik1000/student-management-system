@@ -56,6 +56,10 @@
 
                   <li><a href="{% url 'subject_list' %}">View Subject </a></li>
 
+                  <li><a href="{% url 'create_batch' %}">Add Batch </a></li>
+
+                  <li><a href="{% url 'batch_list' %}">View Batch </a></li>
+
                </ul>
             </li>
 
@@ -71,17 +75,6 @@
                <a href="#"><i class="fas fa-building"></i> <span> Seat plan </span> <span class="menu-arrow"></span></a>
                <ul>
                   <li><a href="{% url 'room_create' %}">Add Room </a></li>
-
-                  <li><a href="{% url 'room_list' %}">View Room </a></li>
-
-
-               </ul>
-            </li>
-
-            <li class="submenu">
-               <a href="#"><i class="fas fa-building"></i> <span> Routine </span> <span class="menu-arrow"></span></a>
-               <ul>
-                  <li><a href="{% url 'day_wise_details' %}">day_wise_details </a></li>
 
                   <li><a href="{% url 'room_list' %}">View Room </a></li>
 
@@ -145,12 +138,17 @@
             </li>
 
             <li class="submenu">
-               <a href="#"><i class="fas fa-book-reader"></i> <span> class routine </span> <span class="menu-arrow"></span></a>
+               <a href="#"><i class="fas fa-building"></i> <span> Routine </span> <span class="menu-arrow"></span></a>
                <ul>
-                  <li><a href="{% url 'exam-add' %}">Create routine </a></li>
-                  <li><a href="{% url 'exam-list' %}">View routine </a></li>
+
+                  <li><a href="{% url 'routine-add' %}">Add Routine </a></li>
+
+                  <li><a href="{% url 'view_staff' %}">View Staff</a></li>
+
+
                </ul>
             </li>
+
             <li class="{% active_link 'staff_apply_leave' 'active' %}">
                <a href="{% url 'staff_apply_leave' %}"><i class="fas fa-envelope-open"></i><span>Apply For Leave</span> </a>
             </li >

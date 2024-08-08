@@ -4,12 +4,14 @@ from app.models import (CustomUser, Routine, Session_year, Staff, Staff_leave, S
     Student)
 from django.contrib import messages
 from course.models import Department, Semester
-from app.forms import RoutineForm, StaffForm
-
+from app.forms import RoutineForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
@@ -47,7 +49,6 @@ def HOME(request):
 
 def ADD_STUDENT(request):
     semesters = Semester.objects.all()
-
     if request.method == "POST":
         profile_pic = request.FILES.get('profile_pic')
         first_name = request.POST.get('first_name')
@@ -192,23 +193,54 @@ def DELETE_STUDENT(request,admin):
 
 @login_required(login_url='/')
 def ADD_STAFF(request):
-    if request.method == 'POST':
-        form = StaffForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Staff has been added successfully.')
-            return redirect('staff_list')  # Redirect to the list view after successful addition
-    else:
-        form = StaffForm()
-    
     departments = Department.objects.all()  # Fetch all departments
     rank_choices = Staff.RANK_CHOICES
-    
-    return render(request, 'Hod/add_staff.html', {
-        'form': form,
+    if request.method == "POST":
+        profile_pic = request.FILES.get('profile_pic')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        gender = request.POST.get('gender')
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.warning(request, 'Email is already taken')
+            return redirect('add_staff')
+        if CustomUser.objects.filter(username=username).exists():
+            messages.warning(request, 'Username is already taken')
+            return redirect('add_staff')
+        else:
+            user = CustomUser(
+                first_name=first_name,
+                last_name=last_name,
+                username=username,
+                email=email,
+                profile_pic=profile_pic,
+                user_type=2
+            )
+            user.set_password(password)
+            user.save()
+
+            staff = Staff(
+                admin=user,
+                address=address,
+                gender=gender,
+
+            )
+            staff.save()
+            messages.success(request, user.first_name + " " + user.last_name + " has been successfully added!")
+            return redirect('view_staff')
+
+    context = {
+        
         'departments': departments,
         'rank_choices': rank_choices,
-    })
+    }
+
+    return render(request, 'Hod/add_staff.html', context)
+
 
 @login_required(login_url='/')
 def VIEW_STAFF(request):
@@ -222,19 +254,51 @@ def VIEW_STAFF(request):
 @login_required(login_url='/')
 def EDIT_STAFF(request, id):
     staff = get_object_or_404(Staff, id=id)
+    departments = Department.objects.all()  # Fetch all departments
+    rank_choices = Staff.RANK_CHOICES
+
     if request.method == 'POST':
-        form = StaffForm(request.POST, request.FILES, instance=staff)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Staff has been updated successfully.')
-            return redirect('staff_list')  # Redirect to the list view after successful update
-    else:
-        form = StaffForm(instance=staff)
-    
-    return render(request, 'Hod/edit_staff.html', {
-        'form': form,
+        profile_pic = request.FILES.get('profile_pic')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        gender = request.POST.get('gender')
+
+        if CustomUser.objects.filter(email=email).exclude(id=staff.admin.id).exists():
+            messages.warning(request, 'Email is already taken')
+            return redirect('edit_staff', id=id)
+        if CustomUser.objects.filter(username=username).exclude(id=staff.admin.id).exists():
+            messages.warning(request, 'Username is already taken')
+            return redirect('edit_staff', id=id)
+        else:
+            user = staff.admin
+            user.first_name = first_name
+            user.last_name = last_name
+            user.username = username
+            user.email = email
+            user.profile_pic = profile_pic if profile_pic else user.profile_pic
+            if password:
+                user.set_password(password)
+            user.save()
+
+            staff.address = address
+            staff.gender = gender
+            staff.save()
+
+            messages.success(request, f'{user.first_name} {user.last_name} has been successfully updated!')
+            return redirect('view_staff')
+
+    context = {
         'staff': staff,
-    })
+        'departments': departments,
+        'rank_choices': rank_choices,
+    }
+
+    return render(request, 'Hod/edit_staff.html', context)
+
 
 @login_required(login_url='/')
 def DELETE_STAFF(request, id):
@@ -366,68 +430,55 @@ class RoutineCreateView(CreateView):
     model = Routine
     form_class = RoutineForm
     template_name = 'routine/create_routine.html'
-    success_url = reverse_lazy('view_routines')
+    success_url = reverse_lazy('view_staff')
 
     def form_valid(self, form):
-        # Custom form validation can be added here
+        # Here you can add any additional custom validation before saving the form
         return super().form_valid(form)
-    
-
-
+ 
 class RoutineUpdateView(UpdateView):
     model = Routine
     form_class = RoutineForm
-    template_name = 'update_routine.html'
-    success_url = reverse_lazy('view_routines')
+    template_name = 'routine/update_routine.html'
+    success_url = reverse_lazy('view_staff')
 
     def form_valid(self, form):
-        # Custom form validation can be added here
+        # Here you can add any additional custom validation before saving the form
         return super().form_valid(form)
+
+
+
+
+
+from django.db.models import Q
+
+def teacher_weekly_routine_view(request, teacher_id):
+    # Get the teacher object or return a 404 if not found
+    teacher = get_object_or_404(Staff, id=teacher_id)
     
+    # Initialize a dictionary to store routines by day
+    weekly_routines = {day: [] for day, _ in Routine.DAY_CHOICES}
+    
+    # Get all routines for this teacher
+    routines = Routine.objects.filter(teacher=teacher)
 
+    for routine in routines:
+        # Check for overlap
+        overlap_by = Routine.objects.filter(
+            subject=routine.subject,
+            day=routine.day,
+            start_time__lt=routine.end_time,
+            end_time__gt=routine.start_time,
+        ).exclude(teacher=teacher).first()
 
-class DayWiseDetailsView(TemplateView):
-    template_name = 'routine/day_wise_details.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        teachers = Staff.objects.all()
-        routines = Routine.objects.all().order_by('day', 'start_time')
-        
-        context['days'] = days
-        context['teachers'] = teachers
-        context['routines'] = routines
-        return context
-
-
-
-class WeeklyDetailsView(DetailView):
-    model = Staff
-    template_name = 'routine/weekly_details.html'
-    context_object_name = 'teacher'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        routines = Routine.objects.filter(teacher=self.object).order_by('day', 'start_time')
-        
-        context['days'] = days
-        context['routines'] = routines
-        return context
-
-
-
-@csrf_exempt
-def check_subject_availability(request):
-    if request.method == 'POST':
-        subject = request.POST.get('subject')
-        teacher = request.POST.get('teacher')
-        
-        # Check if the subject is already taken
-        subject_taken = Routine.objects.filter(subject=subject).exists()
-        
-        if subject_taken:
-            return JsonResponse({'available': False})
+        if overlap_by:
+            routine.message = f"Overlap by {overlap_by.teacher.get_rank_display()}"
         else:
-            return JsonResponse({'available': True})
+            routine.message = None
+
+        weekly_routines[routine.day].append(routine)
+
+    return render(request, 'routine/teacher_routine_detail.html', {
+        'teacher': teacher,
+        'weekly_routines': weekly_routines,
+    })

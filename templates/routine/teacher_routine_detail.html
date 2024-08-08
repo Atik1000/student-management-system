@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class=" mt-5">
+    <h2 class="mb-4">Weekly Routine for {{ teacher.get_full_name }}</h2>
+    
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Day</th>
+
+                <th scope="col">Subject</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day, routines in weekly_routines.items %}
+                {% if routines %}
+                    {% for routine in routines %}
+                        <tr>
+                            {% if forloop.first %}
+                                <th scope="row" rowspan="{{ routines|length }}">{{ day }}</th>
+                            {% endif %}
+
+                            <td>{{ routine.subject }}</td>
+                            <td>{{ routine.start_time }}</td>
+                            <td>{{ routine.end_time }}</td>
+                            <td>
+                                {% if routine.is_overlapped %}
+                                    <span class="text-danger">Overlapped by {{ routine.overlap_by.get_rank_display }} {{ routine.overlap_by.get_full_name }}</span>
+                                {% else %}
+                                    No Overlap
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <th scope="row">{{ day }}</th>
+                        <td colspan="4">No routines scheduled</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

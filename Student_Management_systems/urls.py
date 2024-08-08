@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from Student_Management_systems.Hod_views import (DayWiseDetailsView, RoutineCreateView,
-    RoutineUpdateView, WeeklyDetailsView)
+from Student_Management_systems.Hod_views import (RoutineCreateView, RoutineUpdateView,
+    teacher_weekly_routine_view)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -62,12 +62,17 @@ urlpatterns = [
 
 #  routine urls
     path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
+
+    # path('add_routine/add/', Hod_views.add_routine, name='routine-add'),
   
     path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),
-    path('check_subject_availability/', Hod_views.check_subject_availability, name='check_subject_availability'),
 
-    path('day_wise_details/', DayWiseDetailsView.as_view(), name='day_wise_details'),
-    path('weekly_details/<int:pk>/', WeeklyDetailsView.as_view(), name='weekly_details'),
+    # path('teacher/<int:pk>/routines/', TeacherRoutineDetailView.as_view(), name='teacher_routine_detail'),
+
+    # path('teacher/<int:pk>/weekly-routine/', WeeklyRoutineDetailView.as_view(), name='day_wise_details'),
+    path('teacher/<int:teacher_id>/routines/', teacher_weekly_routine_view, name='teacher_routines'),
+
+    # path('weekly_details/<int:pk>/', WeeklyDetailsView.as_view(), name='weekly_details'),
 
 
 

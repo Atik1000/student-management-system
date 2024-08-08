@@ -37,36 +37,18 @@
                         <table id="table_id" class="table table-hover table-center mb-0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Room No</th>
-                                    <th>Number of seat</th>
-                                    <th>Number of column</th>
+                                    <th>Name</th>
+                                    <th>Semester name</th>
                                    
-                                    <th class="text-right">Action</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for room in rooms %}
+                                {% for batch in batches %}
                                 <tr>
-                                    <td>{{ room.id }}</td>
-                                    <td>{{ room.number }}</td>
-                                    <td>{{ room.num_seats }}</td>
-                                    <td>{{ room.num_columns }}</td>
-                                    <td class="text-right">
-                                        <div class="actions">
-                                            <a href="{% url 'room_update' room.id %}" class="btn btn-sm bg-success-light mr-2">
-                                                <i class="fas fa-pen"></i>
-                                            </a>
-
-                                            <a href="{% url 'create_seatplan' room.id %}" class="btn btn-sm bg-success-light mr-2">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
-
-                                            <a href="{% url 'room_seatplan_detail' room.id %}" class="btn btn-sm bg-success-light mr-2">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </td>
+                                    <td>{{ batch.name }}</td>
+                                    <td>{{ batch.sem_name }}</td>
+                                   
                                 </tr>
                                 {% endfor %}
                             </tbody>

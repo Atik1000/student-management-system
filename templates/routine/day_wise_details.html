@@ -1,36 +1,36 @@
-
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
-    <div class="container">
-        <h2>Day-wise Routine</h2>
-        <table>
-            <thead>
+<div class="container mt-5">
+    <h2 class="mb-4">Day-wise Routine for {{ teacher.user.get_full_name }}</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for day, routines in weekly_routines.items %}
                 <tr>
-                    <th>Teacher</th>
-                    {% for day in days %}
-                        <th>{{ day }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for teacher in teachers %}
-                    <tr>
-                        <td>{{ teacher.username }}</td>
-                        {% for day in days %}
-                            <td>
+                    <th scope="row">{{ day }}</th>
+                    <td colspan="3">
+                        {% if routines %}
+                            <ul>
                                 {% for routine in routines %}
-                                    {% if routine.teacher == teacher and routine.day == day %}
-                                        {{ routine.subject.name }}<br>
-                                        {{ routine.start_time }} - {{ routine.end_time }}<br>
-                                    {% endif %}
+                                    <li>{{ routine.subject }} - {{ routine.start_time }} to {{ routine.end_time }}</li>
                                 {% endfor %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% endblock %}
+                            </ul>
+                        {% else %}
+                            No routines scheduled
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
