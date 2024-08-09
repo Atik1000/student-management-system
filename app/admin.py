@@ -16,6 +16,7 @@ admin.site.register(Staff)
 admin.site.register(Staff_Notification)
 admin.site.register(Staff_leave)
 admin.site.register(Routine)
+admin.site.register(Staff_Feedback)
 
 # admin.site.register(Department)
 

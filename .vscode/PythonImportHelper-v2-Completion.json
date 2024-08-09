@@ -241,7 +241,7 @@
         "documentation": {}
     },
     {
-        "label": "Staff_Notification",
+        "label": "Staff_Feedback",
         "importPath": "app.models",
         "description": "app.models",
         "isExtraImport": true,
@@ -250,6 +250,14 @@
     },
     {
         "label": "Staff_leave",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff_Notification",
         "importPath": "app.models",
         "description": "app.models",
         "isExtraImport": true,
@@ -849,6 +857,38 @@
         "documentation": {}
     },
     {
+        "label": "SAVE_NOTIFICATION",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineCreateView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "RoutineUpdateView",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "teacher_weekly_routine_view",
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -903,30 +943,6 @@
         "description": "django.conf.urls.static",
         "isExtraImport": true,
         "detail": "django.conf.urls.static",
-        "documentation": {}
-    },
-    {
-        "label": "RoutineCreateView",
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
-        "label": "RoutineUpdateView",
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Hod_views",
-        "documentation": {}
-    },
-    {
-        "label": "teacher_weekly_routine_view",
-        "importPath": "Student_Management_systems.Hod_views",
-        "description": "Student_Management_systems.Hod_views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
     {
@@ -1293,6 +1309,38 @@
     },
     {
         "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1986,7 +2034,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def HOME(request):\n    return render(request,'Staff/home.html')\ndef NOTIFICATIONS(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        notification = Staff_Notification.objects.filter(staff_id = staff_id)\n        context = {\n            'notification' : notification,\n        }",
+        "peekOfCode": "def HOME(request):\n    return render(request,'Staff/home.html')\ndef NOTIFICATIONS(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    notifications = []\n    for i in staff:\n        staff_id = i.id\n        notification = Staff_Notification.objects.filter(staff_id=staff_id)\n        notifications.extend(notification)\n    context = {",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -1995,7 +2043,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def NOTIFICATIONS(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        notification = Staff_Notification.objects.filter(staff_id = staff_id)\n        context = {\n            'notification' : notification,\n        }\n    return render(request,'Staff/notification.html',context)\ndef STAFF_NOTIFICATION_MARK_AS_DONE(request,status):",
+        "peekOfCode": "def NOTIFICATIONS(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    notifications = []\n    for i in staff:\n        staff_id = i.id\n        notification = Staff_Notification.objects.filter(staff_id=staff_id)\n        notifications.extend(notification)\n    context = {\n        'notification': notifications,\n    }",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2023,6 +2071,24 @@
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "peekOfCode": "def STAFF_APPLY_LEAVE_SAVE(request):\n    if request.method == 'POST':\n        leave_date =request.POST.get('leave_date')\n        leave_message = request.POST.get('leave_message')\n        staff = Staff.objects.get(admin = request.user.id )\n        leave = Staff_leave(\n            staff_id = staff,\n            date = leave_date,\n            message = leave_message,\n        )",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "STAFF_FEEDBACK",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def STAFF_FEEDBACK(request):\n    return render(request,'Staff/feedback.html')\ndef STAFF_FEEDBACK_SAVE(request):\n    if  request.method == 'POST':\n        feedback = request.POST.get('feedback')\n        staff = Staff.objects.get(admin = request.user.id )\n        feedback=Staff_Feedback(\n            staff_id = staff,\n            feedback = feedback,\n            feedback_reply = \" \",",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "STAFF_FEEDBACK_SAVE",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def STAFF_FEEDBACK_SAVE(request):\n    if  request.method == 'POST':\n        feedback = request.POST.get('feedback')\n        staff = Staff.objects.get(admin = request.user.id )\n        feedback=Staff_Feedback(\n            staff_id = staff,\n            feedback = feedback,\n            feedback_reply = \" \",\n        )\n        feedback.save()",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2459,6 +2525,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0021_alter_staff_notification_status",
+        "description": "app.migrations.0021_alter_staff_notification_status",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0020_remove_staff_password_remove_staff_username'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='staff_notification',\n            name='status',\n            field=models.IntegerField(default=1, null=True),\n        ),",
+        "detail": "app.migrations.0021_alter_staff_notification_status",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0022_staff_feedback",
+        "description": "app.migrations.0022_staff_feedback",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0021_alter_staff_notification_status'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Staff_Feedback',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('feedback', models.TextField()),",
+        "detail": "app.migrations.0022_staff_feedback",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2535,7 +2619,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Staff_Notification(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    message = models.TextField()\n    created_at = models.DateTimeField(auto_now_add=True)\n    status =models.ImageField(null=True,default=0)\n    def __str__(self):\n        return self.staff_id.admin.first_name\nclass Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)",
+        "peekOfCode": "class Staff_Notification(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    message = models.TextField()\n    created_at = models.DateTimeField(auto_now_add=True)\n    status =models.IntegerField(null=True,default=1)\n    def __str__(self):\n        return self.staff_id.admin.first_name\nclass Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2544,7 +2628,16 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)\n    message = models.TextField()\n    status = models.IntegerField(default=0)\n    created_at = models.DateTimeField(auto_now=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.staff_id.admin.first_name + self.staff_id.admin.last_name\nclass Routine(models.Model):",
+        "peekOfCode": "class Staff_leave(models.Model):\n    staff_id = models.ForeignKey(Staff,on_delete=models.CASCADE)\n    date =  models.CharField(max_length=100)\n    message = models.TextField()\n    status = models.IntegerField(default=0)\n    created_at = models.DateTimeField(auto_now=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.staff_id.admin.first_name + self.staff_id.admin.last_name\nclass Staff_Feedback(models.Model):",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff_Feedback",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Staff_Feedback(models.Model):\n    staff_id=models.ForeignKey(Staff,on_delete=models.CASCADE)\n    feedback=models.TextField()\n    feedback_reply =models.TextField()\n    created_at=models.DateTimeField(auto_now_add=True)\n    updated_at=models.DateTimeField(auto_now_add=True)\n    def __str__(self):\n        return self.staff_id.admin.first_name + self.staff_id.admin.last_name\nclass Routine(models.Model):\n    DAY_CHOICES = [",
         "detail": "app.models",
         "documentation": {}
     },

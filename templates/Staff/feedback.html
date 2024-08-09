@@ -3,14 +3,14 @@
  <div class="page-header">
       <div class="row align-items-center">
          <div class="col">
-            <h3 class="page-title">Staff</h3>
+            <h3 class="page-title">Feedback</h3>
             <ul class="breadcrumb">
                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-               <li class="breadcrumb-item active">Staff</li>
+               <li class="breadcrumb-item active">Feedback</li>
             </ul>
          </div>
          <div class="col-auto text-right float-right ml-auto">
-            <button  class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" type="button"><i class="fas fa-pray"></i>&nbsp; Leave History</button>
+            <button  class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg" type="button"><i class="fas fa-pray"></i>&nbsp; Feedback History</button>
 
          </div>
       </div>
@@ -19,29 +19,23 @@
                   <div class="col-sm-12">
                      <div class="card">
                         <div class="card-body">
-                           <form method="post" action="{% url 'staff_apply_leave_save' %}" >
+                           <form method="post" action="{% url 'staff_feedback_save' %}" >
                               {% csrf_token %}
                                  <div class="col-12">
-                                    <h5 class="form-title"><span>Apply For leave</span></h5>
+                                    <h5 class="form-title"><span>Send Feedback</span></h5>
                                  </div>
                                  {% include 'includes/messages.html' %}
 
-                                 <div class="col-sm-11">
-                                    <div class="form-group">
-                                       <label>Leave Date</label>
-                                       <input type="date" class="form-control" name="leave_date" required>
-                                    </div>
-                                 </div>
                               <div class="col-sm-11">
                                     <div class="form-group">
                                        <label>Leave Reason</label>
-                                        <textarea class="form-control" name="leave_message" style="height:250px;" required></textarea>
+                                        <textarea class="form-control" name="feedback" style="height:250px;" required></textarea>
                                     </div>
                                  </div>
 
 
                                  <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Apply For Leave</button>
+                                    <button type="submit" class="btn btn-primary">Send Feedback</button>
                                  </div>
 
                            </form>

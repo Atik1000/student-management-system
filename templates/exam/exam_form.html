@@ -3,55 +3,128 @@
 
 {% block content %}
 <div class="mt-5">
-  <h1 class="mb-4">{% if form.instance.pk %}Update Staff{% else %}Add Staff{% endif %}</h1>
-  <form method="post" action="{% url 'add_staff' %}" enctype="multipart/form-data">
+  <h1 class="mb-4">{% if form.instance.pk %}Update Exam{% else %}Add Exam{% endif %}</h1>
+  <form method="post" action="{% if form.instance.pk %}{% url 'exam-update' form.instance.pk %}{% else %}{% url 'exam-add' %}{% endif %}" enctype="multipart/form-data">
     {% csrf_token %}
+    
+    <!-- Exam Details Section -->
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.profile_pic.label_tag }} {{ form.profile_pic }}
+        {{ form.subject_name.label_tag }} {{ form.subject_name }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.department_name.label_tag }} {{ form.department_name }}
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.first_name.label_tag }} {{ form.first_name }}
+        {{ form.semester_name.label_tag }} {{ form.semester_name }}
       </div>
       <div class="col-md-6 mb-3">
-        {{ form.last_name.label_tag }} {{ form.last_name }}
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        {{ form.email.label_tag }} {{ form.email }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.username.label_tag }} {{ form.username }}
+        {{ form.batch_number.label_tag }} {{ form.batch_number }}
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.password.label_tag }} {{ form.password }}
+        {{ form.name.label_tag }} {{ form.name }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.time.label_tag }} {{ form.time }}
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 mb-3">
-        {{ form.address.label_tag }} {{ form.address }}
+        {{ form.marks.label_tag }} {{ form.marks }}
       </div>
     </div>
+    
+    <!-- Questions Section -->
+    <h3>Questions</h3>
     <div class="row">
-      <div class="col-md-6 mb-3">
-        {{ form.department.label_tag }} {{ form.department }}
+      <div class="col-md-2">
+           {{ form.q1_number }}
+
       </div>
-      <div class="col-md-6 mb-3">
-        {{ form.rank.label_tag }} {{ form.rank }}
+      <div class="col-md-8">    
+        {{ form.q1_description }}
+
       </div>
+      <div class="col-md-2">
+        {{ form.q1_marks }}
+
+      </div>
+      
     </div>
+
     <div class="row">
-      <div class="col-md-6 mb-3">
-        {{ form.gender.label_tag }} {{ form.gender }}
+      <div class="col-md-2">
+           {{ form.q2_number }}
+
       </div>
+      <div class="col-md-8">    
+        {{ form.q2_description }}
+
+      </div>
+      <div class="col-md-2">
+        {{ form.q2_marks }}
+
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+            {{ form.q3_number }}
+        </div>
+        <div class="col-md-8">    
+            {{ form.q3_description }}
+        </div>
+        <div class="col-md-2">
+            {{ form.q3_marks }}
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    
+    <div class="row">
+        <div class="col-md-2">
+            {{ form.q4_number }}
+        </div>
+        <div class="col-md-8">    
+            {{ form.q4_description }}
+        </div>
+        <div class="col-md-2">
+            {{ form.q4_marks }}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+            {{ form.q5_number }}
+        </div>
+        <div class="col-md-8">    
+            {{ form.q5_description }}
+        </div>
+        <div class="col-md-2">
+            {{ form.q5_marks }}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+            {{ form.q6_number }}
+        </div>
+        <div class="col-md-8">    
+            {{ form.q6_description }}
+        </div>
+        <div class="col-md-2">
+            {{ form.q6_marks }}
+        </div>
+    </div>
+    
+    
+
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary mt-4">Save</button>
   </form>
 </div>
+
+
 {% endblock %}
-  

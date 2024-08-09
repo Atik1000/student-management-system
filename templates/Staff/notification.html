@@ -29,25 +29,29 @@
                            <th>Message</th>
                            <th class="text-right">Action</th>
                         </tr>
-                     </thead>
-                     <tbody>
-                        {% for i in notification %}
-                        <tr>
-                           <td>{{i.message}}</td>
-
-                           <td class="text-right">
-                              <div class="actions">
-                                 {% if i.status == 0 %}
-                                 <a href="{% url 'staff_notification_mark_as_done' status=i.id %}" class="btn btn-danger">Mark As Done</a>
-                                 {% else %}
-                                   <button class="btn btn-danger" disabled="disabled">Mark As Done</button>
-                                 {% endif %}
-
-                              </div>
-                           </td>
-                        </tr>
-                        {% endfor %}
+                     </thead><tbody>
+                        {% if notification %}
+                           {% for i in notification %}
+                              <tr>
+                                 <td>{{ i.message }}</td>
+                                 <td class="text-right">
+                                    <div class="actions">
+                                       {% if i.status == 1 %}
+                                          <a href="{% url 'staff_notification_mark_as_done' status=i.id %}" class="btn btn-danger">Mark As Done</a>
+                                       {% else %}
+                                          <button class="btn btn-danger" disabled="disabled">Mark As Done</button>
+                                       {% endif %}
+                                    </div>
+                                 </td>
+                              </tr>
+                           {% endfor %}
+                        {% else %}
+                           <tr>
+                              <td colspan="2">No notifications available.</td>
+                           </tr>
+                        {% endif %}
                      </tbody>
+                     
                   </table>
                </div>
             </div>

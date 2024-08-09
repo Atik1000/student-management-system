@@ -94,9 +94,6 @@
             </li>
 
             <li>
-               <a href="holiday.html"><i class="fa fa-calendar"></i> <span> View Attendance</span></a>
-            </li>
-            <li>
                <a href="#"><i class="fas fa-comments"></i> <span> Teacher Feedback</span></a>
             </li>
 
@@ -152,8 +149,8 @@
             <li class="{% active_link 'staff_apply_leave' 'active' %}">
                <a href="{% url 'staff_apply_leave' %}"><i class="fas fa-envelope-open"></i><span>Apply For Leave</span> </a>
             </li >
-            <li class="{% active_link 'hod_home' 'active' %}">
-               <a href="{% url 'hod_home' %}"><i class="fas fa-comment"></i><span>Send Feedback</span> </a>
+            <li class="{% active_link 'staff-feedback' 'active' %}">
+               <a href="{% url 'staff-feedback' %}"><i class="fas fa-comment"></i><span>Send Feedback</span> </a>
             </li >
             <li class="{% active_link 'notification' 'active' %}">
                <a href="{% url 'notification' %}"><i class="fas fa-bell"></i><span>Notification</span> </a>

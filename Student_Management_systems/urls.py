@@ -59,6 +59,8 @@ urlpatterns = [
     path('Staff/mark_as_done/<str:status',Staff_Views.STAFF_NOTIFICATION_MARK_AS_DONE,name='staff_notification_mark_as_done'),
     path('Staff/Apply_leave',Staff_Views.STAFF_APPLY_LEAVE,name= 'staff_apply_leave'),
     path('Staff/Apply_leave_save',Staff_Views.STAFF_APPLY_LEAVE_SAVE,name = 'staff_apply_leave_save'),
+    path('staff/feedback',Staff_Views.STAFF_FEEDBACK,name='staff-feedback'),
+    path('staff/feedback/save',Staff_Views.STAFF_FEEDBACK_SAVE,name='staff_feedback_save'),
 
 #  routine urls
     path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
