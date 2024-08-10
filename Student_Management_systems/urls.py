@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from Student_Management_systems.Hod_views import (RoutineCreateView, RoutineUpdateView,
     teacher_weekly_routine_view)
+from Student_Management_systems.Staff_Views import STAFF_FEEDBACK
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -49,6 +50,8 @@ urlpatterns = [
     path("Hod/Staff/approve_leave/<str:id>",Hod_views.STAFF_APPROVE_LEAVE,name = 'staff_approve_leave'),
     path("Hod/Staff/disapprove_leave/<str:id>",Hod_views.STAFF_DISAPPROVE_LEAVE,name = 'staff_disapprove_leave'),
 
+    path('Hod/staff/feedback',Hod_views.STAFF_FEEDBACK, name='staff_feedback' ),
+    path('Hod/staff/feedback_reply',Hod_views.STAFF_FEEDBACK_REPLY, name='staff_feedback_reply' ),
 
 
 

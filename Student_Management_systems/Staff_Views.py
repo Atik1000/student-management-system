@@ -66,7 +66,15 @@ def STAFF_APPLY_LEAVE_SAVE(request):
 
 
 def STAFF_FEEDBACK(request):
-    return render(request,'Staff/feedback.html')
+    staff_id = Staff.objects.get(admin = request.user.id)
+
+    feedback_history = Staff_Feedback.objects.filter(staff_id =staff_id)
+
+    context = {
+     'feedback_history' : feedback_history,
+
+    }
+    return render(request,'Staff/feedback.html',context)
 
 def STAFF_FEEDBACK_SAVE(request):
     if  request.method == 'POST':
@@ -81,3 +89,4 @@ def STAFF_FEEDBACK_SAVE(request):
         )
         feedback.save()
         return redirect('staff-feedback') 
+    

@@ -209,6 +209,14 @@
         "documentation": {}
     },
     {
+        "label": "Staff_Feedback",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "Staff_leave",
         "importPath": "app.models",
         "description": "app.models",
@@ -943,6 +951,14 @@
         "description": "django.conf.urls.static",
         "isExtraImport": true,
         "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "STAFF_FEEDBACK",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
     {
@@ -2016,7 +2032,25 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')\n# Routine all function \nclass RoutineCreateView(CreateView):\n    model = Routine\n    form_class = RoutineForm\n    template_name = 'routine/create_routine.html'",
+        "peekOfCode": "def STAFF_DISAPPROVE_LEAVE(request,id):\n    leave = Staff_leave.objects.get(id = id)\n    leave.status =2\n    leave.save()\n    return redirect('staff_leave_view')\ndef STAFF_FEEDBACK(request):\n    feedback = Staff_Feedback.objects.all()\n    context = {\n        'feedback' : feedback,\n    }",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "STAFF_FEEDBACK",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "def STAFF_FEEDBACK(request):\n    feedback = Staff_Feedback.objects.all()\n    context = {\n        'feedback' : feedback,\n    }\n    return render (request, 'Hod/staff_feedback.html',context)\ndef STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "STAFF_FEEDBACK_REPLY",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "def STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')\n        feedback = Staff_Feedback.objects.get(id=feedback_id)\n        feedback.feedback_reply = feedback_reply\n        feedback.save()\n        return redirect('staff_feedback')\n# Routine all function \nclass RoutineCreateView(CreateView):",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2079,7 +2113,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_FEEDBACK(request):\n    return render(request,'Staff/feedback.html')\ndef STAFF_FEEDBACK_SAVE(request):\n    if  request.method == 'POST':\n        feedback = request.POST.get('feedback')\n        staff = Staff.objects.get(admin = request.user.id )\n        feedback=Staff_Feedback(\n            staff_id = staff,\n            feedback = feedback,\n            feedback_reply = \" \",",
+        "peekOfCode": "def STAFF_FEEDBACK(request):\n    staff_id = Staff.objects.get(admin = request.user.id)\n    feedback_history = Staff_Feedback.objects.filter(staff_id =staff_id)\n    context = {\n     'feedback_history' : feedback_history,\n    }\n    return render(request,'Staff/feedback.html',context)\ndef STAFF_FEEDBACK_SAVE(request):\n    if  request.method == 'POST':\n        feedback = request.POST.get('feedback')",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
