@@ -44,35 +44,10 @@ class RoutineForm(forms.ModelForm):
             'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(RoutineForm, self).__init__(*args, **kwargs)
-        if 'teacher' in self.data:
-            teacher_id = self.data.get('teacher')
-            try:
-                teacher = Staff.objects.get(id=teacher_id)
-                self.filter_subjects_based_on_rank(teacher)
-            except Staff.DoesNotExist:
-                pass
-        elif self.instance and self.instance.pk:
-            teacher = self.instance.teacher
-            self.filter_subjects_based_on_rank(teacher)
+    def clean(self):
+        cleaned_data = super().clean()
+        warnings = self.instance.clean()
 
-    def filter_subjects_based_on_rank(self, teacher):
-        if self.is_bound and self.is_valid():
-            cleaned_data = self.cleaned_data
-            taken_subjects = Routine.objects.filter(subject__in=self.fields['subject'].queryset)
-            conflicting_routines = taken_subjects.filter(
-                day=cleaned_data.get('day'),
-                start_time__lt=cleaned_data.get('end_time'),
-                end_time__gt=cleaned_data.get('start_time')
-            )
-
-            conflicting_subjects = []
-            for routine in conflicting_routines:
-                if routine.teacher.rank < teacher.rank:
-                    conflicting_subjects.append(routine.subject.id)
-                elif routine.teacher.rank > teacher.rank:
-                    raise ValidationError(f'This subject has already been taken by {routine.teacher.rank_display()}')
-
-            self.fields['subject'].queryset = self.fields['subject'].queryset.exclude(id__in=conflicting_subjects)
+        if warnings:
+            raise forms.ValidationError(warnings)
 

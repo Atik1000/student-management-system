@@ -167,41 +167,6 @@ class Routine(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
 
-    class Meta:
-        unique_together = ('teacher', 'day', 'start_time', 'end_time')
 
     def __str__(self):
         return f"{self.semester} - {self.subject} - {self.teacher} - {self.day} ({self.start_time} - {self.end_time})"
-
-    def clean(self):
-        super().clean()
-
-        # Check if start_time is before end_time
-        if self.start_time >= self.end_time:
-            raise ValidationError('Start time must be before end time.')
-
-        # Check if the time is within the allowed range
-        if not (time(10, 0) <= self.start_time <= time(21, 0) and time(10, 0) <= self.end_time <= time(21, 0)):
-            raise ValidationError('Class times must be between 10 AM and 9 PM.')
-
-        # Check if the duration is within the allowed range
-        duration = (self.end_time.hour - self.start_time.hour) + (self.end_time.minute - self.start_time.minute) / 60
-        if not (1 <= duration <= 3):
-            raise ValidationError('Class duration must be between 1 and 3 hours.')
-
-        # Validate credit hours
-        total_credits = Routine.objects.filter(teacher=self.teacher, day=self.day).count()
-        if total_credits >= 20:
-            raise ValidationError('Teacher cannot schedule more than 20 credits per day.')
-
-# Check for overlapping subjects based on rank
-        conflicting_routines = Routine.objects.filter(
-            subject=self.subject,
-            day=self.day,
-            start_time__lt=self.end_time,
-            end_time__gt=self.start_time,
-        ).exclude(teacher=self.teacher)
-
-        for routine in conflicting_routines:
-            if routine.teacher.rank and Staff.RANK_CHOICES.index((routine.teacher.rank,)) < Staff.RANK_CHOICES.index((self.teacher.rank,)):
-                raise ValidationError(f"Overlapped by {routine.teacher.get_rank_display()} {routine.teacher.get_full_name()}.")

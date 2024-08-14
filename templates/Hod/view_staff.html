@@ -33,10 +33,10 @@
                         <tr>
                            <th>ID</th>
                            <th>Email</th>
-                           <th>Gender</th>
-                           <th>Address</th>
-                           <th>Created At</th>
-                           <th>Updated At</th>
+                           <th>Name</th>
+
+                           <th>Rank</th>
+
                            <th class="text-right">Actions</th>
                         </tr>
                      </thead>
@@ -45,10 +45,9 @@
                         <tr>
                            <td>{{ staff_member.id }}</td>
                            <td>{{ staff_member.admin.email }}</td>
-                           <td>{{ staff_member.get_gender_display }}</td>
-                           <td>{{ staff_member.address }}</td>
-                           <td>{{ staff_member.created_at }}</td>
-                           <td>{{ staff_member.updated_at }}</td>
+                           <td>{{ staff_member.first_name }}</td>
+
+                           <td>{{ staff_member.rank }}</td>
                            <td class="text-right">
                               <div class="actions">
                                  <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
@@ -59,6 +58,10 @@
                                  </a>
                                  <a href="{% url 'teacher_routines' staff_member.pk %}" class="btn btn-sm bg-info-light">
                                     <i class="fas fa-eye"></i> View routine
+                                 </a>
+
+                                 <a href="{% url 'routine-update' staff_member.pk %}" class="btn btn-sm bg-info-light">
+                                    <i class="fas fa-pen"></i> update routine
                                  </a>
                               </div>
                            </td>

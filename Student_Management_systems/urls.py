@@ -3,8 +3,8 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from Student_Management_systems.Hod_views import (RoutineCreateView, RoutineUpdateView,
-    teacher_weekly_routine_view)
+from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreateView,
+    RoutineUpdateView, teacher_weekly_routine_view)
 from Student_Management_systems.Staff_Views import STAFF_FEEDBACK
 
 from .import views,Hod_views,Staff_Views,Student_Views
@@ -76,6 +76,8 @@ urlpatterns = [
 
     # path('teacher/<int:pk>/weekly-routine/', WeeklyRoutineDetailView.as_view(), name='day_wise_details'),
     path('teacher/<int:teacher_id>/routines/', teacher_weekly_routine_view, name='teacher_routines'),
+    path('routine/check_conflicts/', check_conflicts, name='check_conflicts'),
+
 
     # path('weekly_details/<int:pk>/', WeeklyDetailsView.as_view(), name='weekly_details'),
 

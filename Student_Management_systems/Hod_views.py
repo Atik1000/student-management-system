@@ -12,7 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.db.models import Q
 
+from django.http import JsonResponse
 
 
 
@@ -444,8 +446,9 @@ def STAFF_FEEDBACK_REPLY(request):
 
 
 
-# Routine all function 
-
+from django.db import IntegrityError
+from django.contrib import messages
+from django.shortcuts import render
 class RoutineCreateView(CreateView):
     model = Routine
     form_class = RoutineForm
@@ -453,52 +456,135 @@ class RoutineCreateView(CreateView):
     success_url = reverse_lazy('view_staff')
 
     def form_valid(self, form):
-        # Here you can add any additional custom validation before saving the form
-        return super().form_valid(form)
- 
+        teacher = form.cleaned_data.get('teacher')
+        subject = form.cleaned_data.get('subject')
+        day = form.cleaned_data.get('day')
+        start_time = form.cleaned_data.get('start_time')
+        end_time = form.cleaned_data.get('end_time')
+
+        # Ensure start_time and end_time are not None
+        if start_time is None or end_time is None:
+            messages.error(self.request, "Start time and end time must be provided.")
+            return self.render_to_response(self.get_context_data(form=form))
+
+        # Check if the teacher is already teaching the same subject on the same day
+        existing_routine = Routine.objects.filter(teacher=teacher, subject=subject, day=day)
+        if existing_routine.exists():
+            messages.error(self.request, "This teacher is already scheduled to teach this subject on the selected day.")
+            return self.render_to_response(self.get_context_data(form=form))
+        
+        # Check for overlapping routines (time conflict)
+        overlapping_routine = Routine.objects.filter(
+            teacher=teacher,
+            day=day,
+            start_time__lt=end_time,
+            end_time__gt=start_time
+        )
+        if overlapping_routine.exists():
+            messages.error(self.request, "This teacher already has a routine scheduled during the selected time.")
+            return self.render_to_response(self.get_context_data(form=form))
+        
+        try:
+            # Try to save the form
+            return super().form_valid(form)
+        except IntegrityError:
+            # Handle the integrity error (unique constraint violation)
+            messages.error(self.request, "This teacher already has a routine at the selected time and day.")
+            return self.render_to_response(self.get_context_data(form=form))
+
+
+
+def check_conflicts(request):
+    teacher_id = request.GET.get('teacher')
+    day = request.GET.get('day')
+    routines = Routine.objects.filter(teacher_id=teacher_id, day=day)
+    
+    routines_data = [{
+        'subject': routine.subject.id,
+        'start_time': routine.start_time.strftime('%H:%M'),
+        'end_time': routine.end_time.strftime('%H:%M')
+    } for routine in routines]
+
+    return JsonResponse(routines_data, safe=False)   
+
 class RoutineUpdateView(UpdateView):
     model = Routine
     form_class = RoutineForm
-    template_name = 'routine/update_routine.html'
+    template_name = 'routine/create_routine.html'  # Reuse the same template as the create view
     success_url = reverse_lazy('view_staff')
 
     def form_valid(self, form):
-        # Here you can add any additional custom validation before saving the form
-        return super().form_valid(form)
+        teacher = form.cleaned_data.get('teacher')
+        subject = form.cleaned_data.get('subject')
+        day = form.cleaned_data.get('day')
+        start_time = form.cleaned_data.get('start_time')
+        end_time = form.cleaned_data.get('end_time')
+
+        # Ensure start_time and end_time are not None
+        if start_time is None or end_time is None:
+            messages.error(self.request, "Start time and end time must be provided.")
+            return self.render_to_response(self.get_context_data(form=form))
+
+        # Check if the teacher is already teaching the same subject on the same day
+        existing_routine = Routine.objects.filter(
+            teacher=teacher, 
+            subject=subject, 
+            day=day
+        ).exclude(pk=self.object.pk)  # Exclude the current instance
+        if existing_routine.exists():
+            messages.error(self.request, "This teacher is already scheduled to teach this subject on the selected day.")
+            return self.render_to_response(self.get_context_data(form=form))
+        
+        # Check for overlapping routines (time conflict)
+        overlapping_routine = Routine.objects.filter(
+            teacher=teacher,
+            day=day,
+            start_time__lt=end_time,
+            end_time__gt=start_time
+        ).exclude(pk=self.object.pk)  # Exclude the current instance
+        if overlapping_routine.exists():
+            messages.error(self.request, "This teacher already has a routine scheduled during the selected time.")
+            return self.render_to_response(self.get_context_data(form=form))
+        
+        try:
+            # Try to save the form
+            return super().form_valid(form)
+        except IntegrityError:
+            # Handle the integrity error (unique constraint violation)
+            messages.error(self.request, "This teacher already has a routine at the selected time and day.")
+            return self.render_to_response(self.get_context_data(form=form))
 
 
 
-
-
-from django.db.models import Q
 
 def teacher_weekly_routine_view(request, teacher_id):
-    # Get the teacher object or return a 404 if not found
+# Get the teacher object or return a 404 if not found
     teacher = get_object_or_404(Staff, id=teacher_id)
     
     # Initialize a dictionary to store routines by day
     weekly_routines = {day: [] for day, _ in Routine.DAY_CHOICES}
     
     # Get all routines for this teacher
-    routines = Routine.objects.filter(teacher=teacher)
+    routines = Routine.objects.filter(teacher=teacher).order_by('day', 'start_time')
 
     for routine in routines:
         # Check for overlap
-        overlap_by = Routine.objects.filter(
+        overlap_routine = Routine.objects.filter(
             subject=routine.subject,
-            day=routine.day,
-            start_time__lt=routine.end_time,
-            end_time__gt=routine.start_time,
         ).exclude(teacher=teacher).first()
 
-        if overlap_by:
-            routine.message = f"Overlap by {overlap_by.teacher.get_rank_display()}"
+        if overlap_routine:
+            routine.is_overlapped = True
+            routine.overlap_by = overlap_routine.teacher
         else:
-            routine.message = None
+            routine.is_overlapped = False
+            routine.overlap_by = None
 
         weekly_routines[routine.day].append(routine)
 
     return render(request, 'routine/teacher_routine_detail.html', {
         'teacher': teacher,
         'weekly_routines': weekly_routines,
-    })
+    }
+    )
+ 
