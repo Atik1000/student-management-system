@@ -65,11 +65,12 @@ urlpatterns = [
     path('staff/feedback',Staff_Views.STAFF_FEEDBACK,name='staff-feedback'),
     path('staff/feedback/save',Staff_Views.STAFF_FEEDBACK_SAVE,name='staff_feedback_save'),
 
-#  routine urls
-    path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
+# #  routine urls
+#     path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
 
     # path('add_routine/add/', Hod_views.add_routine, name='routine-add'),
-  
+      path('routine/add/',Hod_views.create_routine, name='routine-add'),  # Updated to use the function-based view
+
     path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),
 
     # path('teacher/<int:pk>/routines/', TeacherRoutineDetailView.as_view(), name='teacher_routine_detail'),

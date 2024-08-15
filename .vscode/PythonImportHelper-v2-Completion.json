@@ -2082,7 +2082,16 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')\n        feedback = Staff_Feedback.objects.get(id=feedback_id)\n        feedback.feedback_reply = feedback_reply\n        feedback.save()\n        return redirect('staff_feedback')\nclass RoutineCreateView(CreateView):\n    model = Routine",
+        "peekOfCode": "def STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')\n        feedback = Staff_Feedback.objects.get(id=feedback_id)\n        feedback.feedback_reply = feedback_reply\n        feedback.save()\n        return redirect('staff_feedback')\ndef create_routine(request):\n    # Get the logged-in staff member",
+        "detail": "Student_Management_systems.Hod_views",
+        "documentation": {}
+    },
+    {
+        "label": "create_routine",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Hod_views",
+        "description": "Student_Management_systems.Hod_views",
+        "peekOfCode": "def create_routine(request):\n    # Get the logged-in staff member\n    staff = Staff.objects.get(admin=request.user.id)\n    if request.method == 'POST':\n        form = RoutineForm(request.POST)\n        if form.is_valid():\n            subject = form.cleaned_data.get('subject')\n            day = form.cleaned_data.get('day')\n            start_time = form.cleaned_data.get('start_time')\n            end_time = form.cleaned_data.get('end_time')",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2127,7 +2136,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_NOTIFICATION_MARK_AS_DONE(request,status):\n    notification =Staff_Notification.objects.get(id = status)\n    notification.status = 1\n    notification.save()\n    return redirect('notification')\ndef STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    # Initialize context with a default value\n    context = {\n        'staff_leave_history': None,",
+        "peekOfCode": "def STAFF_NOTIFICATION_MARK_AS_DONE(request,status):\n    notification =Staff_Notification.objects.get(id = status)\n    notification.status = 1\n    notification.save()\n    return redirect('notification')\ndef STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2136,7 +2145,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    # Initialize context with a default value\n    context = {\n        'staff_leave_history': None,\n    }\n    if staff.exists():\n        staff_id = staff.first().id  # Get the ID of the first staff (assuming one-to-one relationship with user)\n        staff_leave_history = Staff_leave.objects.filter(staff_id=staff_id)\n        context['staff_leave_history'] = staff_leave_history",
+        "peekOfCode": "def STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)\n        context = {\n            'staff_leave_history' : staff_leave_history,\n        }\n    return render(request,'Staff/apply_leave.html',context)\ndef STAFF_APPLY_LEAVE_SAVE(request):",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2145,7 +2154,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_APPLY_LEAVE_SAVE(request):\n    if request.method == 'POST':\n        leave_date = request.POST.get('leave_date')\n        leave_message = request.POST.get('leave_message')\n        if not leave_date or not leave_message:\n            messages.warning(request, \"Please fill out all fields.\")\n            return redirect('staff_apply_leave')\n        try:\n            staff = Staff.objects.get(admin=request.user.id)\n            leave = Staff_leave(",
+        "peekOfCode": "def STAFF_APPLY_LEAVE_SAVE(request):\n    if request.method == 'POST':\n        leave_date =request.POST.get('leave_date')\n        leave_message = request.POST.get('leave_message')\n        staff = Staff.objects.get(admin = request.user.id )\n        leave = Staff_leave(\n            staff_id = staff,\n            date = leave_date,\n            message = leave_message,\n        )",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2649,7 +2658,7 @@
         "kind": 6,
         "importPath": "app.forms",
         "description": "app.forms",
-        "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'teacher', 'day', 'start_time', 'end_time']\n        widgets = {\n            'semester': forms.Select(attrs={'class': 'form-control'}),\n            'subject': forms.Select(attrs={'class': 'form-control'}),\n            'teacher': forms.Select(attrs={'class': 'form-control'}),\n            'day': forms.Select(attrs={'class': 'form-control'}),\n            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),",
+        "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']  # Removed 'teacher'\n        widgets = {\n            'semester': forms.Select(attrs={'class': 'form-control'}),\n            'subject': forms.Select(attrs={'class': 'form-control'}),\n            'day': forms.Select(attrs={'class': 'form-control'}),\n            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),\n            'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),",
         "detail": "app.forms",
         "documentation": {}
     },

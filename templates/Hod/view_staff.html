@@ -51,12 +51,12 @@
                            <td>{{ staff_member.get_rank_display }}</td> <!-- Fixed here -->
                            <td class="text-right">
                               <div class="actions">
-                                 <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
+                                 <!-- <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
                                     <i class="fas fa-pen"></i> Edit
                                  </a>
                                  <a href="{% url 'delete_staff' staff_member.admin.id %}" class="btn btn-sm bg-danger-light">
                                     <i class="fas fa-trash"></i> Delete
-                                 </a>
+                                 </a> -->
                                  <a href="{% url 'teacher_routines' staff_member.pk %}" class="btn btn-sm bg-info-light">
                                     <i class="fas fa-eye"></i> View routine
                                  </a>

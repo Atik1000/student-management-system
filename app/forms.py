@@ -30,15 +30,13 @@ from django.forms import ValidationError
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Routine, Staff, Subject
-
 class RoutineForm(forms.ModelForm):
     class Meta:
         model = Routine
-        fields = ['semester', 'subject', 'teacher', 'day', 'start_time', 'end_time']
+        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']  # Removed 'teacher'
         widgets = {
             'semester': forms.Select(attrs={'class': 'form-control'}),
             'subject': forms.Select(attrs={'class': 'form-control'}),
-            'teacher': forms.Select(attrs={'class': 'form-control'}),
             'day': forms.Select(attrs={'class': 'form-control'}),
             'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
             'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
@@ -51,3 +49,6 @@ class RoutineForm(forms.ModelForm):
         if warnings:
             raise forms.ValidationError(warnings)
 
+        # Additional custom validation (if needed) can be added here.
+
+        return cleaned_data

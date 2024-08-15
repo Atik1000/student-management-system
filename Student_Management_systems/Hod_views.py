@@ -458,6 +458,56 @@ def STAFF_FEEDBACK_REPLY(request):
 
 
 
+def create_routine(request):
+    # Get the logged-in staff member
+    staff = Staff.objects.get(admin=request.user.id)
+
+    if request.method == 'POST':
+        form = RoutineForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data.get('subject')
+            day = form.cleaned_data.get('day')
+            start_time = form.cleaned_data.get('start_time')
+            end_time = form.cleaned_data.get('end_time')
+
+            # Ensure start_time and end_time are not None
+            if start_time is None or end_time is None:
+                messages.error(request, "Start time and end time must be provided.")
+                return render(request, 'routine/create_routine.html', {'form': form})
+
+            # Check if the teacher is already teaching the same subject on the same day
+            existing_routine = Routine.objects.filter(teacher=staff, subject=subject, day=day)
+            if existing_routine.exists():
+                messages.error(request, "You are already scheduled to teach this subject on the selected day.")
+                return render(request, 'routine/create_routine.html', {'form': form})
+
+            # Check for overlapping routines (time conflict)
+            overlapping_routine = Routine.objects.filter(
+                teacher=staff,
+                day=day,
+            start_time__lt=end_time,
+            end_time__gt=start_time
+            )
+            if overlapping_routine.exists():
+                messages.error(request, "You already have a routine scheduled during the selected time.")
+                return render(request, 'routine/create_routine.html', {'form': form})
+
+            try:
+                # Create and save the routine
+                routine = form.save(commit=False)
+                routine.teacher = staff  # Automatically assign the logged-in teacher
+                routine.save()
+                messages.success(request, "Routine created successfully.")
+                return redirect('view_staff')
+            except IntegrityError:
+                messages.error(request, "There was an error saving your routine. Please try again.")
+                return render(request, 'routine/create_routine.html', {'form': form})
+
+    else:
+        form = RoutineForm()
+
+    return render(request, 'routine/create_routine.html', {'form': form})
+
 
 class RoutineCreateView(CreateView):
     model = Routine
