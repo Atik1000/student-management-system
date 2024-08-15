@@ -10,8 +10,10 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django.db import IntegrityError
+from django.contrib import messages
+from django.shortcuts import render
 from django.db.models import Q
 
 from django.http import JsonResponse
@@ -189,10 +191,6 @@ def DELETE_STUDENT(request,admin):
 
 
 
-
-@login_required(login_url='/')
-
-
 @login_required(login_url='/')
 def ADD_STAFF(request):
     departments = Department.objects.all()  # Fetch all departments
@@ -206,6 +204,8 @@ def ADD_STAFF(request):
         password = request.POST.get('password')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
+        department_id = request.POST.get('department')
+        rank = request.POST.get('rank')
 
         if CustomUser.objects.filter(email=email).exists():
             messages.warning(request, 'Email is already taken')
@@ -214,6 +214,7 @@ def ADD_STAFF(request):
             messages.warning(request, 'Username is already taken')
             return redirect('add_staff')
         else:
+            # Create the CustomUser instance
             user = CustomUser(
                 first_name=first_name,
                 last_name=last_name,
@@ -225,23 +226,30 @@ def ADD_STAFF(request):
             user.set_password(password)
             user.save()
 
+            # Fetch the department instance
+            department = Department.objects.get(id=department_id)
+
+            # Create the Staff instance
             staff = Staff(
                 admin=user,
+                first_name=first_name,
+                last_name=last_name,
                 address=address,
                 gender=gender,
-
+                department=department,
+                rank=rank,
             )
             staff.save()
-            messages.success(request, user.first_name + " " + user.last_name + " has been successfully added!")
+            messages.success(request, f"{user.first_name} {user.last_name} has been successfully added!")
             return redirect('view_staff')
 
     context = {
-        
         'departments': departments,
         'rank_choices': rank_choices,
     }
 
     return render(request, 'Hod/add_staff.html', context)
+
 
 
 @login_required(login_url='/')
@@ -251,8 +259,6 @@ def VIEW_STAFF(request):
         'staff': staff,
     }
     return render(request, 'Hod/view_staff.html', context)
-
-
 @login_required(login_url='/')
 def EDIT_STAFF(request, id):
     staff = get_object_or_404(Staff, id=id)
@@ -268,6 +274,8 @@ def EDIT_STAFF(request, id):
         password = request.POST.get('password')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
+        department_id = request.POST.get('department')
+        rank = request.POST.get('rank')
 
         if CustomUser.objects.filter(email=email).exclude(id=staff.admin.id).exists():
             messages.warning(request, 'Email is already taken')
@@ -286,8 +294,13 @@ def EDIT_STAFF(request, id):
                 user.set_password(password)
             user.save()
 
+            # Update the staff details
+            staff.first_name = first_name
+            staff.last_name = last_name
             staff.address = address
             staff.gender = gender
+            staff.department = Department.objects.get(id=department_id)
+            staff.rank = rank
             staff.save()
 
             messages.success(request, f'{user.first_name} {user.last_name} has been successfully updated!')
@@ -300,7 +313,6 @@ def EDIT_STAFF(request, id):
     }
 
     return render(request, 'Hod/edit_staff.html', context)
-
 
 @login_required(login_url='/')
 def DELETE_STAFF(request, id):
@@ -446,9 +458,7 @@ def STAFF_FEEDBACK_REPLY(request):
 
 
 
-from django.db import IntegrityError
-from django.contrib import messages
-from django.shortcuts import render
+
 class RoutineCreateView(CreateView):
     model = Routine
     form_class = RoutineForm

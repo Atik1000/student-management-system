@@ -529,14 +529,6 @@
         "documentation": {}
     },
     {
-        "label": "LoginRequiredMixin",
-        "importPath": "django.contrib.auth.mixins",
-        "description": "django.contrib.auth.mixins",
-        "isExtraImport": true,
-        "detail": "django.contrib.auth.mixins",
-        "documentation": {}
-    },
-    {
         "label": "reverse_lazy",
         "importPath": "django.urls",
         "description": "django.urls",
@@ -806,102 +798,6 @@
         "description": "django.views.decorators.csrf",
         "isExtraImport": true,
         "detail": "django.views.decorators.csrf",
-        "documentation": {}
-    },
-    {
-        "label": "Q",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Case",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "When",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "IntegerField",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "F",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "Value",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "JsonResponse",
-        "importPath": "django.http",
-        "description": "django.http",
-        "isExtraImport": true,
-        "detail": "django.http",
-        "documentation": {}
-    },
-    {
-        "label": "HttpResponse",
-        "importPath": "django.http",
-        "description": "django.http",
-        "isExtraImport": true,
-        "detail": "django.http",
-        "documentation": {}
-    },
-    {
-        "label": "JsonResponse",
-        "importPath": "django.http",
-        "description": "django.http",
-        "isExtraImport": true,
-        "detail": "django.http",
         "documentation": {}
     },
     {
@@ -1481,6 +1377,102 @@
         "documentation": {}
     },
     {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Case",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "When",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "IntegerField",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "F",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Value",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
         "label": "SAVE_NOTIFICATION",
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
@@ -1946,7 +1938,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def DELETE_STUDENT(request,admin):\n    student = CustomUser.objects.get(id = admin)\n    student.delete()\n    messages.success(request,'Record Are Succesfully Deleted')\n    return redirect('view_student')\n@login_required(login_url='/')",
+        "peekOfCode": "def DELETE_STUDENT(request,admin):\n    student = CustomUser.objects.get(id = admin)\n    student.delete()\n    messages.success(request,'Record Are Succesfully Deleted')\n    return redirect('view_student')\n@login_required(login_url='/')\ndef ADD_STAFF(request):\n    departments = Department.objects.all()  # Fetch all departments",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2090,7 +2082,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Hod_views",
         "description": "Student_Management_systems.Hod_views",
-        "peekOfCode": "def STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')\n        feedback = Staff_Feedback.objects.get(id=feedback_id)\n        feedback.feedback_reply = feedback_reply\n        feedback.save()\n        return redirect('staff_feedback')\nfrom django.db import IntegrityError\nfrom django.contrib import messages",
+        "peekOfCode": "def STAFF_FEEDBACK_REPLY(request):\n    if request.method == 'POST':\n        feedback_id = request.POST.get('feedback_id')\n        feedback_reply = request.POST.get('feedback_reply')\n        feedback = Staff_Feedback.objects.get(id=feedback_id)\n        feedback.feedback_reply = feedback_reply\n        feedback.save()\n        return redirect('staff_feedback')\nclass RoutineCreateView(CreateView):\n    model = Routine",
         "detail": "Student_Management_systems.Hod_views",
         "documentation": {}
     },
@@ -2135,7 +2127,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_NOTIFICATION_MARK_AS_DONE(request,status):\n    notification =Staff_Notification.objects.get(id = status)\n    notification.status = 1\n    notification.save()\n    return redirect('notification')\ndef STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)",
+        "peekOfCode": "def STAFF_NOTIFICATION_MARK_AS_DONE(request,status):\n    notification =Staff_Notification.objects.get(id = status)\n    notification.status = 1\n    notification.save()\n    return redirect('notification')\ndef STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    # Initialize context with a default value\n    context = {\n        'staff_leave_history': None,",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2144,7 +2136,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin = request.user.id)\n    for i in staff:\n        staff_id = i.id\n        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)\n        context = {\n            'staff_leave_history' : staff_leave_history,\n        }\n    return render(request,'Staff/apply_leave.html',context)\ndef STAFF_APPLY_LEAVE_SAVE(request):",
+        "peekOfCode": "def STAFF_APPLY_LEAVE(request):\n    staff = Staff.objects.filter(admin=request.user.id)\n    # Initialize context with a default value\n    context = {\n        'staff_leave_history': None,\n    }\n    if staff.exists():\n        staff_id = staff.first().id  # Get the ID of the first staff (assuming one-to-one relationship with user)\n        staff_leave_history = Staff_leave.objects.filter(staff_id=staff_id)\n        context['staff_leave_history'] = staff_leave_history",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2153,7 +2145,7 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def STAFF_APPLY_LEAVE_SAVE(request):\n    if request.method == 'POST':\n        leave_date =request.POST.get('leave_date')\n        leave_message = request.POST.get('leave_message')\n        staff = Staff.objects.get(admin = request.user.id )\n        leave = Staff_leave(\n            staff_id = staff,\n            date = leave_date,\n            message = leave_message,\n        )",
+        "peekOfCode": "def STAFF_APPLY_LEAVE_SAVE(request):\n    if request.method == 'POST':\n        leave_date = request.POST.get('leave_date')\n        leave_message = request.POST.get('leave_message')\n        if not leave_date or not leave_message:\n            messages.warning(request, \"Please fill out all fields.\")\n            return redirect('staff_apply_leave')\n        try:\n            staff = Staff.objects.get(admin=request.user.id)\n            leave = Staff_leave(",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },

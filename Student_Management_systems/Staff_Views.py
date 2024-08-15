@@ -31,38 +31,50 @@ def STAFF_NOTIFICATION_MARK_AS_DONE(request,status):
     notification.save()
     return redirect('notification')
 
-
 def STAFF_APPLY_LEAVE(request):
+    staff = Staff.objects.filter(admin=request.user.id)
 
-    staff = Staff.objects.filter(admin = request.user.id)
-    for i in staff:
-        staff_id = i.id
-        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)
-        context = {
-            'staff_leave_history' : staff_leave_history,
-        }
+    # Initialize context with a default value
+    context = {
+        'staff_leave_history': None,
+    }
 
+    if staff.exists():
+        staff_id = staff.first().id  # Get the ID of the first staff (assuming one-to-one relationship with user)
+        staff_leave_history = Staff_leave.objects.filter(staff_id=staff_id)
+        context['staff_leave_history'] = staff_leave_history
 
-    return render(request,'Staff/apply_leave.html',context)
+    return render(request, 'Staff/apply_leave.html', context)
 
 
 def STAFF_APPLY_LEAVE_SAVE(request):
     if request.method == 'POST':
-        leave_date =request.POST.get('leave_date')
+        leave_date = request.POST.get('leave_date')
         leave_message = request.POST.get('leave_message')
-        staff = Staff.objects.get(admin = request.user.id )
+        
+        if not leave_date or not leave_message:
+            messages.warning(request, "Please fill out all fields.")
+            return redirect('staff_apply_leave')
 
-        leave = Staff_leave(
-            staff_id = staff,
-            date = leave_date,
-            message = leave_message,
-
-        )
-        messages.success(request,"Staff Leave Successfuly Send")
-        leave.save()
-
-
+        try:
+            staff = Staff.objects.get(admin=request.user.id)
+            leave = Staff_leave(
+                staff_id=staff,
+                date=leave_date,
+                message=leave_message,
+            )
+            leave.save()
+            messages.success(request, "Staff leave successfully sent.")
+            return redirect('staff_apply_leave')
+        except Staff.DoesNotExist:
+            messages.error(request, "Staff not found.")
+            return redirect('staff_apply_leave')
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+            return redirect('staff_apply_leave')
+    else:
         return redirect('staff_apply_leave')
+
 
 
 def STAFF_FEEDBACK(request):

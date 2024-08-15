@@ -27,9 +27,12 @@
                             <td>{{ routine.start_time }}</td>
                             <td>{{ routine.end_time }}</td>
                             <td>
-                                {% if routine.is_overlapped %}
+                                {% if routine.is_overlapped and routine.overlap_by %}
                                     <span class="text-danger">
-                                        Overlapped by {{ routine.overlap_by.get_rank_display }} {{ routine.overlap_by.get_full_name }}
+                                        Overlapped by 
+                                        <b>Name</b> : {{ routine.overlap_by.first_name }} {{ routine.overlap_by.last_name }}
+                                        <b>Rank</b>: 
+                                        {{ routine.overlap_by.get_rank_display }}
                                     </span>
                                 {% else %}
                                     No Overlap
