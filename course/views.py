@@ -5,7 +5,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from .models import Program, Department, Semester, Course
 from .forms import ProgramForm, DepartmentForm, SemesterForm, CourseForm,SubjectForm
 from django.db import models
-from django.db.models import Sum
+from django.http import JsonResponse
+
 from django.db.models import Sum, Case, When, IntegerField, F, Value
 from django.db.models.functions import Coalesce
 
@@ -54,6 +55,15 @@ class SemesterCreateView(CreateView):
     form_class = SemesterForm
     template_name = 'course/semester_form.html'
     success_url = reverse_lazy('semester_list')
+
+
+def filter_departments(request):
+    program_id = request.GET.get('program_id')
+    departments = Department.objects.filter(program_id=program_id)
+    options = '<option value="">---------</option>'
+    for department in departments:
+        options += f'<option value="{department.id}">{department.dept_name}</option>'
+    return JsonResponse({'options': options})
 
 class SemesterUpdateView(UpdateView):
     model = Semester

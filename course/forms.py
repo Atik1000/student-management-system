@@ -23,10 +23,11 @@ class SemesterForm(forms.ModelForm):
         model = Semester
         fields = ['program', 'department', 'name']
         widgets = {
-            'program': forms.Select(attrs={'class': 'form-control'}),
-            'department': forms.Select(attrs={'class': 'form-control'}),
+            'program': forms.Select(attrs={'class': 'form-control', 'id': 'id_program'}),
+            'department': forms.Select(attrs={'class': 'form-control', 'id': 'id_department'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course

@@ -1401,14 +1401,6 @@
         "documentation": {}
     },
     {
-        "label": "Sum",
-        "importPath": "django.db.models",
-        "description": "django.db.models",
-        "isExtraImport": true,
-        "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
         "label": "Case",
         "importPath": "django.db.models",
         "description": "django.db.models",
@@ -1446,6 +1438,14 @@
         "description": "django.db.models",
         "isExtraImport": true,
         "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
         "documentation": {}
     },
     {
@@ -2883,7 +2883,7 @@
         "kind": 6,
         "importPath": "course.forms",
         "description": "course.forms",
-        "peekOfCode": "class SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name']\n        widgets = {\n            'program': forms.Select(attrs={'class': 'form-control'}),\n            'department': forms.Select(attrs={'class': 'form-control'}),\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n        }\nclass CourseForm(forms.ModelForm):",
+        "peekOfCode": "class SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name']\n        widgets = {\n            'program': forms.Select(attrs={'class': 'form-control', 'id': 'id_program'}),\n            'department': forms.Select(attrs={'class': 'form-control', 'id': 'id_department'}),\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n        }\nclass CourseForm(forms.ModelForm):",
         "detail": "course.forms",
         "documentation": {}
     },
@@ -3009,7 +3009,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SemesterListView(ListView):\n    model = Semester\n    template_name = 'course/semester_list.html'\n    context_object_name = 'semesters'\nclass SemesterCreateView(CreateView):\n    model = Semester\n    form_class = SemesterForm\n    template_name = 'course/semester_form.html'\n    success_url = reverse_lazy('semester_list')\nclass SemesterUpdateView(UpdateView):",
+        "peekOfCode": "class SemesterListView(ListView):\n    model = Semester\n    template_name = 'course/semester_list.html'\n    context_object_name = 'semesters'\nclass SemesterCreateView(CreateView):\n    model = Semester\n    form_class = SemesterForm\n    template_name = 'course/semester_form.html'\n    success_url = reverse_lazy('semester_list')\ndef filter_departments(request):",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3018,7 +3018,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SemesterCreateView(CreateView):\n    model = Semester\n    form_class = SemesterForm\n    template_name = 'course/semester_form.html'\n    success_url = reverse_lazy('semester_list')\nclass SemesterUpdateView(UpdateView):\n    model = Semester\n    form_class = SemesterForm\n    template_name = 'course/semester_form.html'\n    success_url = reverse_lazy('semester_list')",
+        "peekOfCode": "class SemesterCreateView(CreateView):\n    model = Semester\n    form_class = SemesterForm\n    template_name = 'course/semester_form.html'\n    success_url = reverse_lazy('semester_list')\ndef filter_departments(request):\n    program_id = request.GET.get('program_id')\n    departments = Department.objects.filter(program_id=program_id)\n    options = '<option value=\"\">---------</option>'\n    for department in departments:",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3091,6 +3091,15 @@
         "importPath": "course.views",
         "description": "course.views",
         "peekOfCode": "class SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_departments",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def filter_departments(request):\n    program_id = request.GET.get('program_id')\n    departments = Department.objects.filter(program_id=program_id)\n    options = '<option value=\"\">---------</option>'\n    for department in departments:\n        options += f'<option value=\"{department.id}\">{department.dept_name}</option>'\n    return JsonResponse({'options': options})\nclass SemesterUpdateView(UpdateView):\n    model = Semester\n    form_class = SemesterForm",
         "detail": "course.views",
         "documentation": {}
     },

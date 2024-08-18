@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (CourseCreateView, CourseListView, CourseUpdateView, DepartmentCreateView,
-    DepartmentListView, DepartmentUpdateView, ProgramCreateView, ProgramListView,
-    SemesterCreateView, SemesterDetailView, SemesterListView, SemesterUpdateView,
+    DepartmentListView, DepartmentUpdateView, filter_departments, ProgramCreateView,
+    ProgramListView, SemesterCreateView, SemesterDetailView, SemesterListView, SemesterUpdateView,
     SubjectCreateView, SubjectListView, SubjectUpdateView)
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
     path('semesters/create/', SemesterCreateView.as_view(), name='semester_create'),
     path('semesters/<int:pk>/update/', SemesterUpdateView.as_view(), name='semester_update'),
     path('semester/<int:pk>/', SemesterDetailView.as_view(), name='semester-detail'),
+    path('filter-departments/', filter_departments, name='filter_departments'),
 
     
     # Course URLs
