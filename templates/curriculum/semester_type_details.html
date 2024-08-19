@@ -1,0 +1,10 @@
+<h2>Semester Type: {{ semester_type.name }}</h2>
+
+{% for semester in semesters %}
+    <h3>{{ semester.name }}</h3>
+    <ul>
+        {% for subject in semester.subject_set.all %}
+            <li>{{ subject.sub_name }} ({{ subject.sub_code }}), Credits: {{ subject.credit }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}

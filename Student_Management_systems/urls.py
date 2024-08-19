@@ -5,7 +5,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreateView,
     RoutineUpdateView, teacher_weekly_routine_view)
-from Student_Management_systems.Staff_Views import STAFF_FEEDBACK
+from Student_Management_systems.Staff_Views import (filter_semester_types, filter_semesters,
+    filter_subjects, STAFF_FEEDBACK, TeacherSubjectChoiceCreateView,
+    TeacherSubjectChoiceUpdateView)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -95,6 +97,12 @@ urlpatterns = [
     path('seatplan/', include('seatplan.urls')),
 
     # path('routine/', include('app.urls')),
+# Teacher subject select
+    path('subject-choice/create/', TeacherSubjectChoiceCreateView.as_view(), name='subject_choice_create'),
+    path('subject-choice/update/<int:pk>/', TeacherSubjectChoiceUpdateView.as_view(), name='subject_choice_update'),
+    path('filter-semester-types/', filter_semester_types, name='filter_semester_types'),
+    path('filter-semesters/', filter_semesters, name='filter_semesters'),
+    path('filter-subjects/', filter_subjects, name='filter_subjects'),
 
 
 

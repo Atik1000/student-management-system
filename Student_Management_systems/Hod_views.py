@@ -259,6 +259,7 @@ def VIEW_STAFF(request):
         'staff': staff,
     }
     return render(request, 'Hod/view_staff.html', context)
+
 @login_required(login_url='/')
 def EDIT_STAFF(request, id):
     staff = get_object_or_404(Staff, id=id)

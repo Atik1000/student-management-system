@@ -105,6 +105,22 @@
         "documentation": {}
     },
     {
+        "label": "get_object_or_404",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -281,7 +297,31 @@
         "documentation": {}
     },
     {
+        "label": "TeacherSubjectChoice",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "CustomUser",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Staff",
         "importPath": "app.models",
         "description": "app.models",
         "isExtraImport": true,
@@ -386,6 +426,22 @@
     },
     {
         "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "SemesterType",
         "importPath": "course.models",
         "description": "course.models",
         "isExtraImport": true,
@@ -401,6 +457,22 @@
         "documentation": {}
     },
     {
+        "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "SemesterType",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
         "label": "Department",
         "importPath": "course.models",
         "description": "course.models",
@@ -410,6 +482,14 @@
     },
     {
         "label": "Semester",
+        "importPath": "course.models",
+        "description": "course.models",
+        "isExtraImport": true,
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "SemesterType",
         "importPath": "course.models",
         "description": "course.models",
         "isExtraImport": true,
@@ -521,11 +601,27 @@
         "documentation": {}
     },
     {
+        "label": "TeacherSubjectChoiceForm",
+        "importPath": "app.forms",
+        "description": "app.forms",
+        "isExtraImport": true,
+        "detail": "app.forms",
+        "documentation": {}
+    },
+    {
         "label": "LoginRequiredMixin",
         "importPath": "django.contrib.auth.mixins",
         "description": "django.contrib.auth.mixins",
         "isExtraImport": true,
         "detail": "django.contrib.auth.mixins",
+        "documentation": {}
+    },
+    {
+        "label": "reverse_lazy",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
         "documentation": {}
     },
     {
@@ -666,6 +762,22 @@
     },
     {
         "label": "DetailView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "CreateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "UpdateView",
         "importPath": "django.views.generic",
         "description": "django.views.generic",
         "isExtraImport": true,
@@ -1137,6 +1249,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -1257,7 +1385,79 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
@@ -1393,6 +1593,14 @@
         "documentation": {}
     },
     {
+        "label": "UniqueConstraint",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
         "label": "Sum",
         "importPath": "django.db.models",
         "description": "django.db.models",
@@ -1438,6 +1646,23 @@
         "description": "django.db.models",
         "isExtraImport": true,
         "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "django.http",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.http",
+        "description": "django.http",
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
         "documentation": {}
     },
     {
@@ -1570,7 +1795,63 @@
         "documentation": {}
     },
     {
+        "label": "filter_semester_types",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_semesters",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_subjects",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
         "label": "STAFF_FEEDBACK",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSubjectChoiceCreateView",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSubjectChoiceUpdateView",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_semester_types",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_subjects",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "isExtraImport": true,
@@ -1734,11 +2015,11 @@
         "documentation": {}
     },
     {
-        "label": "forms",
-        "importPath": "django",
-        "description": "django",
+        "label": "ValidationError",
+        "importPath": "django.forms",
+        "description": "django.forms",
         "isExtraImport": true,
-        "detail": "django",
+        "detail": "django.forms",
         "documentation": {}
     },
     {
@@ -1787,14 +2068,6 @@
         "description": "django",
         "isExtraImport": true,
         "detail": "django",
-        "documentation": {}
-    },
-    {
-        "label": "ValidationError",
-        "importPath": "django.forms",
-        "description": "django.forms",
-        "isExtraImport": true,
-        "detail": "django.forms",
         "documentation": {}
     },
     {
@@ -2114,6 +2387,24 @@
         "documentation": {}
     },
     {
+        "label": "TeacherSubjectChoiceCreateView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "class TeacherSubjectChoiceCreateView(CreateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\nclass TeacherSubjectChoiceUpdateView(UpdateView):",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSubjectChoiceUpdateView",
+        "kind": 6,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "class TeacherSubjectChoiceUpdateView(UpdateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\ndef filter_semester_types(request):",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
         "label": "HOME",
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
@@ -2173,6 +2464,33 @@
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "peekOfCode": "def STAFF_FEEDBACK_SAVE(request):\n    if  request.method == 'POST':\n        feedback = request.POST.get('feedback')\n        staff = Staff.objects.get(admin = request.user.id )\n        feedback=Staff_Feedback(\n            staff_id = staff,\n            feedback = feedback,\n            feedback_reply = \" \",\n        )\n        feedback.save()",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_semester_types",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def filter_semester_types(request):\n    department_id = request.GET.get('department_id')\n    semester_types = SemesterType.objects.filter(type_semesters__department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for semester_type in semester_types:\n        options += f'<option value=\"{semester_type.id}\">{semester_type.get_semester_type_name_display()}</option>'\n    return JsonResponse({'options': options})\ndef filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    department_id = request.GET.get('department_id')",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_semesters",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    department_id = request.GET.get('department_id')\n    semesters = Semester.objects.filter(semester_type_id=semester_type_id, department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for semester in semesters:\n        options += f'<option value=\"{semester.id}\">{semester.name}</option>'\n    return JsonResponse({'options': options})\ndef filter_subjects(request):\n    semester_id = request.GET.get('semester_id')",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_subjects",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def filter_subjects(request):\n    semester_id = request.GET.get('semester_id')\n    department_id = request.GET.get('department_id')\n    subjects = Subject.objects.filter(semester_id=semester_id, department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for subject in subjects:\n        options += f'<option value=\"{subject.id}\">{subject.sub_name}</option>'\n    return JsonResponse({'options': options})",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2627,6 +2945,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0023_alter_routine_unique_together_teachersubjectchoice",
+        "description": "app.migrations.0023_alter_routine_unique_together_teachersubjectchoice",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0009_semestertype_subject_semester_semester_semester_type'),\n        ('app', '0022_staff_feedback'),\n    ]\n    operations = [\n        migrations.AlterUniqueTogether(\n            name='routine',\n            unique_together=set(),\n        ),",
+        "detail": "app.migrations.0023_alter_routine_unique_together_teachersubjectchoice",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2659,6 +2986,15 @@
         "importPath": "app.forms",
         "description": "app.forms",
         "peekOfCode": "class RoutineForm(forms.ModelForm):\n    class Meta:\n        model = Routine\n        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']  # Removed 'teacher'\n        widgets = {\n            'semester': forms.Select(attrs={'class': 'form-control'}),\n            'subject': forms.Select(attrs={'class': 'form-control'}),\n            'day': forms.Select(attrs={'class': 'form-control'}),\n            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),\n            'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),",
+        "detail": "app.forms",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSubjectChoiceForm",
+        "kind": 6,
+        "importPath": "app.forms",
+        "description": "app.forms",
+        "peekOfCode": "class TeacherSubjectChoiceForm(forms.ModelForm):\n    class Meta:\n        model = TeacherSubjectChoice\n        fields = ['department', 'semester_type', 'semester', 'subject']\n    def __init__(self, *args, **kwargs):\n        staff = kwargs.pop('staff', None)\n        super(TeacherSubjectChoiceForm, self).__init__(*args, **kwargs)\n        # Initial queryset for semester types and semesters is empty\n        self.fields['semester_type'].queryset = SemesterType.objects.none()\n        self.fields['semester'].queryset = Semester.objects.none()",
         "detail": "app.forms",
         "documentation": {}
     },
@@ -2731,6 +3067,15 @@
         "importPath": "app.models",
         "description": "app.models",
         "peekOfCode": "class Routine(models.Model):\n    DAY_CHOICES = [\n        ('Sun', 'Sunday'),\n        ('Mon', 'Monday'),\n        ('Tue', 'Tuesday'),\n        ('Wed', 'Wednesday'),\n        ('Thu', 'Thursday'),\n        ('Fri', 'Friday'),\n    ]\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='routines')",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "TeacherSubjectChoice",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class TeacherSubjectChoice(models.Model):\n    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')\n    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')\n    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')\n    # batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='subject_choices')\n    def __str__(self):\n        return f\"{self.staff} - {self.subject} ({self.semester})\"",
         "detail": "app.models",
         "documentation": {}
     },
@@ -2816,6 +3161,42 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "course.migrations.0009_semestertype_subject_semester_semester_semester_type",
+        "description": "course.migrations.0009_semestertype_subject_semester_semester_semester_type",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0008_remove_teacher_department_delete_routine_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='SemesterType',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('semester_type_name', models.CharField(choices=[('BI', 'Bi-Semester'), ('TRI', 'Tri-Semester')], max_length=3, unique=True)),",
+        "detail": "course.migrations.0009_semestertype_subject_semester_semester_semester_type",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "course.migrations.0010_subject_semester_type",
+        "description": "course.migrations.0010_subject_semester_type",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0009_semestertype_subject_semester_semester_semester_type'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='subject',\n            name='semester_type',\n            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='subject_type_semesters', to='course.semestertype'),\n            preserve_default=False,",
+        "detail": "course.migrations.0010_subject_semester_type",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "course.migrations.0011_remove_subject_semester_type",
+        "description": "course.migrations.0011_remove_subject_semester_type",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0010_subject_semester_type'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='subject',\n            name='semester_type',\n        ),\n    ]",
+        "detail": "course.migrations.0011_remove_subject_semester_type",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "course.migrations.0012_alter_semester_name_and_more",
+        "description": "course.migrations.0012_alter_semester_name_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0011_remove_subject_semester_type'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='semester',\n            name='name',\n            field=models.CharField(max_length=20),\n        ),",
+        "detail": "course.migrations.0012_alter_semester_name_and_more",
+        "documentation": {}
+    },
+    {
         "label": "getattr_custom",
         "kind": 2,
         "importPath": "course.templatetags.custom_filters",
@@ -2838,7 +3219,7 @@
         "kind": 6,
         "importPath": "course.admin",
         "description": "course.admin",
-        "peekOfCode": "class SubjectAdmin(admin.ModelAdmin):\n    list_display = ('sub_code', 'sub_name', 'credit')\n    search_fields = ('sub_code', 'sub_name')\nclass UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)",
+        "peekOfCode": "class SubjectAdmin(admin.ModelAdmin):\n    list_display = ('sub_code', 'sub_name', 'credit')\n    search_fields = ('sub_code', 'sub_name')\nclass UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(SemesterType)",
         "detail": "course.admin",
         "documentation": {}
     },
@@ -2847,7 +3228,7 @@
         "kind": 6,
         "importPath": "course.admin",
         "description": "course.admin",
-        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)",
+        "peekOfCode": "class UserModel(UserAdmin):\n    list_display = ['username','user_type']\nadmin.site.register(Program)\nadmin.site.register(Department)\nadmin.site.register(Semester)\nadmin.site.register(Course)\nadmin.site.register(SemesterType)",
         "detail": "course.admin",
         "documentation": {}
     },
@@ -2883,7 +3264,7 @@
         "kind": 6,
         "importPath": "course.forms",
         "description": "course.forms",
-        "peekOfCode": "class SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name']\n        widgets = {\n            'program': forms.Select(attrs={'class': 'form-control', 'id': 'id_program'}),\n            'department': forms.Select(attrs={'class': 'form-control', 'id': 'id_department'}),\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n        }\nclass CourseForm(forms.ModelForm):",
+        "peekOfCode": "class SemesterForm(forms.ModelForm):\n    class Meta:\n        model = Semester\n        fields = ['program', 'department', 'name', 'semester_type']\n        widgets = {\n            'program': forms.Select(attrs={'class': 'form-control', 'id': 'id_program'}),\n            'department': forms.Select(attrs={'class': 'form-control', 'id': 'id_department'}),\n            'name': forms.TextInput(attrs={'class': 'form-control'}),\n            'semester_type': forms.Select(attrs={'class': 'form-control', 'id': 'id_semester_type'}),\n        }",
         "detail": "course.forms",
         "documentation": {}
     },
@@ -2901,7 +3282,7 @@
         "kind": 6,
         "importPath": "course.forms",
         "description": "course.forms",
-        "peekOfCode": "class SubjectForm(forms.ModelForm):\n    class Meta:\n        model = Subject\n        fields = ['sub_code', 'sub_name', 'credit']\n        widgets = {\n            'sub_code': forms.TextInput(attrs={'class': 'form-control'}),\n            'sub_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'credit': forms.NumberInput(attrs={'class': 'form-control'}),\n        }",
+        "peekOfCode": "class SubjectForm(forms.ModelForm):\n    class Meta:\n        model = Subject\n        fields = ['sub_code', 'sub_name', 'credit', 'semester']\n        widgets = {\n            'sub_code': forms.TextInput(attrs={'class': 'form-control'}),\n            'sub_name': forms.TextInput(attrs={'class': 'form-control'}),\n            'credit': forms.NumberInput(attrs={'class': 'form-control'}),\n            'semester': forms.Select(attrs={'class': 'form-control', 'id': 'id_semester'}),\n        }",
         "detail": "course.forms",
         "documentation": {}
     },
@@ -2919,16 +3300,16 @@
         "kind": 6,
         "importPath": "course.models",
         "description": "course.models",
-        "peekOfCode": "class Department(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='department')\n    dept_name = models.CharField(max_length=20)\n    def __str__(self):\n        return f\"{self.dept_name}\"\nclass Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\n    def __str__(self):",
+        "peekOfCode": "class Department(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='department')\n    dept_name = models.CharField(max_length=20)\n    def __str__(self):\n        return f\"{self.dept_name}\"\nclass SemesterType(models.Model):\n    SEMESTER_TYPE_CHOICES = [\n        ('BI', 'Bi-Semester'),\n        ('TRI', 'Tri-Semester'),\n    ]",
         "detail": "course.models",
         "documentation": {}
     },
     {
-        "label": "Subject",
+        "label": "SemesterType",
         "kind": 6,
         "importPath": "course.models",
         "description": "course.models",
-        "peekOfCode": "class Subject(models.Model):\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\n    def __str__(self):\n        return f\"{self.sub_name}\"\nclass Semester(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='semesters')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='semesters')\n    name = models.CharField(max_length=20, unique=True)",
+        "peekOfCode": "class SemesterType(models.Model):\n    SEMESTER_TYPE_CHOICES = [\n        ('BI', 'Bi-Semester'),\n        ('TRI', 'Tri-Semester'),\n    ]\n    semester_type_name = models.CharField(max_length=3, choices=SEMESTER_TYPE_CHOICES, unique=True)\n    def __str__(self):\n        return self.get_semester_type_name_display()\nclass Semester(models.Model):\n    program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='semesters')",
         "detail": "course.models",
         "documentation": {}
     },
@@ -2937,7 +3318,16 @@
         "kind": 6,
         "importPath": "course.models",
         "description": "course.models",
-        "peekOfCode": "class Semester(models.Model):\n    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='semesters')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='semesters')\n    name = models.CharField(max_length=20, unique=True)\n    def __str__(self):\n        return f\"{self.program} - {self.name}\"\nclass Course(models.Model):\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='courses')\n    course_code_1 = models.CharField(max_length=10, null=True, blank=True)\n    course_name_1 = models.CharField(max_length=100, null=True, blank=True)",
+        "peekOfCode": "class Semester(models.Model):\n    program = models.ForeignKey('Program', on_delete=models.CASCADE, related_name='semesters')\n    department = models.ForeignKey('Department', on_delete=models.CASCADE, related_name='semesters')\n    name = models.CharField(max_length=20)\n    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='type_semesters')\n    class Meta:\n        constraints = [\n            UniqueConstraint(fields=['program', 'department', 'name'], name='unique_program_department_semester')\n        ]\n    def __str__(self):",
+        "detail": "course.models",
+        "documentation": {}
+    },
+    {
+        "label": "Subject",
+        "kind": 6,
+        "importPath": "course.models",
+        "description": "course.models",
+        "peekOfCode": "class Subject(models.Model):\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subjects')\n    sub_code = models.CharField(max_length=10, null=True, blank=True)\n    sub_name = models.CharField(max_length=100, null=True, blank=True)\n    credit = models.IntegerField(null=True, blank=True)\n    def __str__(self):\n        return f\"{self.sub_name}\"\nclass Course(models.Model):\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='courses')\n    course_code_1 = models.CharField(max_length=10, null=True, blank=True)",
         "detail": "course.models",
         "documentation": {}
     },
@@ -3063,7 +3453,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class CourseUpdateView(UpdateView):\n    model = Course\n    form_class = CourseForm\n    template_name = 'course/course_form.html'\n    success_url = reverse_lazy('course_list')\nclass SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):",
+        "peekOfCode": "class CourseUpdateView(UpdateView):\n    model = Course\n    form_class = CourseForm\n    template_name = 'course/course_form.html'\n    success_url = reverse_lazy('course_list')\n# subject \nclass SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3072,7 +3462,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\nclass SubjectUpdateView(UpdateView):",
+        "peekOfCode": "class SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\n# def filter_semesters(request):",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3081,7 +3471,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\nclass SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')",
+        "peekOfCode": "class SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\n# def filter_semesters(request):\n#     semester_type_id = request.GET.get('semester_type_id')\n#     print('Received Semester Type ID:', semester_type_id)  # Debugging line\n#     if semester_type_id:\n#         try:",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3090,7 +3480,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')",
+        "peekOfCode": "class SubjectUpdateView(UpdateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\n# Curriculam \ndef program_list_view(request):\n    programs = Program.objects.all()\n    return render(request, 'curriculum/program_list.html', {'programs': programs})\ndef department_list_view(request, program_id):",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3100,6 +3490,60 @@
         "importPath": "course.views",
         "description": "course.views",
         "peekOfCode": "def filter_departments(request):\n    program_id = request.GET.get('program_id')\n    departments = Department.objects.filter(program_id=program_id)\n    options = '<option value=\"\">---------</option>'\n    for department in departments:\n        options += f'<option value=\"{department.id}\">{department.dept_name}</option>'\n    return JsonResponse({'options': options})\nclass SemesterUpdateView(UpdateView):\n    model = Semester\n    form_class = SemesterForm",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "program_list_view",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def program_list_view(request):\n    programs = Program.objects.all()\n    return render(request, 'curriculum/program_list.html', {'programs': programs})\ndef department_list_view(request, program_id):\n    program = get_object_or_404(Program, id=program_id)\n    departments = Department.objects.filter(program=program)\n    return render(request, 'curriculum/department_list.html', {'program': program, 'departments': departments})\ndef semester_type_list_view(request, department_id):\n    department = get_object_or_404(Department, id=department_id)\n    semester_types = SemesterType.objects.filter(type_semesters__department=department).distinct()",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "department_list_view",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def department_list_view(request, program_id):\n    program = get_object_or_404(Program, id=program_id)\n    departments = Department.objects.filter(program=program)\n    return render(request, 'curriculum/department_list.html', {'program': program, 'departments': departments})\ndef semester_type_list_view(request, department_id):\n    department = get_object_or_404(Department, id=department_id)\n    semester_types = SemesterType.objects.filter(type_semesters__department=department).distinct()\n    return render(request, 'curriculum/semester_type_list.html', {'department': department, 'semester_types': semester_types})\ndef semester_list_view(request, department_id, semester_type_id):\n    department = get_object_or_404(Department, id=department_id)",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "semester_type_list_view",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def semester_type_list_view(request, department_id):\n    department = get_object_or_404(Department, id=department_id)\n    semester_types = SemesterType.objects.filter(type_semesters__department=department).distinct()\n    return render(request, 'curriculum/semester_type_list.html', {'department': department, 'semester_types': semester_types})\ndef semester_list_view(request, department_id, semester_type_id):\n    department = get_object_or_404(Department, id=department_id)\n    semester_type = get_object_or_404(SemesterType, id=semester_type_id)\n    semesters = Semester.objects.filter(department=department, semester_type=semester_type)\n    return render(request, 'curriculum/semester_list.html', {'department': department, 'semester_type': semester_type, 'semesters': semesters})\ndef subject_list_view(request, semester_id):",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "semester_list_view",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def semester_list_view(request, department_id, semester_type_id):\n    department = get_object_or_404(Department, id=department_id)\n    semester_type = get_object_or_404(SemesterType, id=semester_type_id)\n    semesters = Semester.objects.filter(department=department, semester_type=semester_type)\n    return render(request, 'curriculum/semester_list.html', {'department': department, 'semester_type': semester_type, 'semesters': semesters})\ndef subject_list_view(request, semester_id):\n    semester = get_object_or_404(Semester, id=semester_id)\n    subjects = Subject.objects.filter(semester=semester)\n    return render(request, 'curriculum/subject_list.html', {'semester': semester, 'subjects': subjects})\ndef semester_type_detail(request, semester_type_id):",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "subject_list_view",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def subject_list_view(request, semester_id):\n    semester = get_object_or_404(Semester, id=semester_id)\n    subjects = Subject.objects.filter(semester=semester)\n    return render(request, 'curriculum/subject_list.html', {'semester': semester, 'subjects': subjects})\ndef semester_type_detail(request, semester_type_id):\n    semester_type = get_object_or_404(SemesterType, id=semester_type_id)\n    semesters = Semester.objects.filter(semester_type=semester_type)\n    context = {\n        'semester_type': semester_type,\n        'semesters': semesters,",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "semester_type_detail",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def semester_type_detail(request, semester_type_id):\n    semester_type = get_object_or_404(SemesterType, id=semester_type_id)\n    semesters = Semester.objects.filter(semester_type=semester_type)\n    context = {\n        'semester_type': semester_type,\n        'semesters': semesters,\n    }\n    return render(request, 'curriculum/semester_type_details.html', context)",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3119,6 +3563,15 @@
         "description": "question.migrations.0002_remove_exam_course_code_remove_exam_university_name_and_more",
         "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0007_remove_teacher_staff'),\n        ('question', '0001_initial'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='exam',\n            name='course_code',\n        ),",
         "detail": "question.migrations.0002_remove_exam_course_code_remove_exam_university_name_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "question.migrations.0003_exam_teacher",
+        "description": "question.migrations.0003_exam_teacher",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('app', '0023_alter_routine_unique_together_teachersubjectchoice'),\n        ('question', '0002_remove_exam_course_code_remove_exam_university_name_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='exam',\n            name='teacher',\n            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='exam', to='app.staff'),",
+        "detail": "question.migrations.0003_exam_teacher",
         "documentation": {}
     },
     {
@@ -3153,7 +3606,7 @@
         "kind": 6,
         "importPath": "question.models",
         "description": "question.models",
-        "peekOfCode": "class Exam(models.Model):\n    EXAM_TYPES = [\n        ('Mid', 'Mid Exam'),\n        ('Final', 'Final Exam'),\n    ]\n    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')\n    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')\n    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')\n    batch_number = models.CharField(max_length=20, null=True, blank=True)\n    name = models.CharField(max_length=5, choices=EXAM_TYPES, default='Mid')",
+        "peekOfCode": "class Exam(models.Model):\n    EXAM_TYPES = [\n        ('Mid', 'Mid Exam'),\n        ('Final', 'Final Exam'),\n    ]\n    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='exam')\n    subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')\n    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')\n    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')\n    batch_number = models.CharField(max_length=20, null=True, blank=True)",
         "detail": "question.models",
         "documentation": {}
     },
@@ -3171,7 +3624,7 @@
         "kind": 6,
         "importPath": "question.views",
         "description": "question.views",
-        "peekOfCode": "class ExamCreateView(View):\n    model = Exam\n    form_class = ExamForm\n    template_name = 'exam/exam_form.html'\n    def get(self, request,*args,**kwargs):\n        form=self.form_class()\n        context={\n            'form':form\n        }\n        return render(request,self.template_name,context)",
+        "peekOfCode": "class ExamCreateView(View):\n    model = Exam\n    form_class = ExamForm\n    template_name = 'exam/exam_form.html'\n    def get(self, request, *args, **kwargs):\n        form = self.form_class()\n        context = {\n            'form': form\n        }\n        return render(request, self.template_name, context)",
         "detail": "question.views",
         "documentation": {}
     },

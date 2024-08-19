@@ -1,5 +1,6 @@
+import django.http
 from django.shortcuts import render,redirect
-from app.models import Staff, Staff_Feedback, Staff_leave, Staff_Notification
+from app.models import Staff, Staff_Feedback, Staff_leave, Staff_Notification, TeacherSubjectChoice
 from django.contrib import messages
 from Student_Management_systems.Hod_views import SAVE_NOTIFICATION
 
@@ -90,3 +91,63 @@ def STAFF_FEEDBACK_SAVE(request):
         feedback.save()
         return redirect('staff-feedback') 
     
+
+
+
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView
+from app.forms import TeacherSubjectChoiceForm
+from course.models import Semester, SemesterType, Subject
+
+from django.http import JsonResponse
+
+
+class TeacherSubjectChoiceCreateView(CreateView):
+    model = TeacherSubjectChoice
+    form_class = TeacherSubjectChoiceForm
+    template_name = 'subject/teacher_subject_choice_form.html'
+    success_url = reverse_lazy('subject_choice_list')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['staff'] = self.request.user.staff
+        return kwargs
+
+class TeacherSubjectChoiceUpdateView(UpdateView):
+    model = TeacherSubjectChoice
+    form_class = TeacherSubjectChoiceForm
+    template_name = 'subject/teacher_subject_choice_form.html'
+    success_url = reverse_lazy('subject_choice_list')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['staff'] = self.request.user.staff
+        return kwargs
+
+
+
+def filter_semester_types(request):
+    department_id = request.GET.get('department_id')
+    semester_types = SemesterType.objects.filter(type_semesters__department_id=department_id).distinct()
+    options = '<option value="">---------</option>'
+    for semester_type in semester_types:
+        options += f'<option value="{semester_type.id}">{semester_type.get_semester_type_name_display()}</option>'
+    return JsonResponse({'options': options})
+
+def filter_semesters(request):
+    semester_type_id = request.GET.get('semester_type_id')
+    department_id = request.GET.get('department_id')
+    semesters = Semester.objects.filter(semester_type_id=semester_type_id, department_id=department_id).distinct()
+    options = '<option value="">---------</option>'
+    for semester in semesters:
+        options += f'<option value="{semester.id}">{semester.name}</option>'
+    return JsonResponse({'options': options})
+
+def filter_subjects(request):
+    semester_id = request.GET.get('semester_id')
+    department_id = request.GET.get('department_id')
+    subjects = Subject.objects.filter(semester_id=semester_id, department_id=department_id).distinct()
+    options = '<option value="">---------</option>'
+    for subject in subjects:
+        options += f'<option value="{subject.id}">{subject.sub_name}</option>'
+    return JsonResponse({'options': options})

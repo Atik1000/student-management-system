@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from course.models import Department, Semester, Subject
+from app.models import Staff
 
 class Exam(models.Model):
     EXAM_TYPES = [
@@ -8,6 +9,8 @@ class Exam(models.Model):
         ('Final', 'Final Exam'),
     ]
 
+
+    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='exam')
     subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')
     department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')
     semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')
@@ -41,7 +44,7 @@ class Exam(models.Model):
     q6_marks = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.subject_name} - {self.course_code} - {self.batch_number}"
+        return f"{self.subject_name}"
     
     def get_absolute_url(self):
         return reverse('exam-detail', kwargs={'pk': self.pk})

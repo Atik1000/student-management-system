@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/datatables.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">
+<script>
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>
+
+<div class="content container-fluid">
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Departments in {{ program.get_name_display }}</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'program_list_curriculam' %}">Programs</a></li>
+                    <li class="breadcrumb-item active">Departments</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="table_id" class="table table-hover table-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Department Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for department in departments %}
+                                <tr>
+                                    <td>{{ department.id }}</td>
+                                    <td>{{ department.dept_name }}</td>
+                                    <td>
+                                        <a href="{% url 'semester_type_list_curriculam' department.id %}" class="btn btn-sm btn-info">
+                                            <i class="fas fa-eye"></i> View Semester Types
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

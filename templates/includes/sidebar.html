@@ -63,12 +63,9 @@
                </ul>
             </li>
 
-            <li class="submenu">
-               <a href="#"><i class="fas fa-book-reader"></i> <span> Exam Question</span> <span class="menu-arrow"></span></a>
-               <ul>
-                  <li><a href="{% url 'exam-add' %}">Create Question </a></li>
-                  <li><a href="{% url 'exam-list' %}">View Questions </a></li>
-               </ul>
+
+            <li>
+               <a href="{% url 'program_list_curriculam' %}"><i class="fas fa-envelope"></i> <span> Curiculam</span></a>
             </li>
 
             <li class="submenu">
@@ -125,9 +122,9 @@
                <a href="#"><i class="fas fa-building"></i> <span> Routine </span> <span class="menu-arrow"></span></a>
                <ul>
 
-                  <li><a href="{% url 'routine-add' %}">Add Routine </a></li>
+                  <li><a href="{% url 'subject_choice_create' %}">Add Routine </a></li>
 
-                  <li><a href="{% url 'view_staff' %}">View Staff</a></li>
+                  <!-- <li><a href="{% url 'view_staff' %}">View Staff</a></li> -->
 
 
                </ul>

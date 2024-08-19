@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from course.models import Department, Semester, Subject
+from course.models import Department, Semester, SemesterType, Subject
 from datetime import time
+# from seatplan.models import Batch
 
 
 
@@ -170,3 +171,16 @@ class Routine(models.Model):
 
     def __str__(self):
         return f"{self.semester} - {self.subject} - {self.teacher} - {self.day} ({self.start_time} - {self.end_time})"
+
+
+
+class TeacherSubjectChoice(models.Model):
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')
+    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')
+    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')
+    # batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='subject_choices')
+    
+    def __str__(self):
+        return f"{self.staff} - {self.subject} ({self.semester})"

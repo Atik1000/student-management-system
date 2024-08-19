@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="mt-5">
+  <h1 class="mb-4">{% if form.instance.pk %}Update Subject Selection{% else %}Select Subject{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        {{ form.department.label_tag }} {{ form.department }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.semester_type.label_tag }} {{ form.semester_type }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        {{ form.semester.label_tag }} {{ form.semester }}
+      </div>
+      <div class="col-md-6 mb-3">
+        {{ form.subject.label_tag }} {{ form.subject }}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function () {
+    $('#id_department').change(function () {
+        var department_id = $(this).val();
+        $.ajax({
+            url: "{% url 'filter_semester_types' %}",
+            data: {
+                'department_id': department_id
+            },
+            success: function (data) {
+                $("#id_semester_type").html(data.options);
+            }
+        });
+    });
+
+    $('#id_semester_type').change(function () {
+        var semester_type_id = $(this).val();
+        var department_id = $('#id_department').val();
+        $.ajax({
+            url: "{% url 'filter_semesters' %}",
+            data: {
+                'semester_type_id': semester_type_id,
+                'department_id': department_id
+            },
+            success: function (data) {
+                $("#id_semester").html(data.options);
+            }
+        });
+    });
+
+    $('#id_semester').change(function () {
+        var semester_id = $(this).val();
+        var department_id = $('#id_department').val();
+        $.ajax({
+            url: "{% url 'filter_subjects' %}",
+            data: {
+                'semester_id': semester_id,
+                'department_id': department_id
+            },
+            success: function (data) {
+                $("#id_subject").html(data.options);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

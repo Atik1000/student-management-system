@@ -9,6 +9,7 @@
     <p class="text-center">{{ exam.department_name.dept_name|default:'' }}</p>
     <p class="text-center">{{ exam.semester_name.name|default:'' }}</p>
     <p class="text-center">Batch number: {{ exam.batch_number|default:'' }}</p>
+    <p class="text-center">{{ exam.name }}</p>
     <div class="exam-info">
         <span>Total Time: {{ exam.time|default:'' }}</span>
         <span class="float-right">Total Marks: {{ exam.marks|default:'' }}</span>

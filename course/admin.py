@@ -20,6 +20,8 @@ admin.site.register(Department)
 admin.site.register(Semester)
 admin.site.register(Course)
 
+admin.site.register(SemesterType)
+
 
 
 

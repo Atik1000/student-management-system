@@ -17,15 +17,15 @@ class DepartmentForm(forms.ModelForm):
             'program': forms.Select(attrs={'class': 'form-control'}),
             'dept_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
-
 class SemesterForm(forms.ModelForm):
     class Meta:
         model = Semester
-        fields = ['program', 'department', 'name']
+        fields = ['program', 'department', 'name', 'semester_type']
         widgets = {
             'program': forms.Select(attrs={'class': 'form-control', 'id': 'id_program'}),
             'department': forms.Select(attrs={'class': 'form-control', 'id': 'id_department'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'semester_type': forms.Select(attrs={'class': 'form-control', 'id': 'id_semester_type'}),
         }
 
 class CourseForm(forms.ModelForm):
@@ -84,13 +84,14 @@ class CourseForm(forms.ModelForm):
 #             routine.save()
 #         return routine
     
-
 class SubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
-        fields = ['sub_code', 'sub_name', 'credit']
+        fields = ['sub_code', 'sub_name', 'credit', 'semester']
         widgets = {
             'sub_code': forms.TextInput(attrs={'class': 'form-control'}),
             'sub_name': forms.TextInput(attrs={'class': 'form-control'}),
             'credit': forms.NumberInput(attrs={'class': 'form-control'}),
+            'semester': forms.Select(attrs={'class': 'form-control', 'id': 'id_semester'}),
         }
+

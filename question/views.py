@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import  UpdateView, DetailView,View,ListView
+from app.models import Staff
 from .models import Exam
 from .froms import ExamForm
 from django.shortcuts import render, get_object_or_404,redirect
@@ -11,28 +12,31 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 # from weasyprint import HTML
 
-
 class ExamCreateView(View):
     model = Exam
     form_class = ExamForm
     template_name = 'exam/exam_form.html'
 
-    def get(self, request,*args,**kwargs):
-        form=self.form_class()
-        context={
-            'form':form
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        context = {
+            'form': form
         }
-        return render(request,self.template_name,context)
+        return render(request, self.template_name, context)
     
-    def post(self, request,*args,**kwargs):
-        form=self.form_class(request.POST)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            obj=form.save()
-            return redirect('exam-detail',obj.pk)
-        context={
-            'form':form
+            obj = form.save(commit=False)
+            staff = Staff.objects.get(admin=request.user.id)
+            obj.teacher = staff
+            obj.save()
+            return redirect('exam-detail', obj.pk)
+        context = {
+            'form': form
         }
-        return render(request,self.template_name,context)
+        return render(request, self.template_name, context)
+
  
 
 

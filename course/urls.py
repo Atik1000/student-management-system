@@ -1,8 +1,11 @@
 from django.urls import path
-from .views import (CourseCreateView, CourseListView, CourseUpdateView, DepartmentCreateView,
-    DepartmentListView, DepartmentUpdateView, filter_departments, ProgramCreateView,
-    ProgramListView, SemesterCreateView, SemesterDetailView, SemesterListView, SemesterUpdateView,
-    SubjectCreateView, SubjectListView, SubjectUpdateView)
+from Student_Management_systems.Staff_Views import filter_semester_types, filter_subjects
+from .views import (CourseCreateView, CourseListView, CourseUpdateView, department_list_view,
+    DepartmentCreateView, DepartmentListView, DepartmentUpdateView, filter_departments,
+    program_list_view, ProgramCreateView, ProgramListView, semester_list_view,
+    semester_type_detail, semester_type_list_view, SemesterCreateView, SemesterDetailView,
+    SemesterListView, SemesterUpdateView, subject_list_view, SubjectCreateView, SubjectListView,
+    SubjectUpdateView)
 
 urlpatterns = [
     # Program URLs
@@ -31,5 +34,16 @@ urlpatterns = [
     path('subject', SubjectListView.as_view(), name='subject_list'),
     path('subject/create/', SubjectCreateView.as_view(), name='subject_create'),
     path('subject/<int:pk>/edit/', SubjectUpdateView.as_view(), name='subject_update'),
+    # path('filter-semesters/', filter_semesters, name='filter_semesters'),
+
+    # curriculam 
+    path('curriculam_programs/',program_list_view, name='program_list_curriculam'),
+    path('curriculam_programs/<int:program_id>/departments/', department_list_view, name='department_list_curriculam'),
+    path('curriculam_departments/<int:department_id>/semester-types/',semester_type_list_view, name='semester_type_list_curriculam'),
+    path('curriculam_departments/<int:department_id>/semester-types/<int:semester_type_id>/semesters/',semester_list_view, name='semester_list_curriculam'),
+    path('curriculam_semesters/<int:semester_id>/subjects/',subject_list_view, name='subject_list_curriculam'),
+    path('semester-type/<int:semester_type_id>/', semester_type_detail, name='semester_type_detail'),
+
+
 
 ]

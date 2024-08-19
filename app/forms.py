@@ -1,35 +1,10 @@
-from django import forms
-from course.models import Subject
-from .models import  Staff,Routine
-
-
-
-# class StaffForm(forms.ModelForm):
-#     class Meta:
-#         model = Staff
-#         fields = ['profile_pic', 'first_name', 'last_name', 'email', 'username', 'password', 'address', 'department', 'rank', 'gender']
-#         widgets = {
-#             'profile_pic': forms.FileInput(attrs={'class': 'form-control'}),
-#             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-#             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-#             'email': forms.EmailInput(attrs={'class': 'form-control'}),
-#             'username': forms.TextInput(attrs={'class': 'form-control'}),
-#             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
-#             'address': forms.Textarea(attrs={'class': 'form-control'}),
-#             'department': forms.Select(attrs={'class': 'form-control'}),
-#             'rank': forms.Select(attrs={'class': 'form-control'}),
-#             'gender': forms.Select(attrs={'class': 'form-control'}),
-#         }
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['profile_pic'].label = 'Profile Picture'
 
 
 from django.forms import ValidationError
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Routine, Staff, Subject
+from course.models import Semester, SemesterType
+from .models import Routine, Staff, Subject, TeacherSubjectChoice
 class RoutineForm(forms.ModelForm):
     class Meta:
         model = Routine
@@ -52,3 +27,54 @@ class RoutineForm(forms.ModelForm):
         # Additional custom validation (if needed) can be added here.
 
         return cleaned_data
+
+
+class TeacherSubjectChoiceForm(forms.ModelForm):
+    class Meta:
+        model = TeacherSubjectChoice
+        fields = ['department', 'semester_type', 'semester', 'subject']
+
+    def __init__(self, *args, **kwargs):
+        staff = kwargs.pop('staff', None)
+        super(TeacherSubjectChoiceForm, self).__init__(*args, **kwargs)
+
+        # Initial queryset for semester types and semesters is empty
+        self.fields['semester_type'].queryset = SemesterType.objects.none()
+        self.fields['semester'].queryset = Semester.objects.none()
+        self.fields['subject'].queryset = Subject.objects.none()
+
+        # If editing an existing instance
+        if self.instance and self.instance.pk:
+            department_id = self.instance.department_id
+            semester_type_id = self.instance.semester_type_id
+            semester_id = self.instance.semester_id
+
+            self.fields['semester_type'].queryset = SemesterType.objects.filter(
+                type_semesters__department_id=department_id
+            ).distinct()
+
+            self.fields['semester'].queryset = Semester.objects.filter(
+                semester_type_id=semester_type_id,
+                department_id=department_id
+            ).distinct()
+
+            self.fields['subject'].queryset = Subject.objects.filter(
+                semester_id=semester_id,
+                semester_type_id=semester_type_id,
+                department_id=department_id
+            ).distinct()
+
+        # Exclude subjects already selected by higher-ranked teachers
+        if staff:
+            higher_ranks = ['CH', 'AP', 'AS', 'LE']
+            staff_rank_index = higher_ranks.index(staff.rank)
+            higher_ranks = higher_ranks[:staff_rank_index]
+
+            # Ensure you only access the semester if it exists
+            if self.instance and self.instance.pk and self.instance.semester:
+                selected_subjects = TeacherSubjectChoice.objects.filter(
+                    semester=self.instance.semester,
+                    subject__in=Subject.objects.filter(department=self.instance.department)
+                ).filter(staff__rank__in=higher_ranks).values_list('subject_id', flat=True)
+
+                self.fields['subject'].queryset = self.fields['subject'].queryset.exclude(id__in=selected_subjects)
