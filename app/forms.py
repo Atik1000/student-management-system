@@ -29,52 +29,49 @@ class RoutineForm(forms.ModelForm):
         return cleaned_data
 
 
+
+from .models import TeacherSubjectChoice, Department, SemesterType, Semester, Subject, Intake
+
+
+
 class TeacherSubjectChoiceForm(forms.ModelForm):
     class Meta:
         model = TeacherSubjectChoice
-        fields = ['department', 'semester_type', 'semester', 'subject']
+        fields = ['department', 'semester_type', 'semester', 'batch', 'subject']
 
     def __init__(self, *args, **kwargs):
         staff = kwargs.pop('staff', None)
-        super(TeacherSubjectChoiceForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-        # Initial queryset for semester types and semesters is empty
-        self.fields['semester_type'].queryset = SemesterType.objects.none()
-        self.fields['semester'].queryset = Semester.objects.none()
-        self.fields['subject'].queryset = Subject.objects.none()
+        # Initially show all departments and semester types
+        self.fields['department'].queryset = Department.objects.all()
+        self.fields['semester_type'].queryset = SemesterType.objects.all()
 
-        # If editing an existing instance
-        if self.instance and self.instance.pk:
-            department_id = self.instance.department_id
-            semester_type_id = self.instance.semester_type_id
-            semester_id = self.instance.semester_id
-
-            self.fields['semester_type'].queryset = SemesterType.objects.filter(
-                type_semesters__department_id=department_id
-            ).distinct()
-
+        # Filter semesters based on department and semester type
+        if 'department' in self.data and 'semester_type' in self.data:
+            department_id = int(self.data.get('department'))
+            semester_type_id = int(self.data.get('semester_type'))
             self.fields['semester'].queryset = Semester.objects.filter(
-                semester_type_id=semester_type_id,
-                department_id=department_id
-            ).distinct()
+                department_id=department_id, 
+                semester_type_id=semester_type_id
+            )
+        elif self.instance.pk:  # Handle editing of existing instances
+            self.fields['semester'].queryset = Semester.objects.filter(
+                department=self.instance.department,
+                semester_type=self.instance.semester_type
+            )
+        else:
+            self.fields['semester'].queryset = Semester.objects.none()
 
-            self.fields['subject'].queryset = Subject.objects.filter(
-                semester_id=semester_id,
-                semester_type_id=semester_type_id,
-                department_id=department_id
-            ).distinct()
-
-        # Exclude subjects already selected by higher-ranked teachers
-        if staff:
-            higher_ranks = ['CH', 'AP', 'AS', 'LE']
-            staff_rank_index = higher_ranks.index(staff.rank)
-            higher_ranks = higher_ranks[:staff_rank_index]
-
-            # Ensure you only access the semester if it exists
-            if self.instance and self.instance.pk and self.instance.semester:
-                selected_subjects = TeacherSubjectChoice.objects.filter(
-                    semester=self.instance.semester,
-                    subject__in=Subject.objects.filter(department=self.instance.department)
-                ).filter(staff__rank__in=higher_ranks).values_list('subject_id', flat=True)
-
-                self.fields['subject'].queryset = self.fields['subject'].queryset.exclude(id__in=selected_subjects)
+        # Filter batch and subjects based on the selected semester
+        if 'semester' in self.data:
+            semester_id = int(self.data.get('semester'))
+            self.fields['batch'].queryset = Intake.objects.filter(sem_name_id=semester_id)  # Use sem_name_id
+            self.fields['subject'].queryset = Subject.objects.filter(semester_id=semester_id)
+        elif self.instance.pk:
+            # Handle case where editing an instance
+            self.fields['batch'].queryset = Intake.objects.filter(sem_name=self.instance.semester)
+            self.fields['subject'].queryset = Subject.objects.filter(semester=self.instance.semester)
+        else:
+            self.fields['batch'].queryset = Intake.objects.none()
+            self.fields['subject'].queryset = Subject.objects.none()

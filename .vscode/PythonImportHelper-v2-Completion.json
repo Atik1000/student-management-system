@@ -265,6 +265,14 @@
         "documentation": {}
     },
     {
+        "label": "Intake",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "Staff",
         "importPath": "app.models",
         "description": "app.models",
@@ -1265,6 +1273,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -1795,7 +1835,7 @@
         "documentation": {}
     },
     {
-        "label": "filter_semester_types",
+        "label": "load_batches",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "isExtraImport": true,
@@ -1803,7 +1843,7 @@
         "documentation": {}
     },
     {
-        "label": "filter_semesters",
+        "label": "load_semesters",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "isExtraImport": true,
@@ -1811,7 +1851,7 @@
         "documentation": {}
     },
     {
-        "label": "filter_subjects",
+        "label": "load_subjects",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "isExtraImport": true,
@@ -1836,22 +1876,6 @@
     },
     {
         "label": "TeacherSubjectChoiceUpdateView",
-        "importPath": "Student_Management_systems.Staff_Views",
-        "description": "Student_Management_systems.Staff_Views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Staff_Views",
-        "documentation": {}
-    },
-    {
-        "label": "filter_semester_types",
-        "importPath": "Student_Management_systems.Staff_Views",
-        "description": "Student_Management_systems.Staff_Views",
-        "isExtraImport": true,
-        "detail": "Student_Management_systems.Staff_Views",
-        "documentation": {}
-    },
-    {
-        "label": "filter_subjects",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
         "isExtraImport": true,
@@ -2391,7 +2415,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "class TeacherSubjectChoiceCreateView(CreateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\nclass TeacherSubjectChoiceUpdateView(UpdateView):",
+        "peekOfCode": "class TeacherSubjectChoiceCreateView(CreateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\n    def form_valid(self, form):\n        form.instance.staff = self.request.user.staff",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2400,7 +2424,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "class TeacherSubjectChoiceUpdateView(UpdateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\ndef filter_semester_types(request):",
+        "peekOfCode": "class TeacherSubjectChoiceUpdateView(UpdateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\ndef load_semesters(request):",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2468,29 +2492,29 @@
         "documentation": {}
     },
     {
-        "label": "filter_semester_types",
+        "label": "load_semesters",
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def filter_semester_types(request):\n    department_id = request.GET.get('department_id')\n    semester_types = SemesterType.objects.filter(type_semesters__department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for semester_type in semester_types:\n        options += f'<option value=\"{semester_type.id}\">{semester_type.get_semester_type_name_display()}</option>'\n    return JsonResponse({'options': options})\ndef filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    department_id = request.GET.get('department_id')",
+        "peekOfCode": "def load_semesters(request):\n    department_id = request.GET.get('department')\n    semester_type_id = request.GET.get('semester_type')\n    semesters = Semester.objects.filter(department_id=department_id, semester_type_id=semester_type_id)\n    return JsonResponse({'semesters': list(semesters.values('id', 'name'))})\ndef load_batches(request):\n    semester_id = request.GET.get('semester')\n    if semester_id:\n        batches = Intake.objects.filter(sem_name=semester_id)\n        return JsonResponse({'batches': list(batches.values('id', 'name'))})",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
     {
-        "label": "filter_semesters",
+        "label": "load_batches",
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    department_id = request.GET.get('department_id')\n    semesters = Semester.objects.filter(semester_type_id=semester_type_id, department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for semester in semesters:\n        options += f'<option value=\"{semester.id}\">{semester.name}</option>'\n    return JsonResponse({'options': options})\ndef filter_subjects(request):\n    semester_id = request.GET.get('semester_id')",
+        "peekOfCode": "def load_batches(request):\n    semester_id = request.GET.get('semester')\n    if semester_id:\n        batches = Intake.objects.filter(sem_name=semester_id)\n        return JsonResponse({'batches': list(batches.values('id', 'name'))})\n    return JsonResponse({'batches': []})\ndef load_subjects(request):\n    semester_id = request.GET.get('semester')\n    subjects = Subject.objects.filter(semester_id=semester_id)\n    return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
     {
-        "label": "filter_subjects",
+        "label": "load_subjects",
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def filter_subjects(request):\n    semester_id = request.GET.get('semester_id')\n    department_id = request.GET.get('department_id')\n    subjects = Subject.objects.filter(semester_id=semester_id, department_id=department_id).distinct()\n    options = '<option value=\"\">---------</option>'\n    for subject in subjects:\n        options += f'<option value=\"{subject.id}\">{subject.sub_name}</option>'\n    return JsonResponse({'options': options})",
+        "peekOfCode": "def load_subjects(request):\n    semester_id = request.GET.get('semester')\n    subjects = Subject.objects.filter(semester_id=semester_id)\n    return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2954,6 +2978,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0024_intake_teachersubjectchoice_batch",
+        "description": "app.migrations.0024_intake_teachersubjectchoice_batch",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0012_alter_semester_name_and_more'),\n        ('app', '0023_alter_routine_unique_together_teachersubjectchoice'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Intake',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "app.migrations.0024_intake_teachersubjectchoice_batch",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "app.migrations.0025_alter_intake_sem_name",
+        "description": "app.migrations.0025_alter_intake_sem_name",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('course', '0012_alter_semester_name_and_more'),\n        ('app', '0024_intake_teachersubjectchoice_batch'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='intake',\n            name='sem_name',\n            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='intakes', to='course.semester'),",
+        "detail": "app.migrations.0025_alter_intake_sem_name",
+        "documentation": {}
+    },
+    {
         "label": "EmailBackEand",
         "kind": 6,
         "importPath": "app.EmailBackEand",
@@ -2994,7 +3036,7 @@
         "kind": 6,
         "importPath": "app.forms",
         "description": "app.forms",
-        "peekOfCode": "class TeacherSubjectChoiceForm(forms.ModelForm):\n    class Meta:\n        model = TeacherSubjectChoice\n        fields = ['department', 'semester_type', 'semester', 'subject']\n    def __init__(self, *args, **kwargs):\n        staff = kwargs.pop('staff', None)\n        super(TeacherSubjectChoiceForm, self).__init__(*args, **kwargs)\n        # Initial queryset for semester types and semesters is empty\n        self.fields['semester_type'].queryset = SemesterType.objects.none()\n        self.fields['semester'].queryset = Semester.objects.none()",
+        "peekOfCode": "class TeacherSubjectChoiceForm(forms.ModelForm):\n    class Meta:\n        model = TeacherSubjectChoice\n        fields = ['department', 'semester_type', 'semester', 'batch', 'subject']\n    def __init__(self, *args, **kwargs):\n        staff = kwargs.pop('staff', None)\n        super().__init__(*args, **kwargs)\n        # Initially show all departments and semester types\n        self.fields['department'].queryset = Department.objects.all()\n        self.fields['semester_type'].queryset = SemesterType.objects.all()",
         "detail": "app.forms",
         "documentation": {}
     },
@@ -3071,11 +3113,20 @@
         "documentation": {}
     },
     {
+        "label": "Intake",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Intake(models.Model):\n    name = models.CharField(max_length=100)\n    sem_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='intakes')  # Use the correct related_name if applicable\n    def __str__(self):\n        return self.name\nclass TeacherSubjectChoice(models.Model):\n    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')\n    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
         "label": "TeacherSubjectChoice",
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class TeacherSubjectChoice(models.Model):\n    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')\n    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')\n    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')\n    # batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='subject_choices')\n    def __str__(self):\n        return f\"{self.staff} - {self.subject} ({self.semester})\"",
+        "peekOfCode": "class TeacherSubjectChoice(models.Model):\n    staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')\n    department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')\n    semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')\n    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')\n    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')\n    batch = models.ForeignKey(Intake, on_delete=models.CASCADE, related_name='subject_choices')\n    def __str__(self):\n        return f\"{self.staff} - {self.subject} ({self.semester})\"",
         "detail": "app.models",
         "documentation": {}
     },

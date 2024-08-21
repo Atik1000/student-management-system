@@ -18,6 +18,7 @@ admin.site.register(Staff_leave)
 admin.site.register(Routine)
 admin.site.register(Staff_Feedback)
 
+admin.site.register(Intake)
 admin.site.register(TeacherSubjectChoice)
 
 # admin.site.register(Semester)

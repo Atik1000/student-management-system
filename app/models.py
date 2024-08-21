@@ -174,13 +174,22 @@ class Routine(models.Model):
 
 
 
+class Intake(models.Model):
+    name = models.CharField(max_length=100)
+    sem_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='intakes')  # Use the correct related_name if applicable
+
+    def __str__(self):
+        return self.name
+
+
+
 class TeacherSubjectChoice(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')
     semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')
-    # batch = models.ForeignKey(Batch, on_delete=models.CASCADE, related_name='subject_choices')
+    batch = models.ForeignKey(Intake, on_delete=models.CASCADE, related_name='subject_choices')
     
     def __str__(self):
         return f"{self.staff} - {self.subject} ({self.semester})"

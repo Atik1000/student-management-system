@@ -1,5 +1,4 @@
 from django.urls import path
-from Student_Management_systems.Staff_Views import filter_semester_types, filter_subjects
 from .views import (CourseCreateView, CourseListView, CourseUpdateView, department_list_view,
     DepartmentCreateView, DepartmentListView, DepartmentUpdateView, filter_departments,
     program_list_view, ProgramCreateView, ProgramListView, semester_list_view,
