@@ -138,27 +138,27 @@ class SubjectCreateView(CreateView):
 
 
 
-# def filter_semesters(request):
-#     semester_type_id = request.GET.get('semester_type_id')
-#     print('Received Semester Type ID:', semester_type_id)  # Debugging line
+def filter_semesters(request):
+    semester_type_id = request.GET.get('semester_type_id')
+    print('Received Semester Type ID:', semester_type_id)  # Debugging line
 
-#     if semester_type_id:
-#         try:
-#             # Filter semesters by the provided semester_type_id
-#             semesters = Semester.objects.filter(semester_type_id=semester_type_id).order_by('name')
-#             print('Found Semesters:', list(semesters))  # Debugging line
-#         except ValueError:
-#             # Handle case if semester_type_id is invalid
-#             semesters = Semester.objects.none()
-#     else:
-#         semesters = Semester.objects.none()
+    if semester_type_id:
+        try:
+            # Filter semesters by the provided semester_type_id
+            semesters = Semester.objects.filter(semester_type_id=semester_type_id).order_by('name')
+            print('Found Semesters:', list(semesters))  # Debugging line
+        except ValueError:
+            # Handle case if semester_type_id is invalid
+            semesters = Semester.objects.none()
+    else:
+        semesters = Semester.objects.none()
 
-#     options = '<option value="">---------</option>'
-#     for semester in semesters:
-#         options += f'<option value="{semester.id}">{semester.name}</option>'
+    options = '<option value="">---------</option>'
+    for semester in semesters:
+        options += f'<option value="{semester.id}">{semester.name}</option>'
     
-#     print('Returning Options:', options)  # Debugging line
-#     return JsonResponse({'options': options})
+    print('Returning Options:', options)  # Debugging line
+    return JsonResponse({'options': options})
 
 
 

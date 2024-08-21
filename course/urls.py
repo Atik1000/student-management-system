@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (CourseCreateView, CourseListView, CourseUpdateView, department_list_view,
     DepartmentCreateView, DepartmentListView, DepartmentUpdateView, filter_departments,
-    program_list_view, ProgramCreateView, ProgramListView, semester_list_view,
+    filter_semesters, program_list_view, ProgramCreateView, ProgramListView, semester_list_view,
     semester_type_detail, semester_type_list_view, SemesterCreateView, SemesterDetailView,
     SemesterListView, SemesterUpdateView, subject_list_view, SubjectCreateView, SubjectListView,
     SubjectUpdateView)
@@ -33,7 +33,7 @@ urlpatterns = [
     path('subject', SubjectListView.as_view(), name='subject_list'),
     path('subject/create/', SubjectCreateView.as_view(), name='subject_create'),
     path('subject/<int:pk>/edit/', SubjectUpdateView.as_view(), name='subject_update'),
-    # path('filter-semesters/', filter_semesters, name='filter_semesters'),
+    path('filter-semesters/', filter_semesters, name='filter_semesters'),
 
     # curriculam 
     path('curriculam_programs/',program_list_view, name='program_list_curriculam'),

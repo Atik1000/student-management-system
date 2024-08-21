@@ -110,6 +110,8 @@ class TeacherSubjectChoiceCreateView(CreateView):
     form_class = TeacherSubjectChoiceForm
     template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed
 
+    success_url = reverse_lazy('teacher-subject-choice-list')
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['staff'] = self.request.user.staff
@@ -124,7 +126,7 @@ class TeacherSubjectChoiceUpdateView(UpdateView):
     model = TeacherSubjectChoice
     form_class = TeacherSubjectChoiceForm
     template_name = 'subject/teacher_subject_choice_form.html'
-    success_url = reverse_lazy('subject_choice_list')
+    success_url = reverse_lazy('teacher-subject-choice-list')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -155,3 +157,17 @@ def load_subjects(request):
     subjects = Subject.objects.filter(semester_id=semester_id)
     
     return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})
+
+
+from django.contrib.auth.decorators import login_required
+
+
+
+
+@login_required  # Ensure that only logged-in users can access this view
+def teacher_subject_choice_list(request):
+    teacher_subject_choices = TeacherSubjectChoice.objects.filter(staff=request.user.staff)  # Filter choices by the logged-in staff member
+    context = {
+        'teacher_subject_choices': teacher_subject_choices,
+    }
+    return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name

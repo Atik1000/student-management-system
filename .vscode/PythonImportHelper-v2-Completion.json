@@ -201,6 +201,14 @@
         "documentation": {}
     },
     {
+        "label": "login_required",
+        "importPath": "django.contrib.auth.decorators",
+        "description": "django.contrib.auth.decorators",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.decorators",
+        "documentation": {}
+    },
+    {
         "label": "CustomUser",
         "importPath": "app.models",
         "description": "app.models",
@@ -1867,6 +1875,14 @@
         "documentation": {}
     },
     {
+        "label": "teacher_subject_choice_list",
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "isExtraImport": true,
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
         "label": "TeacherSubjectChoiceCreateView",
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
@@ -2415,7 +2431,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "class TeacherSubjectChoiceCreateView(CreateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\n    def form_valid(self, form):\n        form.instance.staff = self.request.user.staff",
+        "peekOfCode": "class TeacherSubjectChoiceCreateView(CreateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed\n    success_url = reverse_lazy('teacher-subject-choice-list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\n    def form_valid(self, form):",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2424,7 +2440,7 @@
         "kind": 6,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "class TeacherSubjectChoiceUpdateView(UpdateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('subject_choice_list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\ndef load_semesters(request):",
+        "peekOfCode": "class TeacherSubjectChoiceUpdateView(UpdateView):\n    model = TeacherSubjectChoice\n    form_class = TeacherSubjectChoiceForm\n    template_name = 'subject/teacher_subject_choice_form.html'\n    success_url = reverse_lazy('teacher-subject-choice-list')\n    def get_form_kwargs(self):\n        kwargs = super().get_form_kwargs()\n        kwargs['staff'] = self.request.user.staff\n        return kwargs\ndef load_semesters(request):",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -2514,7 +2530,16 @@
         "kind": 2,
         "importPath": "Student_Management_systems.Staff_Views",
         "description": "Student_Management_systems.Staff_Views",
-        "peekOfCode": "def load_subjects(request):\n    semester_id = request.GET.get('semester')\n    subjects = Subject.objects.filter(semester_id=semester_id)\n    return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})",
+        "peekOfCode": "def load_subjects(request):\n    semester_id = request.GET.get('semester')\n    subjects = Subject.objects.filter(semester_id=semester_id)\n    return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})\nfrom django.contrib.auth.decorators import login_required\n@login_required  # Ensure that only logged-in users can access this view\ndef teacher_subject_choice_list(request):\n    teacher_subject_choices = TeacherSubjectChoice.objects.filter(staff=request.user.staff)  # Filter choices by the logged-in staff member\n    context = {\n        'teacher_subject_choices': teacher_subject_choices,",
+        "detail": "Student_Management_systems.Staff_Views",
+        "documentation": {}
+    },
+    {
+        "label": "teacher_subject_choice_list",
+        "kind": 2,
+        "importPath": "Student_Management_systems.Staff_Views",
+        "description": "Student_Management_systems.Staff_Views",
+        "peekOfCode": "def teacher_subject_choice_list(request):\n    teacher_subject_choices = TeacherSubjectChoice.objects.filter(staff=request.user.staff)  # Filter choices by the logged-in staff member\n    context = {\n        'teacher_subject_choices': teacher_subject_choices,\n    }\n    return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name",
         "detail": "Student_Management_systems.Staff_Views",
         "documentation": {}
     },
@@ -3513,7 +3538,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\n# def filter_semesters(request):",
+        "peekOfCode": "class SubjectListView(ListView):\n    model = Subject\n    template_name = 'course/subject_list.html'\n    context_object_name = 'subjects'\nclass SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\ndef filter_semesters(request):",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3522,7 +3547,7 @@
         "kind": 6,
         "importPath": "course.views",
         "description": "course.views",
-        "peekOfCode": "class SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\n# def filter_semesters(request):\n#     semester_type_id = request.GET.get('semester_type_id')\n#     print('Received Semester Type ID:', semester_type_id)  # Debugging line\n#     if semester_type_id:\n#         try:",
+        "peekOfCode": "class SubjectCreateView(CreateView):\n    model = Subject\n    form_class = SubjectForm\n    template_name = 'course/subject_form.html'\n    success_url = reverse_lazy('subject_list')\ndef filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    print('Received Semester Type ID:', semester_type_id)  # Debugging line\n    if semester_type_id:\n        try:",
         "detail": "course.views",
         "documentation": {}
     },
@@ -3541,6 +3566,15 @@
         "importPath": "course.views",
         "description": "course.views",
         "peekOfCode": "def filter_departments(request):\n    program_id = request.GET.get('program_id')\n    departments = Department.objects.filter(program_id=program_id)\n    options = '<option value=\"\">---------</option>'\n    for department in departments:\n        options += f'<option value=\"{department.id}\">{department.dept_name}</option>'\n    return JsonResponse({'options': options})\nclass SemesterUpdateView(UpdateView):\n    model = Semester\n    form_class = SemesterForm",
+        "detail": "course.views",
+        "documentation": {}
+    },
+    {
+        "label": "filter_semesters",
+        "kind": 2,
+        "importPath": "course.views",
+        "description": "course.views",
+        "peekOfCode": "def filter_semesters(request):\n    semester_type_id = request.GET.get('semester_type_id')\n    print('Received Semester Type ID:', semester_type_id)  # Debugging line\n    if semester_type_id:\n        try:\n            # Filter semesters by the provided semester_type_id\n            semesters = Semester.objects.filter(semester_type_id=semester_type_id).order_by('name')\n            print('Found Semesters:', list(semesters))  # Debugging line\n        except ValueError:\n            # Handle case if semester_type_id is invalid",
         "detail": "course.views",
         "documentation": {}
     },

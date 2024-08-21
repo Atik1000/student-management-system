@@ -5,8 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreateView,
     RoutineUpdateView, teacher_weekly_routine_view)
-from Student_Management_systems.Staff_Views import (load_batches, 
-    load_semesters, load_subjects, STAFF_FEEDBACK, TeacherSubjectChoiceCreateView,
+from Student_Management_systems.Staff_Views import (load_batches, load_semesters, load_subjects,
+    STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
     TeacherSubjectChoiceUpdateView)
 
 from .import views,Hod_views,Staff_Views,Student_Views
@@ -103,6 +103,8 @@ urlpatterns = [
     path('ajax/load-semesters/', load_semesters, name='ajax_load_semesters'),
     path('ajax/load-batches/', load_batches, name='ajax_load_batches'),
     path('ajax/load-subjects/', load_subjects, name='ajax_load_subjects'),
+
+    path('teacher-subject-choices/', teacher_subject_choice_list, name='teacher-subject-choice-list'),
 
 
 
