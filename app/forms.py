@@ -76,6 +76,9 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
                 semester_id=semester_id,
                 staff__rank__in=higher_ranks
             ).values_list('subject_id', flat=True)
+
+
+            
             
             self.fields['subject'].queryset = Subject.objects.filter(
                 semester_id=semester_id

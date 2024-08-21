@@ -166,6 +166,7 @@ class Routine(models.Model):
     teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='routines')
     day = models.CharField(max_length=3, choices=DAY_CHOICES)
     start_time = models.TimeField()
+
     end_time = models.TimeField()
 
 
@@ -180,6 +181,7 @@ class Intake(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 

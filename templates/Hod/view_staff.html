@@ -42,10 +42,11 @@
                      <tbody>
                         {% for staff_member in staff %}
                         <tr>
-                           <td>
-                              <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/{{staff_member.profile_pic}}" alt="User Image"></a>
-                           </td>
                            <td>{{ staff_member.id }}</td>
+
+                           <td>
+                              <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/{{staff_member.admin.profile_pic}}" alt="User Image"></a>
+                           </td>
                            <td>{{ staff_member.admin.email }}</td>
                            <td>{{ staff_member.admin.first_name }}</td> <!-- Fixed here -->
                            <td>{{ staff_member.get_rank_display }}</td> <!-- Fixed here -->
