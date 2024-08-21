@@ -4,6 +4,7 @@ from app.models import (Intake, Staff, Staff_Feedback, Staff_leave, Staff_Notifi
     TeacherSubjectChoice)
 from django.contrib import messages
 from Student_Management_systems.Hod_views import SAVE_NOTIFICATION
+from django.db.models import Sum
 
 
 from django.urls import reverse_lazy
@@ -116,11 +117,24 @@ class TeacherSubjectChoiceCreateView(CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['staff'] = self.request.user.staff
         return kwargs
-
     def form_valid(self, form):
         form.instance.staff = self.request.user.staff
+
+        # Check if a higher-ranked teacher has selected this subject
+        higher_ranks = ['CH', 'AP', 'AS','LE']
+        staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
+        higher_ranks = higher_ranks[:staff_rank_index]
+
+        if TeacherSubjectChoice.objects.filter(
+            subject=form.instance.subject,
+            staff__rank__in=higher_ranks
+        ).exists():
+            form.add_error('subject', 'This subject has already been selected by a higher-ranked staff member.')
+            return self.form_invalid(form)
+
         return super().form_valid(form)
-    
+
+
 
 class TeacherSubjectChoiceUpdateView(UpdateView):
     model = TeacherSubjectChoice
@@ -132,6 +146,24 @@ class TeacherSubjectChoiceUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs['staff'] = self.request.user.staff
         return kwargs
+
+    def form_valid(self, form):
+        form.instance.staff = self.request.user.staff
+
+        # Check if a higher-ranked teacher has selected this subject
+        higher_ranks = ['CH', 'AP', 'AS','LE']
+        staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
+        higher_ranks = higher_ranks[:staff_rank_index]
+
+        if TeacherSubjectChoice.objects.filter(
+            subject=form.instance.subject,
+            staff__rank__in=higher_ranks
+        ).exists():
+            form.add_error('subject', 'This subject has already been selected by a higher-ranked staff member.')
+            return self.form_invalid(form)
+
+        return super().form_valid(form)
+
 
 
 def load_semesters(request):
@@ -167,7 +199,12 @@ from django.contrib.auth.decorators import login_required
 @login_required  # Ensure that only logged-in users can access this view
 def teacher_subject_choice_list(request):
     teacher_subject_choices = TeacherSubjectChoice.objects.filter(staff=request.user.staff)  # Filter choices by the logged-in staff member
+    total_credits = teacher_subject_choices.aggregate(total=Sum('subject__credit'))['total'] or 0
+
+
     context = {
         'teacher_subject_choices': teacher_subject_choices,
+        'total_credits': total_credits,
+
     }
     return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name
