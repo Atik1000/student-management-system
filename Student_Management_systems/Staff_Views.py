@@ -215,19 +215,31 @@ def teacher_subject_choice_list(request):
 
 
 
-
-#  Teacher subject choice 
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 
 class TeacherSubjectChoiceListView(ListView):
     model = TeacherSubjectChoice
-    template_name = 'subject/teacher_subject_choice_list.html'  # Update with your actual template path
+    template_name = 'subject/staff_routine_view.html'  # Update with your actual template path
     context_object_name = 'subject_choices'
-
+    
     def get_queryset(self):
-        teacher_id = self.kwargs['pk']
-        return TeacherSubjectChoice.objects.filter(staff_id=teacher_id)
+        # Get the teacher based on the primary key (pk) in the URL
+        teacher = get_object_or_404(Staff, pk=self.kwargs['pk'])
+        # Filter the TeacherSubjectChoice by the teacher
+        return TeacherSubjectChoice.objects.filter(staff=teacher)
 
     def get_context_data(self, **kwargs):
+        # Get the context from the parent class
         context = super().get_context_data(**kwargs)
-        context['teacher'] = Staff.objects.get(pk=self.kwargs['pk'])
+        # Add the teacher object to the context
+        context['teacher'] = get_object_or_404(Staff, pk=self.kwargs['pk'])
+
+        # Calculate the total credits
+        total_credits = self.get_queryset().aggregate(Sum('subject__credit'))['subject__credit__sum'] or 0
+        
+        # Add the total credits to the context
+        context['total_credits'] = total_credits
+
         return context
+
