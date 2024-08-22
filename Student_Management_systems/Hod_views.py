@@ -647,5 +647,9 @@ def teacher_weekly_routine_view(request, teacher_id):
         'teacher': teacher,
         'weekly_routines': weekly_routines,
     }
+    
     )
- 
+
+
+
+

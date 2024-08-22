@@ -64,6 +64,10 @@
                 <td></td>
                 <td class="text-right">{{ exam.q6_marks|default:'' }}</td>
             </tr>
+            <div class="text-center mt-4">
+                <a href="{% url 'generate_pdf' exam.id %}" class="btn btn-primary">Export as PDF</a>
+            </div>
+        
         </tbody>
     </table>
 </div>

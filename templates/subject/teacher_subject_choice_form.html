@@ -2,136 +2,132 @@
 {% load static %}
 
 {% block content %}
-<form method="post">
+<form method="post" id="subject-choice-form">
     {% csrf_token %}
     <div class="row">
-      <div class="col-md-6 mb-3">
-        {{ form.department.label_tag }} {{ form.department }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.semester_type.label_tag }} {{ form.semester_type }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.semester.label_tag }} {{ form.semester }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.batch.label_tag }} {{ form.batch }}
-      </div>
-      <div class="col-md-6 mb-3">
-        {{ form.subject.label_tag }} {{ form.subject }}
-      </div>
-      <input type="hidden" id="total-credits" value="0">
+        <div class="col-md-6 mb-3">
+            {{ form.department.label_tag }} {{ form.department }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form.semester_type.label_tag }} {{ form.semester_type }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form.semester.label_tag }} {{ form.semester }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form.batch.label_tag }} {{ form.batch }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form.subject.label_tag }} {{ form.subject }}
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-  </form>
+</form>
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
-    const departmentField = document.getElementById('id_department');
-    const semesterTypeField = document.getElementById('id_semester_type');
-    const semesterField = document.getElementById('id_semester');
-    const batchField = document.getElementById('id_batch');
-    const subjectField = document.getElementById('id_subject');
-    const totalCreditsField = document.getElementById('total-credits');
+        const departmentField = document.getElementById('id_department');
+        const semesterTypeField = document.getElementById('id_semester_type');
+        const semesterField = document.getElementById('id_semester');
+        const batchField = document.getElementById('id_batch');
+        const subjectField = document.getElementById('id_subject');
+        const form = document.getElementById('subject-choice-form');
 
-    function updateSemesters() {
-        const departmentId = departmentField.value;
-        const semesterTypeId = semesterTypeField.value;
+        let selectedCredits = 0;
+        let selectedSubjects = [];
 
-        if (departmentId && semesterTypeId) {
-            const url = `{% url 'ajax_load_semesters' %}?department=${departmentId}&semester_type=${semesterTypeId}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    semesterField.innerHTML = '<option value="">Select Semester</option>';
-                    data.semesters.forEach(function(semester) {
-                        const option = new Option(semester.name, semester.id);
-                        semesterField.appendChild(option);
+        function updateSemesters() {
+            const departmentId = departmentField.value;
+            const semesterTypeId = semesterTypeField.value;
+
+            if (departmentId && semesterTypeId) {
+                const url = `{% url 'ajax_load_semesters' %}?department=${departmentId}&semester_type=${semesterTypeId}`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        semesterField.innerHTML = '<option value="">Select Semester</option>';
+                        data.semesters.forEach(function(semester) {
+                            const option = new Option(semester.name, semester.id);
+                            semesterField.appendChild(option);
+
+                            batchField.innerHTML = '<option value="">Select Batch</option>';
+                            subjectField.innerHTML = '<option value="">Select Subject</option>';
+                        });
                     });
-                    batchField.innerHTML = '<option value="">Select Batch</option>';
-                    subjectField.innerHTML = '<option value="">Select Subject</option>';
-                });
+            }
         }
-    }
 
-    function updateBatches() {
-        const semesterId = semesterField.value;
+        function updateBatches() {
+            const semesterId = semesterField.value;
 
-        if (semesterId) {
-            const url = `{% url 'ajax_load_batches' %}?semester=${semesterId}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    batchField.innerHTML = '<option value="">Select Batch</option>';
-                    data.batches.forEach(function(batch) {
-                        const option = new Option(batch.name, batch.id);
-                        batchField.appendChild(option);
+            if (semesterId) {
+                const url = `{% url 'ajax_load_batches' %}?semester=${semesterId}`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        batchField.innerHTML = '<option value="">Select Batch</option>';
+                        data.batches.forEach(function(batch) {
+                            const option = new Option(batch.name, batch.id);
+                            batchField.appendChild(option);
+                        });
+
+                        subjectField.innerHTML = '<option value="">Select Subject</option>';
                     });
-                    subjectField.innerHTML = '<option value="">Select Subject</option>';
-                });
+            }
         }
-    }
 
-    function updateSubjects() {
-        const semesterId = semesterField.value;
+        function updateSubjects() {
+            const semesterId = semesterField.value;
 
-        if (semesterId) {
-            const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    subjectField.innerHTML = '<option value="">Select Subject</option>';
-                    data.subjects.forEach(function(subject) {
-                        const option = new Option(subject.sub_name, subject.id);
-                        option.dataset.credits = subject.credit; // Store the credit value
-                        subjectField.appendChild(option);
+            if (semesterId) {
+                const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        subjectField.innerHTML = '<option value="">Select Subject</option>';
+                        data.subjects.forEach(function(subject) {
+                            const option = new Option(subject.sub_name, subject.id);
+                            subjectField.appendChild(option);
+                        });
                     });
-                });
-        }
-    }
-
-    function validateSubjectSelection(event) {
-        const selectedSubject = subjectField.options[subjectField.selectedIndex];
-        const selectedCredits = parseInt(selectedSubject.dataset.credits);
-        const currentTotalCredits = parseInt(totalCreditsField.value);
-
-        // Check if selecting this subject would exceed the 20 credit limit
-        if (currentTotalCredits + selectedCredits > 20) {
-            alert('Selecting this subject would exceed the 20 credit limit. Please choose another subject.');
-            event.preventDefault();
-            return;
+            }
         }
 
-        // Prevent selecting the same subject twice
-        const selectedOptions = Array.from(subjectField.selectedOptions);
-        const selectedValues = selectedOptions.map(option => option.value);
+        function checkTotalCredits() {
+            const selectedOption = subjectField.options[subjectField.selectedIndex];
+            const subjectCredit = parseInt(selectedOption.getAttribute('data-credit'), 10);
+            
+            if (selectedCredits + subjectCredit > 20) {
+                alert('Total credit exceeds the 20 credit limit.');
+                subjectField.value = '';
+                return;
+            }
 
-        if (new Set(selectedValues).size !== selectedValues.length) {
-            alert('You cannot select the same subject twice.');
-            event.preventDefault();
-            return;
+            selectedCredits += subjectCredit;
+            selectedSubjects.push(subjectField.value);
         }
 
-        // Update the total credits
-        totalCreditsField.value = currentTotalCredits + selectedCredits;
-    }
-
-    departmentField.addEventListener('change', updateSemesters);
-    semesterTypeField.addEventListener('change', updateSemesters);
-    semesterField.addEventListener('change', updateBatches);
-    semesterField.addEventListener('change', updateSubjects);
-    subjectField.addEventListener('change', validateSubjectSelection);
-
-    // Initialize total credits on page load
-    let initialCredits = 0;
-    Array.from(subjectField.options).forEach(option => {
-        if (option.selected) {
-            initialCredits += parseInt(option.dataset.credits);
+        function checkDuplicateSubject() {
+            if (selectedSubjects.includes(subjectField.value)) {
+                alert('This subject has already been selected.');
+                subjectField.value = '';
+            }
         }
+
+        departmentField.addEventListener('change', updateSemesters);
+        semesterTypeField.addEventListener('change', updateSemesters);
+        semesterField.addEventListener('change', updateBatches);
+        semesterField.addEventListener('change', updateSubjects);
+        subjectField.addEventListener('change', checkTotalCredits);
+        subjectField.addEventListener('change', checkDuplicateSubject);
+
+        // Before form submission, validate the total credits
+        form.addEventListener('submit', function(event) {
+            if (selectedCredits > 20) {
+                alert('Total selected credits exceed the allowed limit of 20 credits.');
+                event.preventDefault();
+            }
+        });
     });
-    totalCreditsField.value = initialCredits;
-});
-
 </script>
-
 {% endblock %}

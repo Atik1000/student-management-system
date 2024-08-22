@@ -6,6 +6,8 @@ from django.contrib import messages
 from Student_Management_systems.Hod_views import SAVE_NOTIFICATION
 from django.db.models import Sum
 
+from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
+
 
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
@@ -208,3 +210,24 @@ def teacher_subject_choice_list(request):
 
     }
     return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name
+
+
+
+
+
+
+#  Teacher subject choice 
+
+class TeacherSubjectChoiceListView(ListView):
+    model = TeacherSubjectChoice
+    template_name = 'subject/teacher_subject_choice_list.html'  # Update with your actual template path
+    context_object_name = 'subject_choices'
+
+    def get_queryset(self):
+        teacher_id = self.kwargs['pk']
+        return TeacherSubjectChoice.objects.filter(staff_id=teacher_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['teacher'] = Staff.objects.get(pk=self.kwargs['pk'])
+        return context

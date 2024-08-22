@@ -10,10 +10,10 @@
    <div class="page-header">
       <div class="row align-items-center">
          <div class="col">
-            <h3 class="page-title">Staff</h3>
+            <h3 class="page-title">Teacher</h3>
             <ul class="breadcrumb">
                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-               <li class="breadcrumb-item active">Staff</li>
+               <li class="breadcrumb-item active">Teacher</li>
             </ul>
          </div>
          <div class="col-auto text-right float-right ml-auto">
@@ -52,18 +52,17 @@
                            <td>{{ staff_member.get_rank_display }}</td> <!-- Fixed here -->
                            <td class="text-right">
                               <div class="actions">
-                                 <!-- <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
+                                 <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
                                     <i class="fas fa-pen"></i> Edit
                                  </a>
-                                 <a href="{% url 'delete_staff' staff_member.admin.id %}" class="btn btn-sm bg-danger-light">
+                                 <!-- <a href="{% url 'delete_staff' staff_member.admin.id %}" class="btn btn-sm bg-danger-light">
                                     <i class="fas fa-trash"></i> Delete
-                                 </a> -->
-                                 <a href="{% url 'teacher_routines' staff_member.pk %}" class="btn btn-sm bg-info-light">
-                                    <i class="fas fa-eye"></i> View routine
-                                 </a>
-                                 <a href="{% url 'routine-update' staff_member.pk %}" class="btn btn-sm bg-info-light">
-                                    <i class="fas fa-pen"></i> Update routine
-                                 </a>
+                                 </a>  -->
+                                 <!-- <a href="{% url 'teacher_Subject' staff_member.pk %}" class="btn btn-sm bg-info-light">
+                                    <i class="fas fa-eye"></i> View Subject
+                                </a>
+                                 -->
+                               
                               </div>
                            </td>
                         </tr>

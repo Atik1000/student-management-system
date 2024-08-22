@@ -7,7 +7,7 @@ from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreate
     RoutineUpdateView, teacher_weekly_routine_view)
 from Student_Management_systems.Staff_Views import (load_batches, load_semesters, load_subjects,
     STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
-    TeacherSubjectChoiceUpdateView)
+    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -105,6 +105,7 @@ urlpatterns = [
     path('ajax/load-subjects/', load_subjects, name='ajax_load_subjects'),
 
     path('teacher-subject-choices/', teacher_subject_choice_list, name='teacher-subject-choice-list'),
+    path('teacher/<int:pk>/subject/', TeacherSubjectChoiceListView.as_view(), name='teacher_Subject'),
 
 
 
