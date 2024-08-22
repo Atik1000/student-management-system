@@ -34,7 +34,6 @@ class RoutineForm(forms.ModelForm):
 
 
 from .models import TeacherSubjectChoice, Department, SemesterType, Semester, Subject, Intake
-
 class TeacherSubjectChoiceForm(forms.ModelForm):
     class Meta:
         model = TeacherSubjectChoice
@@ -53,7 +52,7 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
             department_id = int(self.data.get('department'))
             semester_type_id = int(self.data.get('semester_type'))
             self.fields['semester'].queryset = Semester.objects.filter(
-                department_id=department_id, 
+                department_id=department_id,
                 semester_type_id=semester_type_id
             )
         elif self.instance.pk:
@@ -64,28 +63,31 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
         else:
             self.fields['semester'].queryset = Semester.objects.none()
 
-        # Filter batch and subjects based on the selected semester
+        # Filter batches and subjects based on the selected semester
         if 'semester' in self.data:
             semester_id = int(self.data.get('semester'))
             self.fields['batch'].queryset = Intake.objects.filter(sem_name_id=semester_id)
 
             # Exclude subjects already selected by the same staff or higher-ranked staff
-            higher_ranks = ['CH', 'AP', 'AS','LE']
+            higher_ranks = ['CH', 'AP', 'AS', 'LE']
             higher_ranks = higher_ranks[:higher_ranks.index(self.staff.rank)]
             higher_rank_subjects = TeacherSubjectChoice.objects.filter(
                 semester_id=semester_id,
                 staff__rank__in=higher_ranks
             ).values_list('subject_id', flat=True)
 
+            # Exclude subjects already selected by this staff member
+            already_selected_subjects = TeacherSubjectChoice.objects.filter(
+                staff=self.staff,
+                semester_id=semester_id
+            ).values_list('subject_id', flat=True)
 
-            
-            
             self.fields['subject'].queryset = Subject.objects.filter(
                 semester_id=semester_id
             ).exclude(
                 id__in=higher_rank_subjects
             ).exclude(
-                id__in=TeacherSubjectChoice.objects.filter(staff=self.staff).values_list('subject_id', flat=True)
+                id__in=already_selected_subjects
             )
         elif self.instance.pk:
             self.fields['batch'].queryset = Intake.objects.filter(sem_name=self.instance.semester)

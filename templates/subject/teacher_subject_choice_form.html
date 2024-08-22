@@ -25,109 +25,81 @@
 </form>
 
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        const departmentField = document.getElementById('id_department');
-        const semesterTypeField = document.getElementById('id_semester_type');
-        const semesterField = document.getElementById('id_semester');
-        const batchField = document.getElementById('id_batch');
-        const subjectField = document.getElementById('id_subject');
-        const form = document.getElementById('subject-choice-form');
+ document.addEventListener('DOMContentLoaded', function() {
+    const departmentField = document.getElementById('id_department');
+    const semesterTypeField = document.getElementById('id_semester_type');
+    const semesterField = document.getElementById('id_semester');
+    const batchField = document.getElementById('id_batch');
+    const subjectField = document.getElementById('id_subject');
 
-        let selectedCredits = 0;
-        let selectedSubjects = [];
+    function updateSemesters() {
+        const departmentId = departmentField.value;
+        const semesterTypeId = semesterTypeField.value;
 
-        function updateSemesters() {
-            const departmentId = departmentField.value;
-            const semesterTypeId = semesterTypeField.value;
-
-            if (departmentId && semesterTypeId) {
-                const url = `{% url 'ajax_load_semesters' %}?department=${departmentId}&semester_type=${semesterTypeId}`;
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        semesterField.innerHTML = '<option value="">Select Semester</option>';
-                        data.semesters.forEach(function(semester) {
-                            const option = new Option(semester.name, semester.id);
-                            semesterField.appendChild(option);
-
-                            batchField.innerHTML = '<option value="">Select Batch</option>';
-                            subjectField.innerHTML = '<option value="">Select Subject</option>';
-                        });
+        if (departmentId && semesterTypeId) {
+            const url = `{% url 'ajax_load_semesters' %}?department=${departmentId}&semester_type=${semesterTypeId}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    semesterField.innerHTML = '<option value="">Select Semester</option>';
+                    data.semesters.forEach(function(semester) {
+                        const option = new Option(semester.name, semester.id);
+                        semesterField.appendChild(option);
                     });
-            }
+
+                    batchField.innerHTML = '<option value="">Select Batch</option>';
+                    subjectField.innerHTML = '<option value="">Select Subject</option>';
+                })
+                .catch(error => console.error('Error loading semesters:', error));
         }
+    }
 
-        function updateBatches() {
-            const semesterId = semesterField.value;
+    function updateBatches() {
+        const semesterId = semesterField.value;
 
-            if (semesterId) {
-                const url = `{% url 'ajax_load_batches' %}?semester=${semesterId}`;
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        batchField.innerHTML = '<option value="">Select Batch</option>';
-                        data.batches.forEach(function(batch) {
-                            const option = new Option(batch.name, batch.id);
-                            batchField.appendChild(option);
-                        });
-
-                        subjectField.innerHTML = '<option value="">Select Subject</option>';
+        if (semesterId) {
+            const url = `{% url 'ajax_load_batches' %}?semester=${semesterId}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    batchField.innerHTML = '<option value="">Select Batch</option>';
+                    data.batches.forEach(function(batch) {
+                        const option = new Option(batch.name, batch.id);
+                        batchField.appendChild(option);
                     });
-            }
+
+                    subjectField.innerHTML = '<option value="">Select Subject</option>';
+                })
+                .catch(error => console.error('Error loading batches:', error));
         }
+    }
 
-        function updateSubjects() {
-            const semesterId = semesterField.value;
+    function updateSubjects() {
+        const semesterId = semesterField.value;
+        const batchId = batchField.value;
 
-            if (semesterId) {
-                const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}`;
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        subjectField.innerHTML = '<option value="">Select Subject</option>';
-                        data.subjects.forEach(function(subject) {
-                            const option = new Option(subject.sub_name, subject.id);
-                            subjectField.appendChild(option);
-                        });
+        if (semesterId && batchId) {
+            const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}&batch=${batchId}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    subjectField.innerHTML = '<option value="">Select Subject</option>';
+                    data.subjects.forEach(function(subject) {
+                        const option = new Option(subject.sub_name, subject.id);
+                        option.setAttribute('data-credit', subject.credit);
+                        subjectField.appendChild(option);
                     });
-            }
+                })
+                .catch(error => console.error('Error loading subjects:', error));
         }
+    }
 
-        function checkTotalCredits() {
-            const selectedOption = subjectField.options[subjectField.selectedIndex];
-            const subjectCredit = parseInt(selectedOption.getAttribute('data-credit'), 10);
-            
-            if (selectedCredits + subjectCredit > 20) {
-                alert('Total credit exceeds the 20 credit limit.');
-                subjectField.value = '';
-                return;
-            }
+    departmentField.addEventListener('change', updateSemesters);
+    semesterTypeField.addEventListener('change', updateSemesters);
+    semesterField.addEventListener('change', updateBatches);
+    batchField.addEventListener('change', updateSubjects);
+});
 
-            selectedCredits += subjectCredit;
-            selectedSubjects.push(subjectField.value);
-        }
 
-        function checkDuplicateSubject() {
-            if (selectedSubjects.includes(subjectField.value)) {
-                alert('This subject has already been selected.');
-                subjectField.value = '';
-            }
-        }
-
-        departmentField.addEventListener('change', updateSemesters);
-        semesterTypeField.addEventListener('change', updateSemesters);
-        semesterField.addEventListener('change', updateBatches);
-        semesterField.addEventListener('change', updateSubjects);
-        subjectField.addEventListener('change', checkTotalCredits);
-        subjectField.addEventListener('change', checkDuplicateSubject);
-
-        // Before form submission, validate the total credits
-        form.addEventListener('submit', function(event) {
-            if (selectedCredits > 20) {
-                alert('Total selected credits exceed the allowed limit of 20 credits.');
-                event.preventDefault();
-            }
-        });
-    });
 </script>
 {% endblock %}

@@ -60,19 +60,19 @@ class ExamDetailView(DetailView):
     context_object_name = 'exam'
 
 
-def generate_pdf(request, exam_id):
-    # Fetch exam details based on exam_id
-    exam = get_object_or_404(Exam, id=exam_id)
+# def generate_pdf(request, exam_id):
+#     # Fetch exam details based on exam_id
+#     exam = get_object_or_404(Exam, id=exam_id)
     
-    # Render the template with exam details
-    html_string = render_to_string('exam/exam_detail.html', {'exam': exam})
+#     # Render the template with exam details
+#     html_string = render_to_string('exam/exam_detail.html', {'exam': exam})
     
-    # Create an HTML object with WeasyPrint
-    html = HTML(string=html_string)
+#     # Create an HTML object with WeasyPrint
+#     html = HTML(string=html_string)
     
-    # Generate the PDF
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename=exam_{exam_id}.pdf'
-    html.write_pdf(response)
+#     # Generate the PDF
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = f'attachment; filename=exam_{exam_id}.pdf'
+#     html.write_pdf(response)
     
-    return response
+#     return response
