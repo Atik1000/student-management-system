@@ -107,23 +107,32 @@ def STAFF_FEEDBACK_SAVE(request):
     
 
 
-
 class TeacherSubjectChoiceCreateView(CreateView):
     model = TeacherSubjectChoice
     form_class = TeacherSubjectChoiceForm
     template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed
-
     success_url = reverse_lazy('teacher-subject-choice-list')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['staff'] = self.request.user.staff
         return kwargs
+
     def form_valid(self, form):
         form.instance.staff = self.request.user.staff
 
+        # Check if the total credits for this staff exceed 20 credits after adding the new subject
+        current_total_credits = TeacherSubjectChoice.objects.filter(
+            staff=self.request.user.staff
+        ).aggregate(total=Sum('subject__credit'))['total'] or 0
+
+        new_total_credits = current_total_credits + form.instance.subject.credit
+        if new_total_credits > 20:
+            form.add_error('subject', f"Adding this subject will exceed the 20-credit limit. Your current total is {current_total_credits} credits.")
+            return self.form_invalid(form)
+
         # Check if a higher-ranked teacher has selected this subject
-        higher_ranks = ['CH', 'AP', 'AS','LE']
+        higher_ranks = ['CH', 'AP', 'AS', 'LE']
         staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
         higher_ranks = higher_ranks[:staff_rank_index]
 
@@ -134,7 +143,11 @@ class TeacherSubjectChoiceCreateView(CreateView):
             form.add_error('subject', 'This subject has already been selected by a higher-ranked staff member.')
             return self.form_invalid(form)
 
+        # If validation passes, proceed with form submission
         return super().form_valid(form)
+    
+
+
 
 
 
@@ -243,3 +256,34 @@ class TeacherSubjectChoiceListView(ListView):
 
         return context
 
+
+
+
+def check_higher_rank_completion(request):
+    staff_id = request.GET.get('staff_id')
+    semester_id = request.GET.get('semester_id')
+
+    # Fetch the current staff member
+    staff = Staff.objects.get(id=staff_id)
+
+    # Define higher ranks
+    higher_ranks = ['CH', 'AP', 'AS', 'LE']
+    higher_ranks = higher_ranks[:higher_ranks.index(staff.rank)]
+
+    for rank in higher_ranks:
+        higher_rank_staff = Staff.objects.filter(rank=rank)
+        for higher_staff in higher_rank_staff:
+            total_credits = TeacherSubjectChoice.objects.filter(
+                staff=higher_staff,
+                semester_id=semester_id
+            ).aggregate(total=Sum('subject__credit'))['total'] or 0
+
+            # If any higher-ranked teacher has less than 20 credits, return a blocking message
+            if total_credits < 20:
+                return JsonResponse({
+                    'can_select': False,
+                    'message': f"A higher-ranked teacher ({higher_staff.rank}) has not completed their 20 credit selection. You cannot select a subject until they finish."
+                })
+
+    # If no blocking conditions are found, allow the selection
+    return JsonResponse({'can_select': True})

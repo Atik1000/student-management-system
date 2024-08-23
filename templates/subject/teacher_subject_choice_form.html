@@ -25,12 +25,15 @@
 </form>
 
 <script type="text/javascript">
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const departmentField = document.getElementById('id_department');
     const semesterTypeField = document.getElementById('id_semester_type');
     const semesterField = document.getElementById('id_semester');
     const batchField = document.getElementById('id_batch');
     const subjectField = document.getElementById('id_subject');
+    const form = document.getElementById('subject-choice-form');
+
+    let currentTotalCredits = 0; // This should be populated with the total credits from server-side
 
     function updateSemesters() {
         const departmentId = departmentField.value;
@@ -49,6 +52,7 @@
 
                     batchField.innerHTML = '<option value="">Select Batch</option>';
                     subjectField.innerHTML = '<option value="">Select Subject</option>';
+                    subjectField.disabled = true;
                 })
                 .catch(error => console.error('Error loading semesters:', error));
         }
@@ -69,6 +73,7 @@
                     });
 
                     subjectField.innerHTML = '<option value="">Select Subject</option>';
+                    subjectField.disabled = true;
                 })
                 .catch(error => console.error('Error loading batches:', error));
         }
@@ -84,22 +89,65 @@
                 .then(response => response.json())
                 .then(data => {
                     subjectField.innerHTML = '<option value="">Select Subject</option>';
-                    data.subjects.forEach(function(subject) {
-                        const option = new Option(subject.sub_name, subject.id);
-                        option.setAttribute('data-credit', subject.credit);
-                        subjectField.appendChild(option);
-                    });
+                    if (data.subjects.length > 0) {
+                        subjectField.disabled = false;
+                        data.subjects.forEach(function(subject) {
+                            const option = new Option(subject.sub_name, subject.id);
+                            option.setAttribute('data-credit', subject.credit);
+                            subjectField.appendChild(option);
+                        });
+                    } else {
+                        subjectField.disabled = true;
+                        alert("Higher-ranked teachers have not completed their subject selection.");
+                    }
                 })
                 .catch(error => console.error('Error loading subjects:', error));
         }
+    }
+
+    function validateForm(event) {
+        const selectedSubject = subjectField.options[subjectField.selectedIndex];
+        const selectedCredit = parseInt(selectedSubject.getAttribute('data-credit'), 10);
+
+        if (!selectedSubject) {
+            alert("Please select a subject.");
+            event.preventDefault();
+            return;
+        }
+
+        if ((currentTotalCredits + selectedCredit) > 20) {
+            alert("Total credit limit exceeded. You cannot add more than 20 credits.");
+            event.preventDefault();
+        }
+    }
+
+    function validateHigherRankCompletion(event) {
+        const staffId = "{{ request.user.staff.id }}"; // Assuming the logged-in user has a related staff object
+        const semesterId = semesterField.value;
+
+        fetch(`{% url 'check_higher_rank_completion' %}?staff_id=${staffId}&semester_id=${semesterId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.can_select) {
+                    alert(data.message);
+                    event.preventDefault(); // Prevent form submission
+                }
+            })
+            .catch(error => {
+                console.error('Error checking higher rank completion:', error);
+                event.preventDefault(); // Prevent form submission on error
+            });
     }
 
     departmentField.addEventListener('change', updateSemesters);
     semesterTypeField.addEventListener('change', updateSemesters);
     semesterField.addEventListener('change', updateBatches);
     batchField.addEventListener('change', updateSubjects);
+
+    form.addEventListener('submit', function(event) {
+        validateForm(event);
+        validateHigherRankCompletion(event);
+    });
 });
-
-
 </script>
 {% endblock %}

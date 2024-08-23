@@ -1,10 +1,10 @@
 import django.shortcuts
 from django.contrib.auth.decorators import login_required
 from app.models import (CustomUser, Routine, Session_year, Staff, Staff_Feedback, Staff_leave,
-    Staff_Notification, Student)
+    Staff_Notification, Student,Intake)
 from django.contrib import messages
 from course.models import Department, Semester
-from app.forms import RoutineForm
+from app.forms import RoutineForm,IntakeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
@@ -650,6 +650,18 @@ def teacher_weekly_routine_view(request, teacher_id):
     
     )
 
+
+
+class IntakeCreateView(CreateView):
+    model = Intake
+    form_class = IntakeForm
+    template_name = 'intake/intake_create.html'
+    success_url = reverse_lazy('intake-list')
+
+class IntakeListView(ListView):
+    model = Intake
+    template_name = 'intake/intake_list.html'
+    context_object_name = 'intakes'
 
 
 

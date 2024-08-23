@@ -4,10 +4,10 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreateView,
-    RoutineUpdateView, teacher_weekly_routine_view)
+    RoutineUpdateView, teacher_weekly_routine_view,IntakeCreateView, IntakeListView)
 from Student_Management_systems.Staff_Views import (load_batches, load_semesters, load_subjects,
     STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
-    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView)
+    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -108,10 +108,13 @@ urlpatterns = [
     path('teacher/<int:pk>/subject/', TeacherSubjectChoiceListView.as_view(), name='teacher_Subject'),
 
 
+    path('ajax/check_higher_rank_completion/', check_higher_rank_completion, name='check_higher_rank_completion'),
 
 
 
-
+# intake 
+    path('intake/create/', IntakeCreateView.as_view(), name='intake-create'),
+    path('intake/', IntakeListView.as_view(), name='intake-list'),
 
 
 
