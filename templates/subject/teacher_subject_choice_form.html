@@ -15,25 +15,28 @@
             {{ form.semester.label_tag }} {{ form.semester }}
         </div>
         <div class="col-md-6 mb-3">
-            {{ form.batch.label_tag }} {{ form.batch }}
-        </div>
-        <div class="col-md-6 mb-3">
             {{ form.subject.label_tag }} {{ form.subject }}
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
+
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     const departmentField = document.getElementById('id_department');
     const semesterTypeField = document.getElementById('id_semester_type');
     const semesterField = document.getElementById('id_semester');
-    const batchField = document.getElementById('id_batch');
     const subjectField = document.getElementById('id_subject');
     const form = document.getElementById('subject-choice-form');
+        // Find the label for the element with id "id_semester"
+        var label = document.querySelector('label[for="id_semester"]');
+    
+    // Change the label's text to "Batch"
+    if (label) {
+        label.textContent = "Batch:";
+    }
 
-    let currentTotalCredits = 0; // This should be populated with the total credits from server-side
 
     function updateSemesters() {
         const departmentId = departmentField.value;
@@ -44,13 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    semesterField.innerHTML = '<option value="">Select Semester</option>';
+                    semesterField.innerHTML = '<option value="">Select Batch</option>';
                     data.semesters.forEach(function(semester) {
                         const option = new Option(semester.name, semester.id);
                         semesterField.appendChild(option);
                     });
 
-                    batchField.innerHTML = '<option value="">Select Batch</option>';
                     subjectField.innerHTML = '<option value="">Select Subject</option>';
                     subjectField.disabled = true;
                 })
@@ -58,33 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function updateBatches() {
+    function updateSubjects() {
         const semesterId = semesterField.value;
 
         if (semesterId) {
-            const url = `{% url 'ajax_load_batches' %}?semester=${semesterId}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    batchField.innerHTML = '<option value="">Select Batch</option>';
-                    data.batches.forEach(function(batch) {
-                        const option = new Option(batch.name, batch.id);
-                        batchField.appendChild(option);
-                    });
-
-                    subjectField.innerHTML = '<option value="">Select Subject</option>';
-                    subjectField.disabled = true;
-                })
-                .catch(error => console.error('Error loading batches:', error));
-        }
-    }
-
-    function updateSubjects() {
-        const semesterId = semesterField.value;
-        const batchId = batchField.value;
-
-        if (semesterId && batchId) {
-            const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}&batch=${batchId}`;
+            const url = `{% url 'ajax_load_subjects' %}?semester=${semesterId}`;
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -105,49 +85,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function validateForm(event) {
-        const selectedSubject = subjectField.options[subjectField.selectedIndex];
-        const selectedCredit = parseInt(selectedSubject.getAttribute('data-credit'), 10);
-
-        if (!selectedSubject) {
-            alert("Please select a subject.");
-            event.preventDefault();
-            return;
-        }
-
-        if ((currentTotalCredits + selectedCredit) > 20) {
-            alert("Total credit limit exceeded. You cannot add more than 20 credits.");
-            event.preventDefault();
-        }
-    }
-
-    function validateHigherRankCompletion(event) {
-        const staffId = "{{ request.user.staff.id }}"; // Assuming the logged-in user has a related staff object
-        const semesterId = semesterField.value;
-
-        fetch(`{% url 'check_higher_rank_completion' %}?staff_id=${staffId}&semester_id=${semesterId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.can_select) {
-                    alert(data.message);
-                    event.preventDefault(); // Prevent form submission
-                }
-            })
-            .catch(error => {
-                console.error('Error checking higher rank completion:', error);
-                event.preventDefault(); // Prevent form submission on error
-            });
-    }
-
     departmentField.addEventListener('change', updateSemesters);
     semesterTypeField.addEventListener('change', updateSemesters);
-    semesterField.addEventListener('change', updateBatches);
-    batchField.addEventListener('change', updateSubjects);
-
-    form.addEventListener('submit', function(event) {
-        validateForm(event);
-        validateHigherRankCompletion(event);
-    });
+    semesterField.addEventListener('change', updateSubjects);
 });
+
 </script>
 {% endblock %}

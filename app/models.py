@@ -184,14 +184,12 @@ class Intake(models.Model):
 
 
 
-
 class TeacherSubjectChoice(models.Model):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='subject_choices')
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='subject_choices')
     semester_type = models.ForeignKey(SemesterType, on_delete=models.CASCADE, related_name='subject_choices')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='subject_choices')
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subject_choices')
-    batch = models.ForeignKey(Intake, on_delete=models.CASCADE, related_name='subject_choices')
-    
+
     def __str__(self):
         return f"{self.staff} - {self.subject} ({self.semester})"

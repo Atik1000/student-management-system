@@ -46,7 +46,7 @@
                                 {% for program in programs %}
                                 <tr>
                                     <td>{{ program.id }}</td>
-                                    <td>{{ program.get_name_display }}</td>
+                                    <td>{{ program.name }}</td>
                                     <td>
                                         <a href="{% url 'department_list_curriculam' program.id %}" class="btn btn-sm btn-info">
                                             <i class="fas fa-eye"></i> View Departments

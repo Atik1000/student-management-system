@@ -105,12 +105,12 @@ def STAFF_FEEDBACK_SAVE(request):
         feedback.save()
         return redirect('staff-feedback') 
     
-
+    
 
 class TeacherSubjectChoiceCreateView(CreateView):
     model = TeacherSubjectChoice
     form_class = TeacherSubjectChoiceForm
-    template_name = 'subject/teacher_subject_choice_form.html'  # Adjust the template name as needed
+    template_name = 'subject/teacher_subject_choice_form.html'
     success_url = reverse_lazy('teacher-subject-choice-list')
 
     def get_form_kwargs(self):
@@ -121,7 +121,6 @@ class TeacherSubjectChoiceCreateView(CreateView):
     def form_valid(self, form):
         form.instance.staff = self.request.user.staff
 
-        # Check if the total credits for this staff exceed 20 credits after adding the new subject
         current_total_credits = TeacherSubjectChoice.objects.filter(
             staff=self.request.user.staff
         ).aggregate(total=Sum('subject__credit'))['total'] or 0
@@ -131,7 +130,6 @@ class TeacherSubjectChoiceCreateView(CreateView):
             form.add_error('subject', f"Adding this subject will exceed the 20-credit limit. Your current total is {current_total_credits} credits.")
             return self.form_invalid(form)
 
-        # Check if a higher-ranked teacher has selected this subject
         higher_ranks = ['CH', 'AP', 'AS', 'LE']
         staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
         higher_ranks = higher_ranks[:staff_rank_index]
@@ -143,12 +141,7 @@ class TeacherSubjectChoiceCreateView(CreateView):
             form.add_error('subject', 'This subject has already been selected by a higher-ranked staff member.')
             return self.form_invalid(form)
 
-        # If validation passes, proceed with form submission
         return super().form_valid(form)
-    
-
-
-
 
 
 class TeacherSubjectChoiceUpdateView(UpdateView):

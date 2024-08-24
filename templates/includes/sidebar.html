@@ -45,20 +45,17 @@
                </ul>
 
             <li class="submenu">
-               <a href="#"><i class="fas fa-building"></i> <span> Semester </span> <span class="menu-arrow"></span></a>
+               <a href="#"><i class="fas fa-building"></i> <span> All Curiculam </span> <span class="menu-arrow"></span></a>
                <ul>
-                  <li><a href="{% url 'semester_create' %}">Add Semester </a></li>
+                  <li><a href="{% url 'semester_create' %}">Add Batch </a></li>
 
                  
-                  <li><a href="{% url 'semester_list' %}">View Semester </a></li>
+                  <li><a href="{% url 'semester_list' %}">View Batch </a></li>
 
                   <li><a href="{% url 'subject_create' %}">Add Subject </a></li>
 
                   <li><a href="{% url 'subject_list' %}">View Subject </a></li>
 
-                  <li><a href="{% url 'intake-create' %}">Add Intake </a></li>
-
-                  <li><a href="{% url 'intake-list' %}">View Intake </a></li>
 
                </ul>
             </li>
@@ -122,9 +119,9 @@
                <a href="#"><i class="fas fa-building"></i> <span> Routine </span> <span class="menu-arrow"></span></a>
                <ul>
 
-                  <li><a href="{% url 'subject_choice_create' %}">Add Routine </a></li>
+                  <li><a href="{% url 'subject_choice_create' %}">Add Teacher schedule </a></li>
 
-                  <li><a href="{% url 'teacher-subject-choice-list' %}">View Routine</a></li> 
+                  <li><a href="{% url 'teacher-subject-choice-list' %}">View Teacher schedule</a></li> 
 
 
                </ul>
