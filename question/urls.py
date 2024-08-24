@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ExamCreateView, ExamUpdateView, ExamDetailView,ExamListView
+from .views import ExamCreateView, ExamUpdateView, ExamDetailView, ExamListView
 
 urlpatterns = [
     path('exam/add/', ExamCreateView.as_view(), name='exam-add'),

@@ -11,14 +11,11 @@ Department and Program under semi
 """
 
 class Program(models.Model):
-    PROGRAM_CHOICES = [
-        ('BSc', 'Bachelor of Science'),
-        ('MSc', 'Master of Science'),
-    ]
-    name = models.CharField(max_length=3, choices=PROGRAM_CHOICES, unique=True)
+    
+    name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.get_name_display()
+        return self.name
 
     
 class Department(models.Model):

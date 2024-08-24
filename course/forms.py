@@ -6,7 +6,7 @@ class ProgramForm(forms.ModelForm):
         model = Program
         fields = ['name']
         widgets = {
-            'name': forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 class DepartmentForm(forms.ModelForm):
