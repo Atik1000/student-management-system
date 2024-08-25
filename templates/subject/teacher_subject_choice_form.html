@@ -18,9 +18,9 @@
             {{ form.subject.label_tag }} {{ form.subject }}
         </div>
     </div>
+    <div id="warning-message" class="alert alert-warning d-none" role="alert"></div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
-
 
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
@@ -29,14 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const semesterField = document.getElementById('id_semester');
     const subjectField = document.getElementById('id_subject');
     const form = document.getElementById('subject-choice-form');
-        // Find the label for the element with id "id_semester"
-        var label = document.querySelector('label[for="id_semester"]');
-    
-    // Change the label's text to "Batch"
+    const warningMessageDiv = document.getElementById('warning-message');
+
+    // Update label for semester to "Batch"
+    var label = document.querySelector('label[for="id_semester"]');
     if (label) {
         label.textContent = "Batch:";
     }
-
 
     function updateSemesters() {
         const departmentId = departmentField.value;
@@ -78,17 +77,53 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     } else {
                         subjectField.disabled = true;
-                        alert("Higher-ranked teachers have not completed their subject selection.");
+                        showWarning("Higher-ranked teachers have not completed their subject selection.");
                     }
                 })
                 .catch(error => console.error('Error loading subjects:', error));
         }
     }
 
+    function showWarning(message) {
+        warningMessageDiv.textContent = message;
+        warningMessageDiv.classList.remove('d-none');
+    }
+
+    function hideWarning() {
+        warningMessageDiv.classList.add('d-none');
+    }
+
+    function validateForm() {
+        const selectedSubjectOption = subjectField.options[subjectField.selectedIndex];
+        const selectedSubjectCredit = parseInt(selectedSubjectOption.getAttribute('data-credit'), 10) || 0;
+        let currentTotalCredits = 0;
+
+        const url = `{% url 'ajax_get_total_credits' %}?staff_id={{ request.user.staff.id }}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                currentTotalCredits = data.total_credits || 0;
+
+                const newTotalCredits = currentTotalCredits + selectedSubjectCredit;
+                if (newTotalCredits > 20) {
+                    showWarning(`Total credit limit exceeded. Current total is ${currentTotalCredits} credits. You cannot add more than 20 credits.`);
+                } else {
+                    hideWarning();
+                    form.submit();
+                }
+            })
+            .catch(error => console.error('Error validating form:', error));
+
+        return false;
+    }
+
     departmentField.addEventListener('change', updateSemesters);
     semesterTypeField.addEventListener('change', updateSemesters);
     semesterField.addEventListener('change', updateSubjects);
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        validateForm();
+    });
 });
-
 </script>
 {% endblock %}

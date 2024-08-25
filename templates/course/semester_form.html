@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="mt-5">
-  <h1 class="mb-4">{% if form.instance.pk %}Update Semester{% else %}Create Semester{% endif %}</h1>
+  <h1 class="mb-4">{% if form.instance.pk %}Update Batch{% else %}Create Batch{% endif %}</h1>
   <form method="post">
     {% csrf_token %}
     <div class="row">

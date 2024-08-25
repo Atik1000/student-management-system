@@ -121,6 +121,7 @@ class TeacherSubjectChoiceCreateView(CreateView):
     def form_valid(self, form):
         form.instance.staff = self.request.user.staff
 
+        # Check current total credits
         current_total_credits = TeacherSubjectChoice.objects.filter(
             staff=self.request.user.staff
         ).aggregate(total=Sum('subject__credit'))['total'] or 0
@@ -130,6 +131,7 @@ class TeacherSubjectChoiceCreateView(CreateView):
             form.add_error('subject', f"Adding this subject will exceed the 20-credit limit. Your current total is {current_total_credits} credits.")
             return self.form_invalid(form)
 
+        # Check for higher-ranked staff
         higher_ranks = ['CH', 'AP', 'AS', 'LE']
         staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
         higher_ranks = higher_ranks[:staff_rank_index]
@@ -142,6 +144,10 @@ class TeacherSubjectChoiceCreateView(CreateView):
             return self.form_invalid(form)
 
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        # Render the form with errors
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class TeacherSubjectChoiceUpdateView(UpdateView):
@@ -198,6 +204,11 @@ def load_subjects(request):
     
     return JsonResponse({'subjects': list(subjects.values('id', 'sub_name'))})
 
+
+def ajax_get_total_credits(request):
+    staff_id = request.GET.get('staff_id')
+    total_credits = TeacherSubjectChoice.objects.filter(staff_id=staff_id).aggregate(total=Sum('subject__credit'))['total'] or 0
+    return JsonResponse({'total_credits': total_credits})
 
 from django.contrib.auth.decorators import login_required
 

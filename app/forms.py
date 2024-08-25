@@ -38,21 +38,19 @@ class RoutineForm(forms.ModelForm):
         # Additional custom validation (if needed) can be added here.
 
         return cleaned_data
-    
-
 
 
 class TeacherSubjectChoiceForm(forms.ModelForm):
+
     class Meta:
         model = TeacherSubjectChoice
-        fields = ['department', 'semester_type', 'semester', 'subject']  # Removed 'batch'
+        fields = ['department', 'semester_type', 'semester', 'subject']
         widgets = {
             'department': forms.Select(attrs={'class': 'form-control'}),
             'semester_type': forms.Select(attrs={'class': 'form-control'}),
             'semester': forms.Select(attrs={'class': 'form-control'}),
             'subject': forms.Select(attrs={'class': 'form-control'}),
         }
-
 
     def __init__(self, *args, **kwargs):
         self.staff = kwargs.pop('staff', None)
@@ -81,6 +79,9 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
             higher_ranks = ['CH', 'AP', 'AS', 'LE']
             higher_ranks = higher_ranks[:higher_ranks.index(self.staff.rank)]
 
+            warnings = []
+
+            # Ensure higher-ranked teachers have selected at least 18 credits
             for rank in higher_ranks:
                 higher_rank_staff = Staff.objects.filter(rank=rank)
                 for staff in higher_rank_staff:
@@ -89,26 +90,39 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
                     ).aggregate(total=Sum('subject__credit'))['total'] or 0
 
                     if total_credits <= 17:
-                        raise ValidationError(
-                            f"A higher-ranked teacher ({staff.rank}) has not completed over 17 credits. You cannot select a subject until they have selected at least 18 credits."
+                        warnings.append(
+                            f"A higher-ranked teacher ({staff.rank}) has not completed over 17 credits. You cannot select a subject until they have selected at least 17 credits."
                         )
 
+            if warnings:
+                self.add_warning_messages(warnings)
+
+            # Exclude subjects already chosen by higher-ranked teachers
             higher_rank_subjects = TeacherSubjectChoice.objects.filter(
                 semester_id=semester_id,
                 staff__rank__in=higher_ranks
             ).values_list('subject_id', flat=True)
 
+            # Exclude subjects already chosen by the current teacher
             already_selected_subjects = TeacherSubjectChoice.objects.filter(
                 staff=self.staff,
                 semester_id=semester_id
             ).values_list('subject_id', flat=True)
 
+            # Exclude subjects already chosen by any teacher in the current semester
+            all_selected_subjects = TeacherSubjectChoice.objects.filter(
+                semester_id=semester_id
+            ).values_list('subject_id', flat=True)
+
+            # Filter the subjects queryset accordingly
             self.fields['subject'].queryset = Subject.objects.filter(
                 semester_id=semester_id
             ).exclude(
                 id__in=higher_rank_subjects
             ).exclude(
                 id__in=already_selected_subjects
+            ).exclude(
+                id__in=all_selected_subjects
             )
         elif self.instance.pk:
             self.fields['subject'].queryset = Subject.objects.filter(
@@ -123,6 +137,8 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
         cleaned_data = super().clean()
         selected_subject = cleaned_data.get('subject')
 
+        warnings = []
+
         if selected_subject:
             current_total_credits = TeacherSubjectChoice.objects.filter(
                 staff=self.staff
@@ -131,6 +147,14 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
             new_total_credits = current_total_credits + selected_subject.credit
 
             if new_total_credits > 20:
-                raise ValidationError(f"Total credit limit exceeded. Current total is {current_total_credits} credits. You cannot add more than 20 credits.")
+                warnings.append(f"Total credit limit exceeded. Current total is {current_total_credits} credits. You cannot add more than 20 credits.")
+
+        if warnings:
+            self.add_warning_messages(warnings)
 
         return cleaned_data
+
+    def add_warning_messages(self, warnings):
+        """Add warning messages to the form's non-field errors."""
+        for warning in warnings:
+            self.add_error(None, warning)

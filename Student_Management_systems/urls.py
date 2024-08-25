@@ -7,7 +7,7 @@ from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreate
     RoutineUpdateView, teacher_weekly_routine_view,IntakeCreateView, IntakeListView)
 from Student_Management_systems.Staff_Views import (load_batches, load_semesters, load_subjects,
     STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
-    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion)
+    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion,ajax_get_total_credits)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -103,6 +103,7 @@ urlpatterns = [
     path('ajax/load-semesters/', load_semesters, name='ajax_load_semesters'),
     path('ajax/load-batches/', load_batches, name='ajax_load_batches'),
     path('ajax/load-subjects/', load_subjects, name='ajax_load_subjects'),
+    path('ajax/get-total-credits/', ajax_get_total_credits, name='ajax_get_total_credits'),
 
     path('teacher-subject-choices/', teacher_subject_choice_list, name='teacher-subject-choice-list'),
     path('teacher/<int:pk>/subject/', TeacherSubjectChoiceListView.as_view(), name='teacher_Subject'),
