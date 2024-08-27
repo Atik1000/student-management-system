@@ -51,20 +51,18 @@ class Staff(models.Model):
         ('LE', 'Lecturer'),
     ]
 
-    admin = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
+    admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     first_name = models.CharField(max_length=100 ,null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)  # Assuming email is unique
-    # password = models.CharField(max_length=128)  # Password field
-
-    # username = models.CharField(max_length=150, unique=True, null=True, blank=True)
+    email = models.EmailField(max_length=255, unique=True, null=True, blank=True)
     address = models.TextField( null=True, blank=True)
     gender = models.CharField(max_length=10, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], null=True, blank=True)  
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name='staff_department')
     rank = models.CharField(max_length=2, choices=RANK_CHOICES, null=True)
+    credit_access = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

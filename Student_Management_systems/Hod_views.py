@@ -205,6 +205,7 @@ def ADD_STAFF(request):
         address = request.POST.get('address')
         gender = request.POST.get('gender')
         department_id = request.POST.get('department')
+        credit_access = request.POST.get('credit_access')
         rank = request.POST.get('rank')
 
         if CustomUser.objects.filter(email=email).exists():
@@ -238,6 +239,7 @@ def ADD_STAFF(request):
                 gender=gender,
                 department=department,
                 rank=rank,
+                credit_access=credit_access,
             )
             staff.save()
             messages.success(request, f"{user.first_name} {user.last_name} has been successfully added!")
@@ -277,6 +279,7 @@ def EDIT_STAFF(request, id):
         gender = request.POST.get('gender')
         department_id = request.POST.get('department')
         rank = request.POST.get('rank')
+        credit_access = request.POST.get('credit_access')
 
         if CustomUser.objects.filter(email=email).exclude(id=staff.admin.id).exists():
             messages.warning(request, 'Email is already taken')
@@ -302,6 +305,7 @@ def EDIT_STAFF(request, id):
             staff.gender = gender
             staff.department = Department.objects.get(id=department_id)
             staff.rank = rank
+            staff.credit_access = credit_access
             staff.save()
 
             messages.success(request, f'{user.first_name} {user.last_name} has been successfully updated!')

@@ -38,7 +38,8 @@ class RoutineForm(forms.ModelForm):
         # Additional custom validation (if needed) can be added here.
 
         return cleaned_data
-
+from django.core.exceptions import ValidationError
+from django.db.models import Sum
 
 class TeacherSubjectChoiceForm(forms.ModelForm):
 
@@ -76,12 +77,12 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
 
         if 'semester' in self.data:
             semester_id = int(self.data.get('semester'))
+
             higher_ranks = ['CH', 'AP', 'AS', 'LE']
             higher_ranks = higher_ranks[:higher_ranks.index(self.staff.rank)]
 
             warnings = []
 
-            # Ensure higher-ranked teachers have selected at least 18 credits
             for rank in higher_ranks:
                 higher_rank_staff = Staff.objects.filter(rank=rank)
                 for staff in higher_rank_staff:
@@ -97,24 +98,20 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
             if warnings:
                 self.add_warning_messages(warnings)
 
-            # Exclude subjects already chosen by higher-ranked teachers
             higher_rank_subjects = TeacherSubjectChoice.objects.filter(
                 semester_id=semester_id,
                 staff__rank__in=higher_ranks
             ).values_list('subject_id', flat=True)
 
-            # Exclude subjects already chosen by the current teacher
             already_selected_subjects = TeacherSubjectChoice.objects.filter(
                 staff=self.staff,
                 semester_id=semester_id
             ).values_list('subject_id', flat=True)
-
-            # Exclude subjects already chosen by any teacher in the current semester
+            
             all_selected_subjects = TeacherSubjectChoice.objects.filter(
                 semester_id=semester_id
             ).values_list('subject_id', flat=True)
 
-            # Filter the subjects queryset accordingly
             self.fields['subject'].queryset = Subject.objects.filter(
                 semester_id=semester_id
             ).exclude(
@@ -144,10 +141,16 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
                 staff=self.staff
             ).aggregate(total=Sum('subject__credit'))['total'] or 0
 
+            # Get the dynamic credit limit from the staff's credit_access field
+            credit_limit = self.staff.credit_access or 20  # Default to 20 if not set
+
             new_total_credits = current_total_credits + selected_subject.credit
 
-            if new_total_credits > 20:
-                warnings.append(f"Total credit limit exceeded. Current total is {current_total_credits} credits. You cannot add more than 20 credits.")
+            if new_total_credits > credit_limit:
+                warnings.append(
+                    f"Total credit limit exceeded. Current total is {current_total_credits} credits. "
+                    f"You cannot add more than {credit_limit} credits."
+                )
 
         if warnings:
             self.add_warning_messages(warnings)
@@ -158,3 +161,4 @@ class TeacherSubjectChoiceForm(forms.ModelForm):
         """Add warning messages to the form's non-field errors."""
         for warning in warnings:
             self.add_error(None, warning)
+
