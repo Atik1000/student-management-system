@@ -17,25 +17,20 @@ from course.models import Semester, SemesterType, Subject
 from django.http import JsonResponse
 
 
-
 def HOME(request):
-    return render(request,'Staff/home.html')
-
+    return render(request, 'Staff/home.html')
 
 
 def NOTIFICATIONS(request):
     staff = Staff.objects.filter(admin=request.user.id)
     notifications = []
-    
     for i in staff:
         staff_id = i.id
         notification = Staff_Notification.objects.filter(staff_id=staff_id)
         notifications.extend(notification)
-    
     context = {
         'notification': notifications,
     }
-    
     return render(request, 'Staff/notification.html', context)
 
 
@@ -103,9 +98,7 @@ def STAFF_FEEDBACK_SAVE(request):
             feedback_reply = " ",
         )
         feedback.save()
-        return redirect('staff-feedback') 
-    
-    
+        return redirect('staff-feedback')
 
 class TeacherSubjectChoiceCreateView(CreateView):
     model = TeacherSubjectChoice
@@ -119,21 +112,25 @@ class TeacherSubjectChoiceCreateView(CreateView):
         return kwargs
 
     def form_valid(self, form):
-        form.instance.staff = self.request.user.staff
+        staff = self.request.user.staff
+        form.instance.staff = staff
+
+        # Retrieve the dynamic credit limit from the staff's `credit_access` field
+        credit_limit = staff.credit_access or 20  # Default to 20 if not set
 
         # Check current total credits
         current_total_credits = TeacherSubjectChoice.objects.filter(
-            staff=self.request.user.staff
+            staff=staff
         ).aggregate(total=Sum('subject__credit'))['total'] or 0
 
         new_total_credits = current_total_credits + form.instance.subject.credit
-        if new_total_credits > 20:
-            form.add_error('subject', f"Adding this subject will exceed the 20-credit limit. Your current total is {current_total_credits} credits.")
+        if new_total_credits > credit_limit:
+            form.add_error('subject', f"Adding this subject will exceed your credit limit of {credit_limit} credits. Your current total is {current_total_credits} credits.")
             return self.form_invalid(form)
 
         # Check for higher-ranked staff
         higher_ranks = ['CH', 'AP', 'AS', 'LE']
-        staff_rank_index = higher_ranks.index(self.request.user.staff.rank)
+        staff_rank_index = higher_ranks.index(staff.rank)
         higher_ranks = higher_ranks[:staff_rank_index]
 
         if TeacherSubjectChoice.objects.filter(
@@ -144,7 +141,7 @@ class TeacherSubjectChoiceCreateView(CreateView):
             return self.form_invalid(form)
 
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         # Render the form with errors
         return self.render_to_response(self.get_context_data(form=form))
