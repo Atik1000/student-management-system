@@ -63,6 +63,7 @@ def ADD_STUDENT(request):
         address = request.POST.get('address')
         gender = request.POST.get('gender')
         semester_id = request.POST.get('semester_id')
+        roll_no = request.POST.get('roll_no')
 
         if CustomUser.objects.filter(email=email).exists():
             messages.warning(request, 'Email is already taken')
@@ -89,6 +90,7 @@ def ADD_STUDENT(request):
                 address=address,
                 semester=semester,
                 gender=gender,
+                roll_no=roll_no,
             )
             student.save()
             messages.success(request, user.first_name + " " + user.last_name + " has been successfully added!")
@@ -126,10 +128,11 @@ def EDIT_STUDENT(request,id):
     return render(request,'Hod/edit_student.html',context)
 
 @login_required(login_url='/')
-def UPDATE_STUDENT(request):
+def EDIT_STUDENT(request, id):
+    student = get_object_or_404(Student, id=id)
+    semesters = Semester.objects.all()
+
     if request.method == 'POST':
-        student_id = request.POST.get('student_id')
-        profile_pic = request.FILES.get('profile_pic')
         profile_pic = request.FILES.get('profile_pic')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -138,40 +141,42 @@ def UPDATE_STUDENT(request):
         password = request.POST.get('password')
         address = request.POST.get('address')
         gender = request.POST.get('gender')
-        course_id = request.POST.get('course_id')
-        session_year_id = request.POST.get('session_year_id')
+        semester_id = request.POST.get('semester_id')
+        roll_no = request.POST.get('roll_no')
 
-
-        user = CustomUser.objects.get(id = student_id)
-
+        # Update the related CustomUser object
+        user = student.admin
         user.first_name = first_name
         user.last_name = last_name
         user.email = email
-        user.username= username
+        user.username = username
 
-        if password != None and password != "":
+        if password:
             user.set_password(password)
-        if profile_pic != None and profile_pic != "":
+        if profile_pic:
             user.profile_pic = profile_pic
         user.save()
 
-
-        student = Student.objects.get(admin =student_id)
+        # Update the Student object
         student.address = address
         student.gender = gender
+        student.roll_no = roll_no
 
-        coures = Semester.objects.get(id =course_id)
-        student.course_id = coures
+        if semester_id:
+            semester = get_object_or_404(Semester, id=semester_id)
+            student.semester = semester
 
-        session_year = Session_year.objects.get(id = session_year_id)
-        student.session_year_id = session_year
         student.save()
-        messages.success(request,'Record Are Successfully updated !')
+        messages.success(request, f'{user.first_name} {user.last_name} has been successfully updated!')
         return redirect('view_student')
 
+    context = {
+        'student': student,
+        'semesters': semesters,
+    }
 
+    return render(request, 'Hod/edit_student.html', context)
 
-    return render(request,'Hod/edit_student.html')
 
 @login_required(login_url='/')
 def DELETE_STUDENT(request,admin):

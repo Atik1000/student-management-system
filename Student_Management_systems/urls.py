@@ -29,7 +29,6 @@ urlpatterns = [
     path('Hod/Student/Add',Hod_views.ADD_STUDENT,name='add_student'),
     path('Hod/Student/View',Hod_views.VIEW_STUDENT,name= 'view_student'),
     path('Hod/Student/Edit/<str:id>',Hod_views.EDIT_STUDENT,name='edit_student'),
-    path('Hod/Student/update',Hod_views.UPDATE_STUDENT,name = 'update_student'),
     path('Hod/Student/Delete/<str:admin>', Hod_views.DELETE_STUDENT,name='delete_student'),
     
     # Staff

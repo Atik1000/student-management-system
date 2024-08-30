@@ -1,28 +1,31 @@
- {% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %}
 {% block content %}
-<div class="exam-container">
-    <h2 class="text-center">Dhaka International University</h2>    
-    <h3 class="text-center">Dept of CSE</h3>
+<div class="container">
+    <h2>Seat Plan for Room {{ room.number }}</h2>
+    <p>Number of seats: {{ room.num_seats }}</p>
+    <p>Number of columns: {{ room.num_columns }}</p>
 
-    <p class="text-center">Room number: {{ room.number }}</p>
-    <p class="text-center">Number of seats: {{ room.num_seats }}</p>
-    <p class="text-center">Number of columns: {{ room.num_columns }}</p>
-
-    <a href="{% url 'generate_seat_plan' %}" class=" btn-success">Generate seat plan</a>
-
-<table class="table table-bordered table-striped">
-  <thead>
-  </thead>
-  <tbody>
-      {% for row in seat_layout %}
-          <tr>
-              {% for seat in row %}
-                  <td>{{ seat }}</td>
-              {% endfor %}
-          </tr>
-      {% endfor %}
-  </tbody>
-</table>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                {% for header in semester_headers %}
+                    <th class="text-center">Batch {{ header.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in seat_layout %}
+                <tr>
+                    {% for seat, student in row %}
+                        {% if student %}
+                            <td>{{ seat }}<br>{{ student.roll_no }}</td>
+                        {% else %}
+                            <td>{{ seat }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

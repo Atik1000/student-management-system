@@ -13,8 +13,6 @@ class CustomUser(AbstractUser):
         (2,'STAFF'),
         (3,'STUDENT'),
     )
-
-
     user_type = models.CharField(choices=USER,max_length=50,default=1)
     profile_pic = models.ImageField(upload_to='media/profile_pic')
 
@@ -33,8 +31,9 @@ class Session_year(models.Model):
 
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    semester=models.ForeignKey(Semester, on_delete=models.DO_NOTHING)
+    semester = models.ForeignKey(Semester, on_delete=models.DO_NOTHING)
     address = models.TextField()
+    roll_no = models.IntegerField()
     gender = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

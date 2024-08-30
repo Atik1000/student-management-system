@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Generate Seat Plan for Room {{ room.number }}</h2>
+    <form method="post" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="semesters">Select Semesters</label>
+            <select multiple class="form-control" id="semesters" name="semesters">
+                {% for semester in semesters %}
+                <option value="{{ semester.id }}">{{ semester.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Seat Plan</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        const selectedSemesters = document.getElementById('semesters').selectedOptions;
+        if (selectedSemesters.length === 0) {
+            alert('Please select at least one semester.');
+            return false;
+        }
+        return true;
+    }
+</script>
+{% endblock %}
