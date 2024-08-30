@@ -4,41 +4,10 @@ from django.forms import ValidationError
 from django import forms
 from django.core.exceptions import ValidationError
 from course.models import Semester, SemesterType
-from .models import Routine, Staff, Subject, TeacherSubjectChoice
+from .models import  Staff, Subject, TeacherSubjectChoice
 from django.db.models import Sum
 
-from .models import TeacherSubjectChoice, Department, SemesterType, Semester, Subject, Intake
-
-
-class IntakeForm(forms.ModelForm):
-    class Meta:
-        model = Intake
-        fields = ['name', 'sem_name']
-
-
-class RoutineForm(forms.ModelForm):
-    class Meta:
-        model = Routine
-        fields = ['semester', 'subject', 'day', 'start_time', 'end_time']  # Removed 'teacher'
-        widgets = {
-            'semester': forms.Select(attrs={'class': 'form-control'}),
-            'subject': forms.Select(attrs={'class': 'form-control'}),
-            'day': forms.Select(attrs={'class': 'form-control'}),
-            'start_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-            'end_time': forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}),
-        }
-
-    def clean(self):
-        cleaned_data = super().clean()
-        warnings = self.instance.clean()
-
-        if warnings:
-            raise forms.ValidationError(warnings)
-
-        # Additional custom validation (if needed) can be added here.
-
-        return cleaned_data
-from django.core.exceptions import ValidationError
+from .models import TeacherSubjectChoice, Department, SemesterType, Semester, Subject
 from django.db.models import Sum
 
 class TeacherSubjectChoiceForm(forms.ModelForm):

@@ -3,9 +3,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from Student_Management_systems.Hod_views import (check_conflicts, RoutineCreateView,
-    RoutineUpdateView, teacher_weekly_routine_view,IntakeCreateView, IntakeListView)
-from Student_Management_systems.Staff_Views import (load_batches, load_semesters, load_subjects,
+from Student_Management_systems.Staff_Views import ( load_semesters, load_subjects,
     STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
     TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion,ajax_get_total_credits)
 
@@ -30,7 +28,7 @@ urlpatterns = [
     path('Hod/Student/View',Hod_views.VIEW_STUDENT,name= 'view_student'),
     path('Hod/Student/Edit/<str:id>',Hod_views.EDIT_STUDENT,name='edit_student'),
     path('Hod/Student/Delete/<str:admin>', Hod_views.DELETE_STUDENT,name='delete_student'),
-    
+
     # Staff
 
     path('staff/add/', Hod_views.ADD_STAFF, name='add_staff'),
@@ -66,24 +64,6 @@ urlpatterns = [
     path('staff/feedback',Staff_Views.STAFF_FEEDBACK,name='staff-feedback'),
     path('staff/feedback/save',Staff_Views.STAFF_FEEDBACK_SAVE,name='staff_feedback_save'),
 
-# #  routine urls
-#     path('routine/add/', RoutineCreateView.as_view(), name='routine-add'),
-
-    # path('add_routine/add/', Hod_views.add_routine, name='routine-add'),
-      path('routine/add/',Hod_views.create_routine, name='routine-add'),  # Updated to use the function-based view
-
-    path('routine/<int:pk>/update/', RoutineUpdateView.as_view(), name='routine-update'),
-
-    # path('teacher/<int:pk>/routines/', TeacherRoutineDetailView.as_view(), name='teacher_routine_detail'),
-
-    # path('teacher/<int:pk>/weekly-routine/', WeeklyRoutineDetailView.as_view(), name='day_wise_details'),
-    path('teacher/<int:teacher_id>/routines/', teacher_weekly_routine_view, name='teacher_routines'),
-    path('routine/check_conflicts/', check_conflicts, name='check_conflicts'),
-
-
-    # path('weekly_details/<int:pk>/', WeeklyDetailsView.as_view(), name='weekly_details'),
-
-
 
 
     # question url
@@ -100,7 +80,7 @@ urlpatterns = [
     path('subject-choice/create/', TeacherSubjectChoiceCreateView.as_view(), name='subject_choice_create'),
     path('subject-choice/update/<int:pk>/', TeacherSubjectChoiceUpdateView.as_view(), name='subject_choice_update'),
     path('ajax/load-semesters/', load_semesters, name='ajax_load_semesters'),
-    path('ajax/load-batches/', load_batches, name='ajax_load_batches'),
+    # path('ajax/load-batches/', load_batches, name='ajax_load_batches'),
     path('ajax/load-subjects/', load_subjects, name='ajax_load_subjects'),
     path('ajax/get-total-credits/', ajax_get_total_credits, name='ajax_get_total_credits'),
 
@@ -109,13 +89,6 @@ urlpatterns = [
 
 
     path('ajax/check_higher_rank_completion/', check_higher_rank_completion, name='check_higher_rank_completion'),
-
-
-
-# intake 
-    path('intake/create/', IntakeCreateView.as_view(), name='intake-create'),
-    path('intake/', IntakeListView.as_view(), name='intake-list'),
-
 
 
 

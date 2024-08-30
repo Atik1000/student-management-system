@@ -1,6 +1,6 @@
 import django.http
 from django.shortcuts import render,redirect
-from app.models import (Intake, Staff, Staff_Feedback, Staff_leave, Staff_Notification,
+from app.models import ( Staff, Staff_Feedback, Staff_leave, Staff_Notification,
     TeacherSubjectChoice)
 from django.contrib import messages
 from Student_Management_systems.Hod_views import SAVE_NOTIFICATION
@@ -185,13 +185,6 @@ def load_semesters(request):
     
     return JsonResponse({'semesters': list(semesters.values('id', 'name'))})
 
-
-def load_batches(request):
-    semester_id = request.GET.get('semester')
-    if semester_id:
-        batches = Intake.objects.filter(sem_name=semester_id)
-        return JsonResponse({'batches': list(batches.values('id', 'name'))})
-    return JsonResponse({'batches': []})
 
 
 def load_subjects(request):

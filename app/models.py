@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from course.models import Department, Semester, SemesterType, Subject
 from datetime import time
-# from seatplan.models import Batch
 
 
 
@@ -143,42 +142,6 @@ class Staff_Feedback(models.Model):
 
     def __str__(self):
         return self.staff_id.admin.first_name + self.staff_id.admin.last_name
-    
-
-
-
-
-class Routine(models.Model):
-    DAY_CHOICES = [
-        ('Sun', 'Sunday'),
-        ('Mon', 'Monday'),
-        ('Tue', 'Tuesday'),
-        ('Wed', 'Wednesday'),
-        ('Thu', 'Thursday'),
-        ('Fri', 'Friday'),
-    ]
-
-    semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='routines')
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='routines')
-    teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='routines')
-    day = models.CharField(max_length=3, choices=DAY_CHOICES)
-    start_time = models.TimeField()
-
-    end_time = models.TimeField()
-
-
-    def __str__(self):
-        return f"{self.semester} - {self.subject} - {self.teacher} - {self.day} ({self.start_time} - {self.end_time})"
-
-
-
-class Intake(models.Model):
-    name = models.CharField(max_length=100)
-    sem_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='intakes')  # Use the correct related_name if applicable
-
-    def __str__(self):
-        return self.name
-
 
 
 class TeacherSubjectChoice(models.Model):
