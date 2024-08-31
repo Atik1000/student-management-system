@@ -7,11 +7,17 @@
 
     <table class="table table-bordered table-striped">
         <thead>
-            <tr>
-                {% for header in semester_headers %}
-                    <th class="text-center">Batch {{ header.name }}</th>
-                {% endfor %}
-            </tr>
+            {% if semester_headers %}
+                <tr>
+                    {% for header in semester_headers %}
+                        <th class="text-center">Batch {{ header.semester__name }}</th>
+                    {% endfor %}
+                </tr>
+            {% else %}
+                <tr>
+                    <th class="text-center" colspan="{{ room.num_columns }}">Seat Layout</th>
+                </tr>
+            {% endif %}
         </thead>
         <tbody>
             {% for row in seat_layout %}
@@ -27,5 +33,7 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <a href="{% url 'generate_seatplan' room.pk %}" class="btn btn-primary mt-3">Generate Seat Plan</a>
 </div>
 {% endblock %}
