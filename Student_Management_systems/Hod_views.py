@@ -47,21 +47,18 @@ def HOME(request):
     return render(request,'Hod/home.html',context)
 
 
-
+#Student crud
 
 @login_required(login_url='/')
 
 def ADD_STUDENT(request):
     semesters = Semester.objects.all()
     if request.method == "POST":
-        profile_pic = request.FILES.get('profile_pic')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
-        address = request.POST.get('address')
-        gender = request.POST.get('gender')
         semester_id = request.POST.get('semester_id')
         roll_no = request.POST.get('roll_no')
 
@@ -77,7 +74,6 @@ def ADD_STUDENT(request):
                 last_name=last_name,
                 username=username,
                 email=email,
-                profile_pic=profile_pic,
                 user_type=3
             )
             user.set_password(password)
@@ -87,9 +83,7 @@ def ADD_STUDENT(request):
 
             student = Student(
                 admin=user,
-                address=address,
                 semester=semester,
-                gender=gender,
                 roll_no=roll_no,
             )
             student.save()
@@ -103,29 +97,22 @@ def ADD_STUDENT(request):
     return render(request, 'Hod/add_student.html', context)
 
 
-
-
-
 @login_required(login_url='/')
 def VIEW_STUDENT(request):
-    student = Student.objects.all()
-    context = {
-        'student':student,
-    }
-    return render(request,'Hod/view_student.html',context)
+    semester_id = request.GET.get('semester')
+    if semester_id:
+        students = Student.objects.filter(semester_id=semester_id)
+    else:
+        students = Student.objects.all()
 
-@login_required(login_url='/')
-def EDIT_STUDENT(request,id):
-    student = Student.objects.filter(id = id)
-    course = Semester.objects.all()
-    session_year = Session_year.objects.all()
-
+    semesters = Semester.objects.all()
     context = {
-        'student':student,
-        'course':course,
-        'session_year':session_year,
+        'students': students,
+        'semesters': semesters,
+        'selected_semester': semester_id,
     }
-    return render(request,'Hod/edit_student.html',context)
+    return render(request, 'Hod/view_student.html', context)
+
 
 @login_required(login_url='/')
 def EDIT_STUDENT(request, id):
@@ -133,14 +120,11 @@ def EDIT_STUDENT(request, id):
     semesters = Semester.objects.all()
 
     if request.method == 'POST':
-        profile_pic = request.FILES.get('profile_pic')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
-        address = request.POST.get('address')
-        gender = request.POST.get('gender')
         semester_id = request.POST.get('semester_id')
         roll_no = request.POST.get('roll_no')
 
@@ -153,13 +137,8 @@ def EDIT_STUDENT(request, id):
 
         if password:
             user.set_password(password)
-        if profile_pic:
-            user.profile_pic = profile_pic
         user.save()
 
-        # Update the Student object
-        student.address = address
-        student.gender = gender
         student.roll_no = roll_no
 
         if semester_id:

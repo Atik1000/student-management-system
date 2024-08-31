@@ -3,8 +3,8 @@
 {% load static %}
 <script>
    $(document).ready( function () {
-   $('#table_id').DataTable();
-   } );
+      $('#table_id').DataTable();
+   });
 </script>
 <div class="content container-fluid">
    <div class="page-header">
@@ -22,6 +22,23 @@
          </div>
       </div>
    </div>
+
+   <!-- Semester Filter Form -->
+   <form method="GET" class="form-inline mb-3">
+      <div class="form-group">
+         <label for="semester" class="mr-2">Filter by Batch:</label>
+         <select name="semester" id="semester" class="form-control mr-2">
+            <option value="">All Batch</option>
+            {% for semester in semesters %}
+            <option value="{{ semester.id }}" {% if selected_semester == semester.id|stringformat:"s" %}selected{% endif %}>
+               {{ semester.name }}
+            </option>
+            {% endfor %}
+         </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Filter</button>
+   </form>
+
    {% include 'includes/messages.html' %}
    <div class="row">
       <div class="col-sm-12">
@@ -36,30 +53,24 @@
                            <th>Roll</th>
                            <th>Batch</th>
                            <th>Email</th>
-                           <th>Gender</th>
-                           <th>Address</th>
-                           
                            <th class="text-right">Action</th>
                         </tr>
                      </thead>
                      <tbody>
-                        {% for i in student %}
+                        {% for student in students %}
                         <tr>
-                           <td>{{i.id}}</td>
-                           <td>{{i.admin.first_name}} {{i.admin.last_name}}</td>
-                           <td>{{i.roll_no}}</td>
-                           <td>{{i.semester.name}}</td>
-                           <td>{{i.admin.email}}</td>
-                           <td>{{i.gender}}</td>
-                           <td>{{i.address}}</td>
-                          
+                           <td>{{ student.id }}</td>
+                           <td>{{ student.admin.first_name }} {{ student.admin.last_name }}</td>
+                           <td>{{ student.roll_no }}</td>
+                           <td>{{ student.semester.name }}</td>
+                           <td>{{ student.admin.email }}</td>
                            <td class="text-right">
                               <div class="actions">
-                                 <a href="{% url 'edit_student' i.id %}" class="btn btn-sm bg-success-light mr-2">
-                                 <i class="fas fa-pen"></i>
+                                 <a href="{% url 'edit_student' student.id %}" class="btn btn-sm bg-success-light mr-2">
+                                    <i class="fas fa-pen"></i>
                                  </a>
-                                 <a href="{% url 'delete_student' i.admin.id %}" class="btn btn-sm bg-danger-light">
-                                 <i class="fas fa-trash"></i>
+                                 <a href="{% url 'delete_student' student.admin.id %}" class="btn btn-sm bg-danger-light">
+                                    <i class="fas fa-trash"></i>
                                  </a>
                               </div>
                            </td>

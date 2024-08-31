@@ -62,30 +62,11 @@
               </div>
             </div>
 
-            <div class="col-sm-11">
-              <div class="form-group">
-                <label>Address</label>
-                <textarea class="form-control" name="address" required>{{ student.address }}</textarea>
-              </div>
-            </div>
+
 
             <div class="col-sm-11">
               <div class="form-group">
-                <label>Gender</label>
-                <select class="form-control" name="gender">
-                  <option>Select Gender</option>
-                  <option value="Female" {% if student.gender == 'Female' %}selected{% endif %}>Female</option>
-                  <option value="Male" {% if student.gender == 'Male' %}selected{% endif %}>Male</option>
-                  <option value="Others" {% if student.gender == 'Others' %}selected{% endif %}>Others</option>
-                </select>
-              </div>
-            </div>
-
-            <br>
-
-            <div class="col-sm-11">
-              <div class="form-group">
-                <label>Semester</label>
+                <label>Batch</label>
                 <select class="form-control" name="course_id">
                   <option>Select Semester</option>
                   {% for i in semesters %}
