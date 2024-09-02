@@ -1,12 +1,13 @@
 from django import forms
 from .models import Exam
 
+
 class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
         fields = [
             'subject_name', 'department_name', 'semester_name', 'batch_number',
-             'name', 'time', 'marks',
+            'name', 'time', 'marks',
             'q1_number', 'q1_description', 'q1_marks',
             'q2_number', 'q2_description', 'q2_marks',
             'q3_number', 'q3_description', 'q3_marks',

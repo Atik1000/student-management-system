@@ -20,9 +20,9 @@
             {% endif %}
         </thead>
         <tbody>
-            {% for row in seat_layout %}
+            {% for col in seat_layout %}
                 <tr>
-                    {% for seat, student in row %}
+                    {% for seat, student in col %}
                         {% if student %}
                             <td>{{ seat }}<br>{{ student.roll_no }}</td>
                         {% else %}

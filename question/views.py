@@ -2,15 +2,18 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import  UpdateView, DetailView,View,ListView
+from django.views.generic import  UpdateView, DetailView, View, ListView
 from app.models import Staff
 from .models import Exam
 from .froms import ExamForm
 from django.shortcuts import render, get_object_or_404,redirect
-
+from django.http import JsonResponse
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 # from weasyprint import HTML
+
+from course.models import Department, Semester, Subject
+
 
 class ExamCreateView(View):
     model = Exam
@@ -19,11 +22,9 @@ class ExamCreateView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-        context = {
-            'form': form
-        }
+        context = {'form': form}
         return render(request, self.template_name, context)
-    
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -32,13 +33,18 @@ class ExamCreateView(View):
             obj.teacher = staff
             obj.save()
             return redirect('exam-detail', obj.pk)
-        context = {
-            'form': form
-        }
+        context = {'form': form}
         return render(request, self.template_name, context)
 
- 
+def load_semesters(request):
+    department_id = request.GET.get('department')
+    semesters = Semester.objects.filter(department_id=department_id).values('id', 'name')
+    return JsonResponse({'semesters': list(semesters)})
 
+def load_subjects(request):
+    semester_id = request.GET.get('semester')
+    subjects = Subject.objects.filter(semester_id=semester_id).values('id', 'sub_name')
+    return JsonResponse({'subjects': list(subjects)})
 
 # Exam List View
 class ExamListView(ListView):

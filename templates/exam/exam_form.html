@@ -4,21 +4,28 @@
 {% block content %}
 <div class="mt-5">
   <h1 class="mb-4">{% if form.instance.pk %}Update Exam{% else %}Add Exam{% endif %}</h1>
-  <form method="post" action="{% if form.instance.pk %}{% url 'exam-update' form.instance.pk %}{% else %}{% url 'exam-add' %}{% endif %}" enctype="multipart/form-data">
+  <form method="post" action="{% if form.instance.pk %}{% url 'exam-update' form.instance.pk %}{% else %}{% url 'exam-add' %}{% endif %}">
     {% csrf_token %}
     
     <!-- Exam Details Section -->
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.subject_name.label_tag }} {{ form.subject_name }}
+        {{ form.department_name.label_tag }}
+        {{ form.department_name }}
       </div>
       <div class="col-md-6 mb-3">
-        {{ form.department_name.label_tag }} {{ form.department_name }}
+        {{ form.semester_name.label_tag }}
+        <select id="id_semester_name" name="semester_name" class="form-control">
+          <option value="">Select a Semester</option>
+        </select>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        {{ form.semester_name.label_tag }} {{ form.semester_name }}
+        {{ form.subject_name.label_tag }}
+        <select id="id_subject_name" name="subject_name" class="form-control">
+          <option value="">Select a Subject</option>
+        </select>
       </div>
       <div class="col-md-6 mb-3">
         {{ form.batch_number.label_tag }} {{ form.batch_number }}
@@ -43,34 +50,26 @@
     <div class="row">
       <div class="col-md-2">
            {{ form.q1_number }}
-
       </div>
       <div class="col-md-8">    
         {{ form.q1_description }}
-
       </div>
       <div class="col-md-2">
         {{ form.q1_marks }}
-
       </div>
-      
     </div>
-
     <div class="row">
       <div class="col-md-2">
            {{ form.q2_number }}
-
       </div>
       <div class="col-md-8">    
         {{ form.q2_description }}
-
       </div>
       <div class="col-md-2">
         {{ form.q2_marks }}
-
       </div>
-      </div>
-      <div class="row">
+    </div>
+    <div class="row">
         <div class="col-md-2">
             {{ form.q3_number }}
         </div>
@@ -81,7 +80,6 @@
             {{ form.q3_marks }}
         </div>
     </div>
-    
     <div class="row">
         <div class="col-md-2">
             {{ form.q4_number }}
@@ -93,7 +91,6 @@
             {{ form.q4_marks }}
         </div>
     </div>
-    
     <div class="row">
         <div class="col-md-2">
             {{ form.q5_number }}
@@ -105,7 +102,6 @@
             {{ form.q5_marks }}
         </div>
     </div>
-    
     <div class="row">
         <div class="col-md-2">
             {{ form.q6_number }}
@@ -117,14 +113,56 @@
             {{ form.q6_marks }}
         </div>
     </div>
-    
-    
 
-    
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary mt-4">Save</button>
   </form>
 </div>
 
+<!-- JavaScript for AJAX to Load Semesters and Subjects -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const departmentSelect = document.getElementById('id_department_name');
+    const semesterSelect = document.getElementById('id_semester_name');
+    const subjectSelect = document.getElementById('id_subject_name');
+
+    departmentSelect.addEventListener('change', function() {
+      const departmentId = this.value;
+      semesterSelect.innerHTML = '<option value="">Select a Semester</option>';
+      subjectSelect.innerHTML = '<option value="">Select a Subject</option>';
+
+      if (departmentId) {
+        const url = `{% url 'ajax_load_semesters' %}?department=` + departmentId;
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            data.semesters.forEach(semester => {
+              const option = new Option(semester.name, semester.id);
+              semesterSelect.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error loading semesters:', error));
+      }
+    });
+
+    semesterSelect.addEventListener('change', function() {
+      const semesterId = this.value;
+      subjectSelect.innerHTML = '<option value="">Select a Subject</option>';
+
+      if (semesterId) {
+        const url = `{% url 'ajax_load_subjects' %}?semester=` + semesterId;
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            data.subjects.forEach(subject => {
+              const option = new Option(subject.sub_name, subject.id);
+              subjectSelect.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error loading subjects:', error));
+      }
+    });
+  });
+</script>
 
 {% endblock %}
