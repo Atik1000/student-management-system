@@ -12,8 +12,11 @@ class UserModel(UserAdmin):
 admin.site.register(Room)
 
 
-admin.site.register(SeatPlan)
+# admin.site.register(SeatPlan)
 
+@admin.register(SeatPlan)
+class SeatPlanAdmin(admin.ModelAdmin):
+    list_display=['id','room','semester','student','col_num','seat_number']
 
 
 

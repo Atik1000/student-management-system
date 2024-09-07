@@ -30,7 +30,7 @@ class Session_year(models.Model):
 
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    semester = models.ForeignKey(Semester, on_delete=models.DO_NOTHING)
+    semester = models.ForeignKey(Semester, on_delete=models.DO_NOTHING,related_name='students')
     address = models.TextField()
     roll_no = models.IntegerField()
     gender = models.CharField(max_length=100)

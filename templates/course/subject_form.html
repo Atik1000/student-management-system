@@ -54,5 +54,10 @@
         }
     });
   });
+   // Update label for semester to "Batch"
+   var label = document.querySelector('label[for="id_semester"]');
+    if (label) {
+        label.textContent = "Batch:";
+    }
 </script>
 {% endblock %}

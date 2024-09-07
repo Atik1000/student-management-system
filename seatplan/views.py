@@ -77,35 +77,69 @@ class SeatPlanGenerateView(View):
         semesters = Semester.objects.all()
         return render(request, self.template_name, {'room': room, 'semesters': semesters})
     
-    def post(self, request, *args, **kwargs):
+    # def post(self, request, *args, **kwargs):
+    #     room = get_object_or_404(Room, pk=kwargs['pk'])
+    #     selected_semesters = request.POST.getlist('semesters')
+    #     semesters = Semester.objects.filter(pk__in=selected_semesters).order_by('name')
+        
+    #     seats_per_column = room.num_seats // room.num_columns
+    #     seat_layout = [[] for _ in range(seats_per_column)]
+
+    #     # Organize students by semester
+    #     students_by_semester = [list(Student.objects.filter(semester=semester).order_by('roll_no')) for semester in semesters]
+
+    #     # Assign students to columns in a cyclic manner
+    #     column_index = 0
+    #     while any(students_by_semester):
+    #         for row in seat_layout:
+    #             if column_index < room.num_columns:
+    #                 semester_index = column_index % len(semesters)
+    #                 if students_by_semester[semester_index]:
+    #                     student = students_by_semester[semester_index].pop(0)
+    #                     seat_number = f'{column_index + 1}-{len(row) + 1}'
+    #                     SeatPlan.objects.create(
+    #                         room=room,
+    #                         semester=semesters[semester_index],
+    #                         student=student,
+    #                         seat_number=seat_number
+    #                     )
+    #                     row.append((seat_number, student))
+    #                 else:
+    #                     row.append((f'{column_index + 1}-{len(row) + 1}', None))
+    #             column_index += 1
+
+    #     return redirect('room_detail', pk=room.pk)
+    
+    def post (self,request,*args,**kwargs):
         room = get_object_or_404(Room, pk=kwargs['pk'])
         selected_semesters = request.POST.getlist('semesters')
         semesters = Semester.objects.filter(pk__in=selected_semesters).order_by('name')
-        
-        seats_per_column = room.num_seats // room.num_columns
-        seat_layout = [[] for _ in range(seats_per_column)]
+        for semester in semesters:
+            print('semesytye',semester)
+            for std in semester.students.all():
+                print('std',std)
+                
+                get_current_col_seat=SeatPlan.objects.filter(room=room,semester=semester,col_num=1).count()
+                if get_current_col_seat < room.calculateSeatPercol: 
+                    
+                    for col in range(1,room.num_columns+1):
+                        print('col',col)
+                        seat_plan_layout=SeatPlan.objects.filter(room=room, col_num=col)
+                        print('setaplan layout',len(seat_plan_layout))
+                        if len(seat_plan_layout)==0:
+                        
+                            total_seat=SeatPlan.objects.filter(room=room,semester=semester).count()
 
-        # Organize students by semester
-        students_by_semester = [list(Student.objects.filter(semester=semester).order_by('roll_no')) for semester in semesters]
+                            total_seat_of_col=SeatPlan.objects.filter(room=room,semester=semester,col_num=col).count()
+                            print('roomcalculate',room.calculateSeatPercol,total_seat_of_col)
+                            if room.calculateSeatPercol>total_seat_of_col:
+                                seatplan_create= SeatPlan.objects.create(
+                                    room=room,
+                                    semester=semester,
+                                    student=std,
+                                    col_num=col,
+                                    seat_number=total_seat+1
 
-        # Assign students to columns in a cyclic manner
-        column_index = 0
-        while any(students_by_semester):
-            for row in seat_layout:
-                if column_index < room.num_columns:
-                    semester_index = column_index % len(semesters)
-                    if students_by_semester[semester_index]:
-                        student = students_by_semester[semester_index].pop(0)
-                        seat_number = f'{column_index + 1}-{len(row) + 1}'
-                        SeatPlan.objects.create(
-                            room=room,
-                            semester=semesters[semester_index],
-                            student=student,
-                            seat_number=seat_number
-                        )
-                        row.append((seat_number, student))
-                    else:
-                        row.append((f'{column_index + 1}-{len(row) + 1}', None))
-                column_index += 1
-
-        return redirect('room_detail', pk=room.pk)
+                                )
+                                print(seatplan_create,'=================')
+            return redirect('room_list')

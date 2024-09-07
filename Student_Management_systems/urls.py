@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from Student_Management_systems.Staff_Views import ( load_semesters, load_subjects,
     STAFF_FEEDBACK, teacher_subject_choice_list, TeacherSubjectChoiceCreateView,
-    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion,ajax_get_total_credits)
+    TeacherSubjectChoiceUpdateView,TeacherSubjectChoiceListView,check_higher_rank_completion,ajax_get_total_credits,pdf_view)
 
 from .import views,Hod_views,Staff_Views,Student_Views
 
@@ -75,12 +75,12 @@ urlpatterns = [
     path('course/', include('course.urls')),
     path('seatplan/', include('seatplan.urls')),
 
-    # path('routine/', include('app.urls')),
+  
 # Teacher subject select
     path('subject-choice/create/', TeacherSubjectChoiceCreateView.as_view(), name='subject_choice_create'),
     path('subject-choice/update/<int:pk>/', TeacherSubjectChoiceUpdateView.as_view(), name='subject_choice_update'),
+    path('teacher/<int:pk>/pdf/', pdf_view, name='teacher_subject_choices_pdf'),
     path('ajax/load-semesters/', load_semesters, name='ajax_load_semesters'),
-    # path('ajax/load-batches/', load_batches, name='ajax_load_batches'),
     path('ajax/load-subjects/', load_subjects, name='ajax_load_subjects'),
     path('ajax/get-total-credits/', ajax_get_total_credits, name='ajax_get_total_credits'),
 

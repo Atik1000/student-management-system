@@ -9,6 +9,13 @@ from django.db.models import Sum
 from django.views.generic import CreateView, UpdateView, ListView, TemplateView, DetailView
 
 
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+
+
+from django.shortcuts import get_object_or_404
+
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from app.forms import TeacherSubjectChoiceForm
@@ -219,15 +226,9 @@ def teacher_subject_choice_list(request):
     return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name
 
 
-
-
-
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView
-
 class TeacherSubjectChoiceListView(ListView):
     model = TeacherSubjectChoice
-    template_name = 'subject/staff_routine_view.html'  # Update with your actual template path
+    template_name = 'subject/teacher_subject_choice_list.html'  # Updated with correct template name
     context_object_name = 'subject_choices'
     
     def get_queryset(self):
@@ -241,16 +242,31 @@ class TeacherSubjectChoiceListView(ListView):
         context = super().get_context_data(**kwargs)
         # Add the teacher object to the context
         context['teacher'] = get_object_or_404(Staff, pk=self.kwargs['pk'])
-
         # Calculate the total credits
         total_credits = self.get_queryset().aggregate(Sum('subject__credit'))['subject__credit__sum'] or 0
-        
-        # Add the total credits to the context
         context['total_credits'] = total_credits
-
         return context
 
 
+def pdf_view(request, pk):
+    # Fetch the teacher and their subject choices
+    teacher = get_object_or_404(Staff, pk=pk)
+    subject_choices = TeacherSubjectChoice.objects.filter(staff=teacher)
+    
+    # Generate the HTML content
+    html_string = render_to_string('subject/staff_routine_pdf.html', {
+        'subject_choices': subject_choices,
+        'teacher': teacher,
+        'total_credits': subject_choices.aggregate(Sum('subject__credit'))['subject__credit__sum'] or 0
+    })
+    
+    # Create the PDF
+    pdf = HTML(string=html_string).write_pdf()
+    
+    # Return the PDF as an HTTP response
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="subject_choices_{pk}.pdf"'
+    return response
 
 
 def check_higher_rank_completion(request):
