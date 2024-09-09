@@ -7,27 +7,24 @@
 
     <table class="table table-bordered table-striped">
         <thead>
-            {% if semester_headers %}
-                <tr>
-                    {% for header in semester_headers %}
-                        <th class="text-center">Batch {{ header.semester__name }}</th>
-                    {% endfor %}
-                </tr>
-            {% else %}
-                <tr>
-                    <th class="text-center" colspan="{{ room.num_columns }}">Seat Layout</th>
-                </tr>
-            {% endif %}
+            <tr>
+                {% for column_number in ""|center:room.num_columns %}
+                    <th class="text-center">Column {{ forloop.counter }}</th>
+                {% endfor %}
+            </tr>
         </thead>
         <tbody>
-            {% for col in seat_layout %}
+            {% for row in seat_layout %}
                 <tr>
-                    {% for seat, student in col %}
-                        {% if student %}
-                            <td>{{ seat }}<br>{{ student.roll_no }}</td>
-                        {% else %}
-                            <td>{{ seat }}</td>
-                        {% endif %}
+                    {% for seat in row %}
+                        <td>
+                            {% if seat and seat.student %}
+                                {{ seat.student.roll_number }}<br>
+                                {{ seat.student.semester.name }}
+                            {% else %}
+                                Empty
+                            {% endif %}
+                        </td>
                     {% endfor %}
                 </tr>
             {% endfor %}

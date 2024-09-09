@@ -5,7 +5,7 @@
     <form method="post" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="form-group">
-            <label for="semesters">Select Semesters</label>
+            <label for="semesters">Select Up to Two Semesters</label>
             <select multiple class="form-control" id="semesters" name="semesters">
                 {% for semester in semesters %}
                 <option value="{{ semester.id }}">{{ semester.name }}</option>
@@ -22,8 +22,19 @@
         if (selectedSemesters.length === 0) {
             alert('Please select at least one semester.');
             return false;
+        } else if (selectedSemesters.length > 2) {
+            alert('You can only select up to two semesters.');
+            return false;
         }
         return true;
     }
+
+    document.getElementById('semesters').addEventListener('change', function() {
+        const selectedOptions = this.selectedOptions;
+        if (selectedOptions.length > 2) {
+            alert('You can only select up to two semesters.');
+            selectedOptions[selectedOptions.length - 1].selected = false;
+        }
+    });
 </script>
 {% endblock %}
