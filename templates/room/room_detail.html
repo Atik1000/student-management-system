@@ -8,8 +8,8 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                {% for column_number in ""|center:room.num_columns %}
-                    <th class="text-center">Column {{ forloop.counter }}</th>
+                {% for batch in batches %}
+                    <th class="text-center">{{ batch }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -18,9 +18,8 @@
                 <tr>
                     {% for seat in row %}
                         <td>
-                            {% if seat and seat.student %}
-                                {{ seat.student.roll_number }}<br>
-                                {{ seat.student.semester.name }}
+                            {% if seat and seat != 'Empty' %}
+                                {{ seat }} <!-- Display the student roll number -->
                             {% else %}
                                 Empty
                             {% endif %}
@@ -30,7 +29,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <a href="{% url 'room_detail_pdf' room.pk %}" class="btn btn-danger mt-3">Download as PDF</a>
 
-    <a href="{% url 'generate_seatplan' room.pk %}" class="btn btn-primary mt-3">Generate Seat Plan</a>
 </div>
 {% endblock %}
