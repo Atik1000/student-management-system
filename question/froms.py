@@ -1,13 +1,11 @@
 from django import forms
 from .models import Exam
 
-
 class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
         fields = [
-            'subject_name', 'department_name', 'semester_name', 'batch_number',
-            'name', 'time', 'marks',
+            'subject_name', 'batch_number', 'name', 'time', 'marks',
             'q1_number', 'q1_description', 'q1_marks',
             'q2_number', 'q2_description', 'q2_marks',
             'q3_number', 'q3_description', 'q3_marks',
@@ -17,8 +15,6 @@ class ExamForm(forms.ModelForm):
         ]
         widgets = {
             'subject_name': forms.Select(attrs={'class': 'form-control'}),
-            'department_name': forms.Select(attrs={'class': 'form-control'}),
-            'semester_name': forms.Select(attrs={'class': 'form-control'}),
             'batch_number': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.Select(attrs={'class': 'form-control'}),
             'time': forms.TextInput(attrs={'class': 'form-control'}),

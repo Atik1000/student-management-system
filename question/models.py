@@ -12,8 +12,8 @@ class Exam(models.Model):
 
     teacher = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='exam')
     subject_name = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='exams')
-    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams')
-    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams')
+    department_name = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='exams',null=True, blank=True)
+    semester_name = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name='exams',null=True, blank=True)
     batch_number = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=5, choices=EXAM_TYPES, default='Mid')
     time = models.CharField(max_length=20, null=True, blank=True)

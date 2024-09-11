@@ -36,15 +36,6 @@ class ExamCreateView(View):
         context = {'form': form}
         return render(request, self.template_name, context)
 
-def load_semesters(request):
-    department_id = request.GET.get('department')
-    semesters = Semester.objects.filter(department_id=department_id).values('id', 'name')
-    return JsonResponse({'semesters': list(semesters)})
-
-def load_subjects(request):
-    semester_id = request.GET.get('semester')
-    subjects = Subject.objects.filter(semester_id=semester_id).values('id', 'sub_name')
-    return JsonResponse({'subjects': list(subjects)})
 
 # Exam List View
 class ExamListView(ListView):
