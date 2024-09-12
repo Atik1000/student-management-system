@@ -53,7 +53,7 @@
 
                                     <td>{{ exam.name }}</td>
                                     <td>{{ exam.subject_name.sub_name|default:'' }}</td>
-                                    <td>{{ exam.department_name.dept_name|default:'' }}</td>
+                                    <td>{{ exam.subject_name.semester.department.dept_name|default:'' }}</td>
                                     <td> {{ exam.batch_number|default:'' }}</td>
                                     <td class="text-right">
                                         <div class="actions">
