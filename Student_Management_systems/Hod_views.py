@@ -446,3 +446,8 @@ def STAFF_FEEDBACK_REPLY(request):
 
 
 
+
+def staff_list(request):
+    staff = Staff.objects.all()
+    departments = Department.objects.all()  # Fetch all departments
+    return render(request, 'view_staff.html', {'staff': staff, 'departments': departments})

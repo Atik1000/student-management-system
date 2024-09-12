@@ -2,9 +2,17 @@
 {% block content %}
 {% load static %}
 <script>
-   $(document).ready( function () {
+   $(document).ready(function() {
        $('#table_id').DataTable();
-   } );
+
+       // Filter function
+       $('#filter-btn').click(function() {
+           var selectedDepartment = $('#department-filter').val().toLowerCase();
+           $('#table_id tbody tr').filter(function() {
+               $(this).toggle($(this).find('td').eq(4).text().toLowerCase().indexOf(selectedDepartment) > -1 || selectedDepartment == '');
+           });
+       });
+   });
 </script>
 <div class="content container-fluid">
    <div class="page-header">
@@ -23,6 +31,22 @@
       </div>
    </div>
    {% include 'includes/messages.html' %}
+
+   <!-- Department filter -->
+   <!-- <div class="row mb-3">
+      <div class="col-sm-4">
+         <select id="department-filter" class="form-control">
+            <option value="">All Departments</option>
+            {% for department in departments %}
+            <option value="{{ department.dept_name }}">{{ department.dept_name }}</option>
+            {% endfor %}
+         </select>
+      </div>
+      <div class="col-sm-2">
+         <button id="filter-btn" class="btn btn-primary">Filter</button>
+      </div>
+   </div> -->
+
    <div class="row">
       <div class="col-sm-12">
          <div class="card card-table">
@@ -35,6 +59,7 @@
                            <th>Image</th>
                            <th>Email</th>
                            <th>Name</th>
+                           <th>Department</th>
                            <th>Rank</th>
                            <th class="text-right">Actions</th>
                         </tr>
@@ -43,26 +68,21 @@
                         {% for staff_member in staff %}
                         <tr>
                            <td>{{ staff_member.id }}</td>
-
                            <td>
                               <a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="/{{staff_member.admin.profile_pic}}" alt="User Image"></a>
                            </td>
                            <td>{{ staff_member.admin.email }}</td>
-                           <td>{{ staff_member.admin.first_name }}</td> <!-- Fixed here -->
-                           <td>{{ staff_member.get_rank_display }}</td> <!-- Fixed here -->
+                           <td>{{ staff_member.admin.first_name }}</td>
+                           <td>{{ staff_member.department.dept_name }}</td>
+                           <td>{{ staff_member.get_rank_display }}</td>
                            <td class="text-right">
                               <div class="actions">
                                  <a href="{% url 'edit_staff' staff_member.id %}" class="btn btn-sm bg-success-light mr-2">
                                     <i class="fas fa-pen"></i> Edit
                                  </a>
-                                 <!-- <a href="{% url 'delete_staff' staff_member.admin.id %}" class="btn btn-sm bg-danger-light">
-                                    <i class="fas fa-trash"></i> Delete
-                                 </a>  -->
-                                  <a href="{% url 'teacher_Subject' staff_member.pk %}" class="btn btn-sm bg-info-light">
+                                 <a href="{% url 'teacher_Subject' staff_member.pk %}" class="btn btn-sm bg-info-light">
                                     <i class="fas fa-eye"></i> View Subject
-                                </a>
-                                 
-                               
+                                 </a>
                               </div>
                            </td>
                         </tr>
