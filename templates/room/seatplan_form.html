@@ -2,6 +2,9 @@
 {% block content %}
 <div class="container">
     <h2>Generate Seat Plan for Room {{ room.number }}</h2>
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
     <form method="post" onsubmit="return validateForm()">
         {% csrf_token %}
         <div class="form-group">

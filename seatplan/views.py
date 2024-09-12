@@ -97,12 +97,12 @@ class RoomDetailView(DetailView):
         context['batches'] = batch_names  # List of batch names for the table header
         return context
 
-
 class SeatPlanGenerateView(View):
     template_name = 'room/seatplan_form.html'
 
     def get(self, request, *args, **kwargs):
         room = get_object_or_404(Room, pk=kwargs['pk'])
+        # Only select semesters with students that still need to be seated
         semesters = Semester.objects.annotate(
             student_count=Count('students'),
             seated_students_count=Count('students', filter=Q(students__seatplan__isnull=False))
@@ -118,8 +118,9 @@ class SeatPlanGenerateView(View):
         if len(semesters) != 2:
             return render(request, self.template_name, {'room': room, 'semesters': semesters, 'error': "Please select exactly two semesters."})
 
+        # Retrieve unseated students from the selected semesters
         students_by_semester = {
-            semester: list(semester.students.order_by('roll_no')) for semester in semesters
+            semester: list(semester.students.filter(seatplan__isnull=True).order_by('roll_no')) for semester in semesters
         }
 
         num_columns = room.num_columns
@@ -131,7 +132,7 @@ class SeatPlanGenerateView(View):
         semester_a_students = students_by_semester[semester_a]
         semester_b_students = students_by_semester[semester_b]
 
-        # Filling seats for Semester A in odd columns (1, 3, etc.)
+        # Fill seats for Semester A in odd columns (1, 3, etc.)
         for col_num in range(1, num_columns + 1, 2):  # Iterate over odd columns
             for row_num in range(1, num_rows + 1):
                 if not semester_a_students:
@@ -145,7 +146,7 @@ class SeatPlanGenerateView(View):
                     seat_number=row_num
                 ))
 
-        # Filling seats for Semester B in even columns (2, 4, etc.)
+        # Fill seats for Semester B in even columns (2, 4, etc.)
         for col_num in range(2, num_columns + 1, 2):  # Iterate over even columns
             for row_num in range(1, num_rows + 1):
                 if not semester_b_students:
@@ -162,7 +163,34 @@ class SeatPlanGenerateView(View):
         # Bulk create the seat plans to optimize database performance
         SeatPlan.objects.bulk_create(seat_plan_data)
 
+        # Check if there are remaining students to be seated
+        if semester_a_students or semester_b_students:
+            # Get the next available room (implement your own logic to find the next room)
+            next_room = self.get_next_room(room)
+
+            if next_room:
+                return redirect('generate_seatplan', pk=next_room.pk)
+            else:
+                # No more rooms available, display a message
+                return render(request, self.template_name, {
+                    'room': room,
+                    'semesters': semesters,
+                    'error': "Not enough rooms available to seat all students."
+                })
+
         return redirect('room_list')
+
+    def get_next_room(self, current_room):
+        """
+        Function to get the next available room after the current room.
+        You can customize this method to determine the logic for selecting the next room.
+        For example, you might want to select the next room based on the room number or other criteria.
+        """
+        try:
+            # Fetch the next room based on the room number or some other ordering criteria
+            return Room.objects.filter(id__gt=current_room.id).order_by('id').first()
+        except Room.DoesNotExist:
+            return None
 
 
 
