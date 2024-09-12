@@ -2,16 +2,19 @@
 {% load static %}
 
 {% block content %}
+<!-- Include DataTables CSS and JS -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/datatables.min.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/datatables.min.css' %}">
+
 <script>
     $(document).ready(function () {
-        $('#table_id').DataTable();
+        $('#table_id').DataTable();  // Initialize DataTables
     });
 </script>
 
 <div class="content container-fluid">
+    <!-- Page Header -->
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
@@ -20,16 +23,19 @@
                     <li class="breadcrumb-item active">Teacher Subject Choices</li>
                 </ul>
                 <div class="mt-3">
-                    <h5> Total selected Credits: {{ total_credits }}</h5>
+                    <h5>Your total selected Credits: {{ total_credits }}</h5>
                 </div>
             </div>
             <div class="col-auto text-right float-right ml-auto">
+                <a href="{% url 'subject_choice_create' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Subject Choice</a>
             </div>
         </div>
     </div>
 
+    <!-- Include messages for alerts -->
     {% include 'includes/messages.html' %}
 
+    <!-- DataTable for Subject Choices -->
     <div class="row">
         <div class="col-sm-12">
             <div class="card card-table">
@@ -47,16 +53,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for choice in subject_choices %}
+                                {% if teacher_subject_choices %}
+                                    {% for choice in teacher_subject_choices %}
+                                        <tr>
+                                            <td>{{ choice.department.dept_name }}</td>
+                                            <td>{{ choice.semester_type.semester_type_name }}</td>
+                                            <td>{{ choice.semester.name }}</td>
+                                            <td>{{ choice.subject.sub_name }}</td>
+                                            <td>{{ choice.subject.sub_code }}</td>
+                                            <td>{{ choice.subject.credit }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <!-- Display message when no subject choices are available -->
                                     <tr>
-                                        <td>{{ choice.department.dept_name }}</td>
-                                        <td>{{ choice.semester_type.semester_type_name }}</td>
-                                        <td>{{ choice.semester.name }}</td>
-                                        <td>{{ choice.subject.sub_name }}</td>
-                                        <td>{{ choice.subject.sub_code }}</td>
-                                        <td>{{ choice.subject.credit }}</td>
+                                        <td colspan="6" class="text-center">No subject choices found.</td>
                                     </tr>
-                                {% endfor %}
+                                {% endif %}
                             </tbody>
                         </table>     
                     </div>

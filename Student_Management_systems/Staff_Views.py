@@ -223,7 +223,7 @@ def teacher_subject_choice_list(request):
         'total_credits': total_credits,
 
     }
-    return render(request, 'subject/teacher_subject_choice_list.html', context)  # Replace 'your_app' with your actual app name
+    return render(request, 'subject/single_teacher_subject_list.html', context)  # Replace 'your_app' with your actual app name
 
 
 class TeacherSubjectChoiceListView(ListView):
